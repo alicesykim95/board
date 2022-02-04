@@ -44,7 +44,7 @@ public class BoardController {
         return mv;
     }
 
-    @RequestMapping(value = "/{boardNum}", method = RequestMethod.PUT)
+    @RequestMapping(value = "boardUpdate")
     public String updateBoard(BoardVo bdv) throws Exception{
         boardService.updateBoard(bdv);
         return "redirect:/boardList";

@@ -8,7 +8,6 @@
 <body>
 <div class="container">
     <h2>게시글 상세 화면</h2>
-    <form id="frm" method="post">
         <table>
             <tr>
                 <td>글 번호</td>
@@ -31,25 +30,33 @@
                 <td><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
             </tr>
         </table>
-    </form>
-    <input type="hidden" id="boardNum" th:value="${board.boardNum}">
     <input type="button" value="목록" id="goBackList" onclick="location.href='bList'">
-    <input type="button" value="수정" id="update">
+    <input type="button" value="수정" id="update" onclick="update()">
     <input type="button" value="삭제" id="delete">
 </div>
 </body>
 </html>
 <script>
-    $(document).ready(function(){
+   function update() {
 
-        var boardNum = $("#boardNum").val();
+       const updateList = {
+           title: document.getElementById("title").val,
+           content: document.getElementById("content").val
+       }
 
-        $("#update").on("click", function (){
-            var frm = $("#frm")[0];
-            frm.action = "/" + boardNum;
-            frm.submit();
-        });
-    });
+       $.ajax({
+           url: "boardUpdate",
+           type: "POST",
+           data: updateList,
+           success: function(){
+               alert("수정했습니다.");
+           },
+           error: function(){
+               alert("실패했습니다.");
+           }
+       });
+
+   }
 
 
 </script>
