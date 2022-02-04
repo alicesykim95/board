@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 작성</title>
+    <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>게시글 쓰기</h2>
+    <table>
+        <tr>
+            <td>작성자</td>
+            <td><input type="text" id="writer" size="68"></td>
+        </tr>
+        <tr>
+            <td>제목</td>
+            <td><input type="text" id="title" size="68"></td>
+        </tr>
+        <tr>
+            <td>글내용</td>
+            <td><textarea rows="10" cols="70" id="content"></textarea></td>
+        </tr>
+    </table>
+    <input type="button" value="작성완료" onclick="registerBoard()">
+</div>
+</body>
+</html>
+<script>
+    function registerBoard() {
+
+        const dataList = {
+            writer : document.getElementById("writer").value,
+            title : document.getElementById("title").value,
+            content : document.getElementById("content").value
+        }
+
+        $.ajax({
+            url:'/boardWrite',
+            type:'POST',
+            data: dataList,
+            success: function () {
+                alert("성공하였습니다.");
+            },
+            error: function (){
+                alert("실패하였습니다.");
+            }
+        });
+
+    }
+</script>

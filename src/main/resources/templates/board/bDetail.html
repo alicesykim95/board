@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 상세 화면</title>
+    <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>게시글 상세 화면</h2>
+    <form id="frm" method="post">
+        <table>
+            <tr>
+                <td>글 번호</td>
+                <th th:text="${board.boardNum}"></th>
+                <td>조회수</td>
+                <th th:text="${board.hitCnt}"></th>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <th th:text="${board.writer}"></th>
+                <td>작성일</td>
+                <th th:text="${board.createdTime}"></th>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" id="title" name="title" th:value="${board.title}"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
+            </tr>
+        </table>
+    </form>
+    <input type="hidden" id="boardNum" th:value="${board.boardNum}">
+    <input type="button" value="목록" id="goBackList" onclick="location.href='bList'">
+    <input type="button" value="수정" id="update">
+    <input type="button" value="삭제" id="delete">
+</div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+
+        var boardNum = $("#boardNum").val();
+
+        $("#update").on("click", function (){
+            var frm = $("#frm")[0];
+            frm.action = "/" + boardNum;
+            frm.submit();
+        });
+    });
+
+
+</script>

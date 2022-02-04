@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.board.mapper.BoardMapper">
+    <select id="selectBoardList" resultType="BoardVo"><![CDATA[
+        SELECT board_num,
+               writer,
+               title,
+               created_time,
+               hit_cnt
+        FROM t_board
+        ORDER BY board_num DESC
+        ]]></select>
+
+    <insert id="insertBoard" parameterType="BoardVo"><![CDATA[
+        INSERT INTO t_board (board_num,
+                             writer,
+                             title,
+                             content,
+                             created_time,
+                             hit_cnt)
+        VALUES (#{boardNum},
+                #{writer},
+                #{title},
+                #{content},
+                now(),
+                #{hitCnt})
+     ]]></insert>
+
+    <select id="getBoardDetail" resultType="BoardVo" parameterType="int"><![CDATA[
+        SELECT board_num,
+               writer,
+               title,
+               content,
+               created_time,
+               hit_cnt
+        FROM t_board
+        WHERE board_num = #{boardNum}
+    ]]></select>
+
+    <update id="updateBoard" parameterType="BoardVo">
+        UPDATE
+            t_board
+        WHERE
+            board_num = #{boardNum}
+    </update>
+
+</mapper>

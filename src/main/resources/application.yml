@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/board_example
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  devtools:
+    livereload:
+      enabled: true
+
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8084
+
+mybatis:
+  type-aliases-package: com.example.board.vo
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

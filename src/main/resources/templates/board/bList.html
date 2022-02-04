@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글목록</title>
+    <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">게시글 쓰기</h2>
+        <table class="table" th:border="1">
+            <thead>
+                <tr class="table_head">
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table_list" th:each="list:${list}" >
+                    <td th:text="${list.boardNum}"></td>
+                    <td class="title"><a href="/" th:attrappend="href=${list.boardNum}" th:text="${list.title}"></a></td>
+                    <td th:text="${list.writer}"></td>
+                    <td th:text="${list.createdTime}"></td>
+                    <td th:text="${list.hitCnt}"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <input type="button" value="글쓰기" onclick="location.href='boardWrite'"/>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>
