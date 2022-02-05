@@ -32,7 +32,7 @@
         </table>
     <input type="button" value="목록" id="goBackList" onclick="location.href='bList'">
     <input type="button" value="수정" id="update" onclick="update()">
-    <input type="button" value="삭제" id="delete">
+    <input type="button" value="삭제" id="delete" onclick="delete()">
 </div>
 </body>
 </html>
@@ -40,8 +40,8 @@
    function update() {
 
        const updateList = {
-           title: document.getElementById("title").val,
-           content: document.getElementById("content").val
+           title: document.getElementById("title").value,
+           content: document.getElementById("content").value
        }
 
        $.ajax({
@@ -55,6 +55,14 @@
                alert("실패했습니다.");
            }
        });
+
+   }
+
+   function delete() {
+       const updateList = {
+           title: document.getElementById("title").value,
+           content: document.getElementById("content").value
+       }
 
    }
 

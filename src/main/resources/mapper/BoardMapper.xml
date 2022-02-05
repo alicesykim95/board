@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.board.mapper.BoardMapper">
-    <select id="selectBoardList" resultType="BoardVo"><![CDATA[
+    <select id="selectBoardList" resultType="BoardVo">
         SELECT board_num,
                writer,
                title,
@@ -10,9 +10,9 @@
                hit_cnt
         FROM t_board
         ORDER BY board_num DESC
-        ]]></select>
+       </select>
 
-    <insert id="insertBoard" parameterType="BoardVo"><![CDATA[
+    <insert id="insertBoard" parameterType="BoardVo">
         INSERT INTO t_board (board_num,
                              writer,
                              title,
@@ -25,24 +25,39 @@
                 #{content},
                 now(),
                 #{hitCnt})
-     ]]></insert>
+        </insert>
 
-    <select id="getBoardDetail" resultType="BoardVo" parameterType="int"><![CDATA[
-        SELECT board_num,
+    <select id="getBoardDetail" resultType="BoardVo" parameterType="int">
+        SELECT
+               board_num,
                writer,
                title,
                content,
                created_time,
                hit_cnt
-        FROM t_board
-        WHERE board_num = #{boardNum}
-    ]]></select>
+        FROM
+             t_board
+        WHERE
+              board_num = #{boardNum}
+        </select>
 
     <update id="updateBoard" parameterType="BoardVo">
         UPDATE
             t_board
+        SET
+            title   = #{title},
+            content = #{content}
+        WHERE
+              board_num = #{boardNum}
+    </update>
+
+    <delete id="deleteBoard" parameterType="int">
+        DELETE FROM
+            t_board
         WHERE
             board_num = #{boardNum}
-    </update>
+    </delete>
+
+
 
 </mapper>

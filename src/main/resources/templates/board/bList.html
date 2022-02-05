@@ -38,3 +38,13 @@
     </div>
 </body>
 </html>
+<script>
+    function delete() {
+        $.ajax({
+            url: "/board",
+            type: 'DELETE',
+            data : {boardNum : 3}
+        })
+    }
+
+</script>

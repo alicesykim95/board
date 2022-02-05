@@ -8,7 +8,8 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     List<BoardVo> selectBoardList() throws Exception;
-    void insertBoard(BoardVo bdv) throws Exception;
+    int insertBoard(BoardVo bdv) throws Exception;
     BoardVo getBoardDetail(int boardNum) throws Exception;
-    void updateBoard(BoardVo bdv) throws Exception;
+    int updateBoard(BoardVo bdv) throws Exception;
+    int deleteBoard(int boardNum) throws Exception;
 }
