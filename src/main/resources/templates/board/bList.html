@@ -30,7 +30,7 @@
             <tfoot>
                 <tr>
                     <td>
-                        <input type="button" value="글쓰기" onclick="location.href='boardWrite'"/>
+                        <input type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
                     </td>
                 </tr>
             </tfoot>
@@ -39,12 +39,5 @@
 </body>
 </html>
 <script>
-    function delete() {
-        $.ajax({
-            url: "/board",
-            type: 'DELETE',
-            data : {boardNum : 3}
-        })
-    }
 
 </script>

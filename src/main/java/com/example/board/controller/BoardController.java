@@ -10,29 +10,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 
 @Controller
 public class BoardController {
 
     @Autowired
-    private BoardService boardService;
+    BoardService boardService;
 
 
     @RequestMapping(value = "/boardListPage", method = RequestMethod.GET)
-    public String openBoardList() throws Exception{
+    public String openBoardList(Model model) throws Exception {
+//        model.addAttribute(0)
+
         return "board/bList";
     }
 
     @RequestMapping(value = "/boardWritePage", method = RequestMethod.GET)
-    public String addBoardPage() throws Exception{
+    public String addBoardPage() throws Exception {
         return "board/bWrite";
     }
 
+//    @RequestMapping(value = "/{boardNum}", method = RequestMethod.GET)
+//    public String openBoardDetail(@PathVariable("boardNum") int boardNum, Model model)throws Exception{
+//        return "board/bDetail";
+//    }
+
     @RequestMapping(value = "/{boardNum}", method = RequestMethod.GET)
-    public String openBoardDetail(@PathVariable("boardNum") int boardNum, Model model)throws Exception{
-        return "board/bDetail";
+    public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum) throws Exception {
+        ModelAndView mv = new ModelAndView("board/bDetail");
+        BoardVo board = boardService.getBoardDetail(boardNum);
+        mv.addObject("board", board);
+        return mv;
     }
 
 }
+
+
+//ksy
+//
+//
+//ksy1010%%

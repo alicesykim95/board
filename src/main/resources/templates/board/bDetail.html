@@ -8,63 +8,72 @@
 <body>
 <div class="container">
     <h2>게시글 상세 화면</h2>
-        <table>
-            <tr>
-                <td>글 번호</td>
-                <th th:text="${board.boardNum}"></th>
-                <td>조회수</td>
-                <th th:text="${board.hitCnt}"></th>
-            </tr>
-            <tr>
-                <td>작성자</td>
-                <th th:text="${board.writer}"></th>
-                <td>작성일</td>
-                <th th:text="${board.createdTime}"></th>
-            </tr>
-            <tr>
-                <td>제목</td>
-                <td><input type="text" id="title" name="title" th:value="${board.title}"></td>
-            </tr>
-            <tr>
-                <td>내용</td>
-                <td><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
-            </tr>
-        </table>
+    <table>
+        <tr>
+            <td>글 번호</td>
+            <th th:text="${board.boardNum}"></th>
+            <td>조회수</td>
+            <th th:text="${board.hitCnt}"></th>
+        </tr>
+        <tr>
+            <td>작성자</td>
+            <th th:text="${board.writer}"></th>
+            <td>작성일</td>
+            <th th:text="${board.createdTime}"></th>
+        </tr>
+        <tr>
+            <td>제목</td>
+            <td><input type="text" id="title" name="title" th:value="${board.title}"></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
+        </tr>
+    </table>
+    <input type="hidden" id="boardNum" th:value="${board.boardNum}">
     <input type="button" value="목록" id="goBackList" onclick="location.href='bList'">
-    <input type="button" value="수정" id="update" onclick="update()">
-    <input type="button" value="삭제" id="delete" onclick="delete()">
+    <input type="button" value="수정" id="update" onclick="updateBoard()">
+    <input type="button" value="삭제" id="delete" onclick="deleteBoard()">
 </div>
 </body>
 </html>
 <script>
-   function update() {
 
-       const updateList = {
-           title: document.getElementById("title").value,
-           content: document.getElementById("content").value
-       }
+    // const boardNum = $('#boardNum').val();
+    const boardNum = document.getElementById("boardNum").value;
 
-       $.ajax({
-           url: "boardUpdate",
-           type: "POST",
-           data: updateList,
-           success: function(){
-               alert("수정했습니다.");
-           },
-           error: function(){
-               alert("실패했습니다.");
-           }
-       });
+    function deleteBoard() {
+        loadAjax('/board', 'DELETE', {boardNum: boardNum}, true);
+    }
 
-   }
+    function updateBoard() {
 
-   function delete() {
-       const updateList = {
-           title: document.getElementById("title").value,
-           content: document.getElementById("content").value
-       }
+        const detailList = {
+            title: document.getElementById("title").value,
+            content: document.getElementById("content").value,
+            boardNum: boardNum
+        }
 
-   }
+        loadAjax('/board', 'PUT', detailList, true);
+    }
+
+    function loadAjax(link, method, dataList, alertOK) {
+        $.ajax({
+            url: link,
+            type: method,
+            data: dataList,
+            success: function () {
+                if (alertOK) {
+                    alert("성공 하였습니다.");
+                }
+            },
+            error: function () {
+                if (alertOK) {
+                    alert("실패 하였습니다.")
+                }
+            }
+        });
+    }
 
 
 </script>
