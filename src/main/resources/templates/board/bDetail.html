@@ -33,9 +33,9 @@
     </table>
     <div>
         <input type="hidden" id="boardNum" th:value="${board.boardNum}">
-        <input class="detail_btn" type="button" value="목록" id="goBackList" onclick="location.href='bList'">
-        <input class="detail_btn" type="button" value="수정" id="update" onclick="updateBoard()">
-        <input class="detail_btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
+        <input class="detail_btn btn" type="button" value="목록" id="goBackList" onclick="location.href='/boardListPage'">
+        <input class="detail_btn btn" type="button" value="수정" id="update" onclick="updateBoard()">
+        <input class="detail_btn btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
     </div>
 </div>
 </body>
@@ -68,6 +68,7 @@
             success: function () {
                 if (alertOK) {
                     alert("성공 하였습니다.");
+                    location.href="/boardListPage";
                 }
             },
             error: function () {

@@ -31,7 +31,9 @@ public class BoardService{
     }
 
     public BoardVo getBoardDetail(int boardNum) throws Exception{
-        return boardMapper.getBoardDetail(boardNum);
+        boardMapper.updateHitCount(boardNum);
+        BoardVo board  = boardMapper.getBoardDetail(boardNum);
+        return board;
     }
 
     public int updateBoard(BoardVo bdv) throws Exception{

@@ -23,7 +23,7 @@
             <td><textarea rows="10" cols="70" id="content"></textarea></td>
         </tr>
     </table>
-    <input class="write_btn" type="button" value="작성완료" onclick="registerBoard()">
+    <input class="write_btn btn" type="button" value="작성완료" onclick="registerBoard()">
 </div>
 </body>
 </html>
@@ -42,6 +42,7 @@
             data: dataList,
             success: function () {
                 alert("성공하였습니다.");
+                location.href="/boardListPage";
             },
             error: function (){
                 alert("실패하였습니다.");

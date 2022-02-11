@@ -13,4 +13,5 @@ public interface BoardMapper {
     BoardVo getBoardDetail(int boardNum) throws Exception;
     int updateBoard(BoardVo bdv) throws Exception;
     int deleteBoard(int boardNum) throws Exception;
+    void updateHitCount(int boardNum) throws Exception;
 }

@@ -10,13 +10,20 @@
     <div class="container">
         <h2 class="title">게시글 목록</h2>
         <table class="board_list">
+            <colgroup>
+                <col th:width="10"/>
+                <col th:width="50"/>
+                <col th:width="10"/>
+                <col th:width="20"/>
+                <col th:width="10"/>
+            </colgroup>
             <thead>
                 <tr class="table_head">
-                    <th class="list_th">No</th>
-                    <th class="list_th">Title</th>
-                    <th class="list_th">Writer</th>
-                    <th class="list_th">Date</th>
-                    <th class="list_th">Hit</th>
+                    <th scope="col" class="list_th">No</th>
+                    <th scope="col" class="list_th">Title</th>
+                    <th scope="col" class="list_th">Writer</th>
+                    <th scope="col" class="list_th">Date</th>
+                    <th scope="col" class="list_th">Hit</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +37,7 @@
             </tbody>
             <tr>
                 <td>
-                    <input class="list_btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
+                    <input class="list_btn btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
                 </td>
             </tr>
     </div>

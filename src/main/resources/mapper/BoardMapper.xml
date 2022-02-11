@@ -64,7 +64,12 @@
         WHERE
             board_num = #{boardNum}
     </delete>
-
-
-
+    <update id="updateHitCount" parameterType="int">
+        UPDATE
+            t_board
+        SET
+            hit_cnt = hit_cnt+1
+        WHERE
+            board_num = #{boardNum}
+    </update>
 </mapper>
