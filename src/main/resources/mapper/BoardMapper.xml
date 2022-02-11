@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.board.mapper.BoardMapper">
-    <select id="selectBoardList" resultType="BoardVo">
+    <select id="selectBoardList" parameterType="Criteria" resultType="BoardVo">
         SELECT board_num,
                writer,
                title,
@@ -10,7 +10,14 @@
                hit_cnt
         FROM t_board
         ORDER BY board_num DESC
+        LIMIT #{startPage}, #{perPageNum}
        </select>
+    <select id="totalRecordCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            t_board;
+    </select>
 
     <insert id="insertBoard" parameterType="BoardVo">
         INSERT INTO t_board (board_num,

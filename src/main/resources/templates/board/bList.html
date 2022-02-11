@@ -4,37 +4,35 @@
     <meta charset="UTF-8">
     <title>게시글목록</title>
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="container">
-        <h2 class="title">게시글 쓰기</h2>
-        <table class="table" th:border="1">
+        <h2 class="title">게시글 목록</h2>
+        <table class="board_list">
             <thead>
                 <tr class="table_head">
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
-                    <th>조회수</th>
+                    <th class="list_th">No</th>
+                    <th class="list_th">Title</th>
+                    <th class="list_th">Writer</th>
+                    <th class="list_th">Date</th>
+                    <th class="list_th">Hit</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="table_list" th:each="list:${list}" >
-                    <td th:text="${list.boardNum}"></td>
-                    <td class="title"><a href="/" th:attrappend="href=${list.boardNum}" th:text="${list.title}"></a></td>
-                    <td th:text="${list.writer}"></td>
-                    <td th:text="${list.createdTime}"></td>
-                    <td th:text="${list.hitCnt}"></td>
+                <tr class="table_body" th:each="list:${list}" >
+                    <td class="list_td list_td_no" th:text="${list.boardNum}"></td>
+                    <td class="list_td"><a href="/" th:attrappend="href=${list.boardNum}" th:text="${list.title}"></a></td>
+                    <td class="list_td" th:text="${list.writer}"></td>
+                    <td class="list_td" th:text="${list.createdTime}"></td>
+                    <td class="list_td" th:text="${list.hitCnt}"></td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td>
-                        <input type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+            <tr>
+                <td>
+                    <input class="list_btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
+                </td>
+            </tr>
     </div>
 </body>
 </html>

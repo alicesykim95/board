@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <title>게시글 작성</title>
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container">
-    <h2>게시글 쓰기</h2>
-    <table>
-        <tr>
-            <td>작성자</td>
+    <h2 class="title">게시글 작성</h2>
+    <table class="board_write">
+        <tr class="write_head">
+            <td class="write_title">작성자</td>
             <td><input type="text" id="writer" size="68"></td>
         </tr>
-        <tr>
-            <td>제목</td>
+        <tr class="write_head">
+            <td class="write_title">제목</td>
             <td><input type="text" id="title" size="68"></td>
         </tr>
-        <tr>
-            <td>글내용</td>
+        <tr class="write_head">
+            <td class="write_title">글내용</td>
             <td><textarea rows="10" cols="70" id="content"></textarea></td>
         </tr>
     </table>
-    <input type="button" value="작성완료" onclick="registerBoard()">
+    <input class="write_btn" type="button" value="작성완료" onclick="registerBoard()">
 </div>
 </body>
 </html>

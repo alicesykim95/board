@@ -4,36 +4,39 @@
     <meta charset="UTF-8">
     <title>게시글 상세 화면</title>
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container">
-    <h2>게시글 상세 화면</h2>
-    <table>
-        <tr>
-            <td>글 번호</td>
-            <th th:text="${board.boardNum}"></th>
-            <td>조회수</td>
-            <th th:text="${board.hitCnt}"></th>
+    <h2 class="title">게시글 작성</h2>
+    <table class="board_detail">
+        <tr class="detail_head head1">
+            <td class="head_title">글 번호</td>
+            <td th:text="${board.boardNum}"></td>
+            <td class="head_title">조회수</td>
+            <td th:text="${board.hitCnt}"></td>
         </tr>
-        <tr>
-            <td>작성자</td>
-            <th th:text="${board.writer}"></th>
-            <td>작성일</td>
-            <th th:text="${board.createdTime}"></th>
+        <tr class="detail_head head2">
+            <td class="head_title">작성자</td>
+            <td th:text="${board.writer}"></td>
+            <td class="head_title">작성일</td>
+            <td th:text="${board.createdTime}"></td>
         </tr>
-        <tr>
-            <td>제목</td>
-            <td><input type="text" id="title" name="title" th:value="${board.title}"></td>
+        <tr class="detail_head head3">
+            <td class="head_title">제목</td>
+            <td class="head3_text" colspan="3"><input type="text" id="title" name="title" th:value="${board.title}"></td>
         </tr>
-        <tr>
-            <td>내용</td>
-            <td><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
+        <tr class="detail_head head4">
+            <td class="head_title">내용</td>
+            <td colspan="3"><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
         </tr>
     </table>
-    <input type="hidden" id="boardNum" th:value="${board.boardNum}">
-    <input type="button" value="목록" id="goBackList" onclick="location.href='bList'">
-    <input type="button" value="수정" id="update" onclick="updateBoard()">
-    <input type="button" value="삭제" id="delete" onclick="deleteBoard()">
+    <div>
+        <input type="hidden" id="boardNum" th:value="${board.boardNum}">
+        <input class="detail_btn" type="button" value="목록" id="goBackList" onclick="location.href='bList'">
+        <input class="detail_btn" type="button" value="수정" id="update" onclick="updateBoard()">
+        <input class="detail_btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
+    </div>
 </div>
 </body>
 </html>

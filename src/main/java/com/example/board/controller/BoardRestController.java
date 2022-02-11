@@ -1,8 +1,10 @@
 package com.example.board.controller;
 
+import com.example.board.vo.Criteria;
 import com.example.board.service.BoardService;
 import com.example.board.vo.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,10 +22,10 @@ public class BoardRestController {
     @Autowired
     private BoardService boardService;
 
-    @RequestMapping(value = "/boardList", method = RequestMethod.GET)
-    public List<BoardVo> getListBoard() throws Exception {
-        return boardService.selectBoardList();
-    }
+//    @RequestMapping(value = "/boardList", method = RequestMethod.GET)
+//    public List<BoardVo> getListBoard() throws Exception {
+//        return boardService.selectBoardList();
+//    }
 
     @RequestMapping(value = "/board", method = RequestMethod.POST)
     public int addBoard(BoardVo bdv) throws Exception {
