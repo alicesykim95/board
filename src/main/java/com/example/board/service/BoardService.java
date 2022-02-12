@@ -21,6 +21,11 @@ public class BoardService{
         return boardMapper.selectBoardList(criteria);
     }
 
+    public List<BoardVo> selectBoardListNone() throws Exception{
+
+        return boardMapper.selectBoardListNone();
+    }
+
     public int totalRecordCount() throws Exception{
         return boardMapper.totalRecordCount();
     }

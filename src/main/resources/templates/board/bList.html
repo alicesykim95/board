@@ -7,40 +7,67 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="container">
-        <h2 class="title">게시글 목록</h2>
-        <table class="board_list">
-            <colgroup>
-                <col th:width="10"/>
-                <col th:width="50"/>
-                <col th:width="10"/>
-                <col th:width="20"/>
-                <col th:width="10"/>
-            </colgroup>
-            <thead>
-                <tr class="table_head">
-                    <th scope="col" class="list_th">No</th>
-                    <th scope="col" class="list_th">Title</th>
-                    <th scope="col" class="list_th">Writer</th>
-                    <th scope="col" class="list_th">Date</th>
-                    <th scope="col" class="list_th">Hit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="table_body" th:each="list:${list}" >
-                    <td class="list_td list_td_no" th:text="${list.boardNum}"></td>
-                    <td class="list_td"><a href="/" th:attrappend="href=${list.boardNum}" th:text="${list.title}"></a></td>
-                    <td class="list_td" th:text="${list.writer}"></td>
-                    <td class="list_td" th:text="${list.createdTime}"></td>
-                    <td class="list_td" th:text="${list.hitCnt}"></td>
-                </tr>
-            </tbody>
-            <tr>
-                <td>
-                    <input class="list_btn btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
-                </td>
-            </tr>
-    </div>
+<div class="container">
+    <h2 class="title">게시글 목록</h2>
+    <table class="board_list">
+        <colgroup>
+            <col th:width="10"/>
+            <col th:width="50"/>
+            <col th:width="10"/>
+            <col th:width="20"/>
+            <col th:width="10"/>
+        </colgroup>
+        <thead>
+        <tr class="table_head">
+            <th scope="col" class="list_th">No</th>
+            <th scope="col" class="list_th">Title</th>
+            <th scope="col" class="list_th">Writer</th>
+            <th scope="col" class="list_th">Date</th>
+            <th scope="col" class="list_th">Hit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table_body" th:each="list:${list}">
+            <td class="list_td list_td_no" th:text="${list.boardNum}"></td>
+            <td class="list_td"><a href="/" th:attrappend="href=${list.boardNum}" th:text="${list.title}"></a></td>
+            <td class="list_td" th:text="${list.writer}"></td>
+            <td class="list_td" th:text="${list.createdTime}"></td>
+            <td class="list_td" th:text="${list.hitCnt}"></td>
+        </tr>
+        </tbody>
+        <tr>
+            <td>
+                <input class="list_btn btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
+            </td>
+        </tr>
+        <li th:if="${paging.hasPreviousPage}" class="page-class">
+            <a class="page-link"
+               th:href="@{/boardListPage?currentPageNum={page} (page=${paging.firstPage}-1)}"
+               aria-label="Next">
+                <span aria-hidden="true">PREV</span>
+            </a>
+        </li>
+        <th:block th:with="start=${paging.firstPage}, end=${paging.lastPage}">
+            <li class="page-class" th:with="start=${paging.firstPage}, end=${paging.lastPage}"
+                th:each="pageButton : ${#numbers.sequence(paging.firstPage, paging.lastPage)}">
+                <a class="page-link" th:href="@{/boardListPage?currentPageNum={page} (page=${pageButton})}"
+                   th:text="${pageButton}"></a>
+            </li>
+        </th:block>
+<!--        <div th:if="${paging.hasFirstPage}">-->
+            <li th:if="${paging.hasNextPage}" class="page-class">
+                <a class="page-link"
+                   th:href="@{/boardListPage?currentPageNum={page} (page=${paging.lastPage}+1)}"
+                   aria-label="Next">
+                    <span aria-hidden="true">NEXT</span>
+                </a>
+            </li>
+<!--        </div>-->
+        <!--        <input type="button" onclick="location.href='/boardListPage?currentPageNum=1'" value="1">-->
+        <!--        <input type="button" onclick="location.href='/boardListPage?currentPageNum=2'" value="2">-->
+        <!--        <input type="button" onclick="location.href='/boardListPage?currentPageNum=3'" value="3">-->
+</div>
+
 </body>
 </html>
 <script>

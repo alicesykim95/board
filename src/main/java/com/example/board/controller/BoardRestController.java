@@ -22,10 +22,20 @@ public class BoardRestController {
     @Autowired
     private BoardService boardService;
 
-//    @RequestMapping(value = "/boardList", method = RequestMethod.GET)
-//    public List<BoardVo> getListBoard() throws Exception {
-//        return boardService.selectBoardList();
+    // 생성자로 호출해서 사용하는것이기 때문에 유지보수에 더 용이하다. 수정이 쉽고 빠름.
+    // 그러나 차이는 별로 없다.
+//    private final BoardService boardService;
+//
+//    @Autowired
+//    public BoardRestController( BoardService boardService) {
+//        this.boardService = boardService;
 //    }
+
+
+    @RequestMapping(value = "/boardList", method = RequestMethod.GET)
+    public List<BoardVo> getListBoard() throws Exception {
+        return boardService.selectBoardListNone();
+    }
 
     @RequestMapping(value = "/board", method = RequestMethod.POST)
     public int addBoard(BoardVo bdv) throws Exception {

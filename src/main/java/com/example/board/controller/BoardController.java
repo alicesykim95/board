@@ -24,10 +24,20 @@ public class BoardController {
         int boardtotalCount = boardService.totalRecordCount();
         Paging paging = new Paging(criteria, boardtotalCount);
 
+
+        System.out.println(paging.getFirstPage());
+        System.out.println(paging.isHasNextPage());
+
         model.addAttribute("paging", paging);
         model.addAttribute("list", boardService.selectBoardList(criteria));
 
         return "board/bList";
+    }
+
+    @RequestMapping(value = "boardListTable", method = RequestMethod.GET)
+    public String boardListTable() throws Exception {
+
+        return "board/Datatables";
     }
 
     @RequestMapping(value = "/boardWritePage", method = RequestMethod.GET)

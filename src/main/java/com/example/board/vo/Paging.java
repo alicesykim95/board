@@ -65,6 +65,9 @@ public class Paging {
         // 다음 페이지 존재 여부
         hasNextPage = (lastPage * criteria.getPerPageNum()) < totalRecordCount;
 
+        //시작 페이지
+
+
     }
 
 

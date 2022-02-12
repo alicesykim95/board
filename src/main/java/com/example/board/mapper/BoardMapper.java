@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     List<BoardVo> selectBoardList(Criteria criteria) throws Exception;
+    List<BoardVo> selectBoardListNone() throws Exception;
     int totalRecordCount() throws Exception;
     int insertBoard(BoardVo bdv) throws Exception;
     BoardVo getBoardDetail(int boardNum) throws Exception;
