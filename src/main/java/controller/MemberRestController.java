@@ -1,4 +1,4 @@
-package com.example.board.controller;
+package controller;
 
 import com.example.board.service.MemberService;
 import com.example.board.vo.MemberVo;
@@ -12,6 +12,7 @@ public class MemberRestController {
     @Autowired
     private MemberService memberService;
 
+    // 회원가입 처리
     @RequestMapping(value = "/member", method = RequestMethod.POST)
     public int addMember(MemberVo mbv) throws Exception{
         return memberService.insertMember(mbv);

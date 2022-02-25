@@ -1,4 +1,4 @@
-package com.example.board.controller;
+package controller;
 
 import com.example.board.vo.Criteria;
 import com.example.board.service.BoardService;

@@ -40,34 +40,37 @@
                 <input class="list_btn btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
             </td>
         </tr>
-        <li th:if="${paging.hasPreviousPage}" class="page-class">
-            <a class="page-link"
+    </table>
+
+    <div class="page_container">
+        <!--이전 페이지 버튼-->
+        <li th:if="${paging.hasPreviousPage}" class="page_class">
+            <a class="page_link page_btn"
                th:href="@{/boardListPage?currentPageNum={page} (page=${paging.firstPage}-1)}"
                aria-label="Next">
-                <span aria-hidden="true">PREV</span>
+                <span aria-hidden="true"><</span>
             </a>
         </li>
+
+        <!--10개 페이지 버튼 로딩-->
         <th:block th:with="start=${paging.firstPage}, end=${paging.lastPage}">
-            <li class="page-class" th:with="start=${paging.firstPage}, end=${paging.lastPage}"
+            <li class="page_class" th:with="start=${paging.firstPage}, end=${paging.lastPage}"
                 th:each="pageButton : ${#numbers.sequence(paging.firstPage, paging.lastPage)}">
-                <a class="page-link" th:href="@{/boardListPage?currentPageNum={page} (page=${pageButton})}"
+                <a class="page_link page_number" th:href="@{/boardListPage?currentPageNum={page} (page=${pageButton})}"
                    th:text="${pageButton}"></a>
             </li>
         </th:block>
-<!--        <div th:if="${paging.hasFirstPage}">-->
-            <li th:if="${paging.hasNextPage}" class="page-class">
-                <a class="page-link"
-                   th:href="@{/boardListPage?currentPageNum={page} (page=${paging.lastPage}+1)}"
-                   aria-label="Next">
-                    <span aria-hidden="true">NEXT</span>
-                </a>
-            </li>
-<!--        </div>-->
-        <!--        <input type="button" onclick="location.href='/boardListPage?currentPageNum=1'" value="1">-->
-        <!--        <input type="button" onclick="location.href='/boardListPage?currentPageNum=2'" value="2">-->
-        <!--        <input type="button" onclick="location.href='/boardListPage?currentPageNum=3'" value="3">-->
-</div>
 
+        <!--다음 페이지 버튼-->
+        <li th:if="${paging.hasNextPage}" class="page_class">
+            <a class="page_link page_btn"
+               th:href="@{/boardListPage?currentPageNum={page} (page=${paging.lastPage}+1)}"
+               aria-label="Next">
+                <span aria-hidden="true"> > </span>
+            </a>
+        </li>
+    </div>
+</div>
 </body>
 </html>
 <script>

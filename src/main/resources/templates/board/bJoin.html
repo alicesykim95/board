@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <h2>회원가입</h2>
+    <table class="board_join">
+        <tr>
+           <td>아이디</td>
+            <td><input type="text" id="mId"></td>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td><input type="password" id="mPassword"></td>
+        </tr>
+        <tr>
+            <td>비밀번호 확인</td>
+            <td><input type="password" id="mPasswordConfirm"></td>
+        </tr>
+    </table>
+    <input type="button" class="btn" value="회원가입" onclick="joinBoard()">
+</div>
+
+</body>
+</html>
+<script>
+    function joinBoard() {
+
+        document.getElementById("mId").value = document.getElementById("mId").value.trim();
+        if (document.getElementById("mId").value === 0){
+            alert("아이디를 입력해주세요.");
+            document.getElementById("mId").focus();
+            return false;
+        }
+
+        if (document.getElementById("mId").value < 4){
+            alert("아이디를 4글자 이상 입력해주세요.");
+            document.getElementById("mId").focus();
+            return false;
+        }
+
+        document.getElementById("mPassword").value = document.getElementById("mPassword").value.trim();
+        if(document.getElementById("mPassword").value === 0){
+            alert("비밀번호를 입력해주세요.");
+            document.getElementById("mPassword").focus();
+            return false;
+        }
+
+        document.getElementById("mPasswordConfirm").value = document.getElementById("mPasswordConfirm").value.trim();
+        if(document.getElementById("mPassword").value !== document.getElementById("mPasswordConfirm").value){
+            alert("비밀번호가 일치하지 않습니다.");
+            return false;
+        }
+
+        const memberList = {
+            mId: document.getElementById("mId").value,
+            mPassword: document.getElementById("mPassword").value
+        }
+
+        $.ajax({
+            url: '/member',
+            type: 'POST',
+            data: memberList,
+            success: function() {
+                alert("성공하였습니다.");
+                location.href="/bHome";
+            },
+            error: function() {
+                alert("실패하였습니다.");
+            }
+
+        });
+
+
+    }
+
+</script>
