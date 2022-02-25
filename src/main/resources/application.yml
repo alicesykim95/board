@@ -5,6 +5,12 @@ spring:
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  security:
+    user:
+      name: user1
+      password: 1111
+      roles: USER
+
   devtools:
     livereload:
       enabled: true
