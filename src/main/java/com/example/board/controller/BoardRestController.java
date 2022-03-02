@@ -1,4 +1,4 @@
-package controller;
+package com.example.board.controller;
 
 import com.example.board.service.BoardService;
 import com.example.board.vo.BoardVo;

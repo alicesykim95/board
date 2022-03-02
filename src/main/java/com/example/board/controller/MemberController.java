@@ -1,4 +1,4 @@
-package controller;
+package com.example.board.controller;
 
 import com.example.board.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
