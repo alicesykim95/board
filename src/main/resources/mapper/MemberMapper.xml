@@ -10,4 +10,14 @@
                 #{mId},
                 #{mPassword})
     </insert>
+    <select id="loginMember" resultType="MemberVo">
+        SELECT
+            m_num,
+            m_id,
+            m_password
+        FROM
+            member
+        WHERE
+            m_num = #{mNum}
+    </select>
 </mapper>

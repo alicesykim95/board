@@ -15,4 +15,5 @@ public class MemberService {
         return memberMapper.insertMember(mbv);
     }
 
+
 }

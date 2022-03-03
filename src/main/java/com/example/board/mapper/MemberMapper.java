@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberMapper {
 
     int insertMember(MemberVo mbv) throws Exception;
-
+    String loginMember(MemberVo mbv) throws Exception;
 }

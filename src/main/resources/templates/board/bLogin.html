@@ -3,12 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
+    <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <form action="/member" method="post">
-        <input type="text" name="username" placeholder="이메일 입력해주세요">
-        <input type="password" name="password" placeholder="비밀번호">
-        <button type="submit">로그인</button>
-    </form>
+<div class="container">
+    <h2>로그인</h2>
+    <table class="board_login">
+        <tr>
+            <td>아이디</td>
+            <td><input type="text" id="mId" placeholder="아이디를 입력해주세요"></td>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td><input type="password" id="mPassword" placeholder="비밀번호를 입력해주세요"></td>
+        </tr>
+    </table>
+    <button type="submit" class="btn" onclick="loginBoard()">로그인</button>
+</div>
 </body>
 </html>
+<script>
+    function loginBoard(){
+
+        const loginInfo = {
+            mId: document.getElementById("mId").value,
+            mPassword: document.getElementById("mPassword").value
+        }
+
+        $.ajax({
+            url: '/member',
+            type: 'POST',
+            data: memberList,
+            success: function() {
+                alert("성공하였습니다.");
+                location.href="/home";
+            },
+            error: function() {
+                alert("실패하였습니다.");
+            }
+        });
+
+    }
+
+</script>
