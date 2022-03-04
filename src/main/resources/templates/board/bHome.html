@@ -7,8 +7,14 @@
 <body>
 <div class="container">
     <h1>홈 화면</h1>
-    <a th:href="@{/memberLogin}">로그인</a>
-    <a th:href="@{/memberJoin}">회원가입</a>
+    <p th:if="${login == null}">
+        <a th:href="@{/memberLogin}">로그인</a>
+    </p>
+    <p th:unless="${login != null}">
+        <a th:href="@{/memberLogout}">로그아웃</a>
+        <a th:href="@{/boardListPage}">글목록</a>
+    </p>
+    <p><a th:href="@{/memberJoin}">회원가입</a></p>
 </div>
 </body>
 </html>
