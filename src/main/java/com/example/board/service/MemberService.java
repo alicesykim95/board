@@ -18,7 +18,13 @@ public class MemberService {
     }
 
     public MemberVo loginMember(MemberVo mbv) throws Exception{
-        return memberMapper.loginMember(mbv);
+
+        MemberVo memberVo =  memberMapper.loginMember(mbv);
+
+        if (memberVo == null) {
+            return null;
+        }
+        return memberVo;
     }
 
 

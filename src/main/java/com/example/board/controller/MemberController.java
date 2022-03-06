@@ -30,32 +30,20 @@ public class MemberController {
     }
 
     // 로그인 페이지
-    @RequestMapping(value = "/memberLogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
     public String loginPage(MemberVo mbv, HttpServletRequest request, Model model) throws Exception {
 
         HttpSession session = request.getSession();
 
-        MemberVo login = memberService.loginMember(mbv);
+        Object  loginYn = session.getAttribute("login");
 
-        if (login != null){
-            session.setAttribute("login", login);
-            session.setMaxInactiveInterval(60 * 30);
-            model.addAttribute("login", login);
-        } else {
-            session.setAttribute("login", null);
-            model.addAttribute("login", null);
+        if (loginYn != null) {
+            System.out.println(loginYn.toString());
+            return "board/bHome";
         }
-
 
         return "board/bLogin";
     }
-
-    // 로그아웃 페이지
-    @RequestMapping(value = "/memberLogout", method = RequestMethod.GET)
-    public String LogoutPage() throws Exception {
-        return "board/bLogout";
-    }
-
 
 
 }
