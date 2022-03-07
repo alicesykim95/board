@@ -59,8 +59,3 @@ public class BoardController {
     }
 
 }
-
-//ksy
-//
-//
-//ksy1010%%

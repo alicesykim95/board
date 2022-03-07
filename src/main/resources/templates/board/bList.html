@@ -29,7 +29,7 @@
         <tbody>
         <tr class="table_body" th:each="list:${list}">
             <td class="list_td list_td_no" th:text="${list.boardNum}"></td>
-            <td class="list_td"><a th:href="@{'/board/'+ ${list.boardNum}" th:text="${list.title}"></a></td>
+            <td class="list_td"><a th:href="@{'/'+ ${list.boardNum}}" th:text="${list.title}"></a></td>
             <td class="list_td" th:text="${list.writer}"></td>
             <td class="list_td" th:text="${list.createdTime}"></td>
             <td class="list_td" th:text="${list.hitCnt}"></td>

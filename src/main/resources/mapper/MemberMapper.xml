@@ -10,6 +10,7 @@
                 #{mId},
                 #{mPassword})
     </insert>
+
     <select id="loginMember" resultType="MemberVo">
         SELECT
             m_id,

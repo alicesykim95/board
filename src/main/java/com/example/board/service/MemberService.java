@@ -5,8 +5,6 @@ import com.example.board.vo.MemberVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
-
 @Service
 public class MemberService {
 

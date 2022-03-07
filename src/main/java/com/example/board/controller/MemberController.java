@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,26 +25,9 @@ public class MemberController {
     }
 
     // 회원가입 페이지
-    @RequestMapping(value = "/memberJoin", method = RequestMethod.GET)
+    @RequestMapping(value = "/memberJoinPage", method = RequestMethod.GET)
     public String addMemeberPage() throws Exception {
         return "board/bJoin";
     }
-
-    // 로그인 페이지
-    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-    public String loginPage(MemberVo mbv, HttpServletRequest request, Model model) throws Exception {
-
-        HttpSession session = request.getSession();
-
-        Object  loginYn = session.getAttribute("login");
-
-        if (loginYn != null) {
-            System.out.println(loginYn.toString());
-            return "board/bHome";
-        }
-
-        return "board/bLogin";
-    }
-
 
 }
