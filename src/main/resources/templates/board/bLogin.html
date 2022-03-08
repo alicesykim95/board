@@ -6,21 +6,26 @@
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
+<style>
+    body {
+        background: #efa5a5;
+    }
+</style>
 <body>
-<div class="container">
-    <h2>로그인</h2>
-    <table class="board_login">
-        <tr>
-            <td>아이디</td>
-            <td><input type="text" id="mId" placeholder="아이디를 입력해주세요"></td>
-        </tr>
-        <tr>
-            <td>비밀번호</td>
-            <td><input type="password" id="mPassword" placeholder="비밀번호를 입력해주세요"></td>
-        </tr>
-    </table>
-    <button type="submit" class="btn" onclick="loginBoard()">로그인</button>
-</div>
+    <div class="board_login">
+    <p class="login_title">Login</p>
+        <div class="login_table">
+            <div class="login_section">
+                <input type="text" id="mId" class="login_btn" placeholder="Username">
+            </div>
+            <div class="login_section">
+                <input type="password" id="mPassword" class="login_btn" placeholder="Password">
+            </div>
+            <div class="login_section">
+                <button type="submit" class="login_bottom_btn" onclick="loginBoard()">Login</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 <script>

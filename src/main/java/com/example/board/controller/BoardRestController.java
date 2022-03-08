@@ -64,29 +64,5 @@ public class BoardRestController {
         return boardService.deleteBoard(boardNum);
     }
 
-    // 로그인 처리
-    @RequestMapping(value = "/memberLogin", method = RequestMethod.POST)
-    public int login(MemberVo mbv, HttpServletRequest request, Model model) throws Exception {
-
-        HttpSession session = request.getSession();
-        MemberVo login = memberService.loginMember(mbv);
-
-        if (login != null) {
-            session.setAttribute("login", login);
-            session.setMaxInactiveInterval(60 * 30);
-            model.addAttribute("login", login);
-            return 1;
-        } else {
-            return 0;
-        }
-
-    }
-
-    // 회원가입 처리
-    @RequestMapping(value = "/memberJoin", method = RequestMethod.POST)
-    public int addMember(MemberVo mbv) throws Exception {
-        return memberService.insertMember(mbv);
-    }
-
 
 }

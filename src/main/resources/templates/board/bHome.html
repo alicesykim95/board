@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>홈</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
+<style>
+    body {
+        background: #efa5a5;
+    }
+</style>
 <body>
-<div class="container">
-    <h1>홈 화면</h1>
-    <p th:if="${session.login == null}">
-        <a th:href="@{/loginPage}">로그인</a>
-    </p>
-    <p th:unless="${session.login == null}">
-        <a th:href="@{/memberLogout}">로그아웃</a>
-        <a th:href="@{/boardListPage}">글목록</a>
-    </p>
-    <p><a th:href="@{/memberJoinPage}">회원가입</a></p>
+<div class="board_home">
+    <p class="home_title">Home</p>
+    <div class="home_section" th:if="${session.login == null}">
+        <a class="home_btn" th:href="@{/loginPage}">Login</a>
+    </div>
+    <div class="home_section" th:unless="${session.login == null}">
+        <p class="home_user_text" th:inline="text">[[${session.login.mId}]] 님 어서오세요</p>
+        <a class="home_btn" th:href="@{/memberLogout}">Logout</a>
+        <a class="home_btn" th:href="@{/boardListPage}">Board</a>
+    </div>
+    <div class="home_section bottom_btn">
+        <p><a class="home_btn bottom_btn" th:href="@{/memberJoinPage}">Join</a></p>
+    </div>
 </div>
 </body>
 </html>
