@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+// Controller - 정통적인 Controller = 화면단위을 반환합니다 (= 데이터도 같이 반환할 수 있음)
+// RestController - Controller + Response Body = 데이터만 반환합니다.
+
 @Controller
 @RequiredArgsConstructor
 public class LoginController {

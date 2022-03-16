@@ -22,6 +22,7 @@ public class MemberService {
         if (memberVo == null) {
             return null;
         }
+
         return memberVo;
     }
 
