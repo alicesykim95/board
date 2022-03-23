@@ -16,10 +16,10 @@
     <p class="login_title">Login</p>
         <div class="login_table">
             <div class="login_section">
-                <input type="text" id="mId" class="login_btn" placeholder="Username">
+                <input type="text" id="userId" class="login_btn" placeholder="Id">
             </div>
             <div class="login_section">
-                <input type="password" id="mPassword" class="login_btn" placeholder="Password">
+                <input type="password" id="userPassword" class="login_btn" placeholder="Password">
             </div>
             <div class="login_section">
                 <button type="submit" class="login_bottom_btn" onclick="loginBoard()">Login</button>
@@ -32,12 +32,12 @@
     function loginBoard() {
 
         const loginInfo = {
-            mId: document.getElementById("mId").value,
-            mPassword: document.getElementById("mPassword").value
+            userId: document.getElementById("userId").value,
+            userPassword: document.getElementById("userPassword").value
         }
 
         $.ajax({
-            url: '/memberLogin',
+            url: '/userLogin',
             type: 'POST',
             data: loginInfo,
             success: function (data) {

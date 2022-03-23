@@ -1,7 +1,7 @@
 package com.example.board.controller;
 
-import com.example.board.service.MemberService;
-import com.example.board.vo.MemberVo;
+import com.example.board.service.UserService;
+import com.example.board.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
-public class LoginController {
+public class UserLoginController {
 
-    private final MemberService memberService;
+    private final UserService userService;
 
     // 로그인 페이지
     @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
@@ -38,12 +38,12 @@ public class LoginController {
     }
 
     // 로그인 처리
-    @RequestMapping(value = "/memberLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     @ResponseBody
-    public int login(MemberVo mbv, HttpServletRequest request, Model model) throws Exception {
+    public int login(UserVo uv, HttpServletRequest request, Model model) throws Exception {
 
         HttpSession session = request.getSession();
-        MemberVo login = memberService.loginMember(mbv);
+        UserVo login = userService.loginMember(uv);
 
         if (login != null) {
             session.setAttribute("login", login);
@@ -53,11 +53,10 @@ public class LoginController {
         } else {
             return 0;
         }
-
     }
 
     // 로그아웃 페이지
-    @RequestMapping(value = "/memberLogout", method = RequestMethod.GET)
+    @RequestMapping(value = "/userLogout", method = RequestMethod.GET)
     public String LogoutPage(HttpServletRequest request) throws Exception {
 
         try {

@@ -2,84 +2,86 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.board.mapper.BoardMapper">
+
+    <!-- 게시글 전체 리스트 조회 for 화면 -->
     <select id="selectBoardList" parameterType="Criteria" resultType="BoardVo">
         SELECT board_num,
                writer,
                title,
                created_time,
                hit_cnt
-        FROM t_board
+        FROM board
         ORDER BY board_num DESC
-        LIMIT #{startPage}, #{perPageNum}
-       </select>
+            LIMIT #{startPage}, #{perPageNum}
+    </select>
 
-    <select id="selectBoardListNone"  resultType="BoardVo">
+    <!-- 게시글 전체 리스트 조회 for RestApi -->
+    <select id="selectBoardListNone" resultType="BoardVo">
         SELECT board_num,
                writer,
                title,
                created_time,
                hit_cnt
-        FROM t_board
+        FROM board
         ORDER BY board_num DESC
-       </select>
-    <select id="totalRecordCount" resultType="int">
-        SELECT
-            COUNT(*)
-        FROM
-            t_board;
     </select>
 
+    <!-- 게시글 전체 갯수 조회 for 페이징 -->
+    <select id="totalRecordCount" resultType="int">
+        SELECT COUNT(*)
+        FROM board;
+    </select>
+
+    <!-- 게시글 삽입 -->
     <insert id="insertBoard" parameterType="BoardVo">
-        INSERT INTO t_board (board_num,
-                             writer,
-                             title,
-                             content,
-                             created_time,
-                             hit_cnt)
+        INSERT INTO board (board_num,
+                           writer,
+                           title,
+                           content,
+                           created_time,
+                           hit_cnt)
         VALUES (#{boardNum},
                 #{writer},
                 #{title},
                 #{content},
                 now(),
                 #{hitCnt})
-        </insert>
+    </insert>
 
+    <!-- 게시글 상세 조회 -->
     <select id="getBoardDetail" resultType="BoardVo" parameterType="int">
-        SELECT
-               board_num,
+        SELECT board_num,
                writer,
                title,
                content,
                created_time,
                hit_cnt
-        FROM
-             t_board
-        WHERE
-              board_num = #{boardNum}
-        </select>
+        FROM board
+        WHERE board_num = #{boardNum}
+    </select>
 
+    <!-- 게시글 수정 -->
     <update id="updateBoard" parameterType="BoardVo">
         UPDATE
-            t_board
-        SET
-            title   = #{title},
+            board
+        SET title   = #{title},
             content = #{content}
-        WHERE
-              board_num = #{boardNum}
+        WHERE board_num = #{boardNum}
     </update>
 
+    <!-- 게시글 삭제 -->
     <delete id="deleteBoard" parameterType="int">
-        DELETE FROM
-            t_board
-        WHERE
-            board_num = #{boardNum}
+        DELETE
+        FROM board
+        WHERE board_num = #{boardNum}
     </delete>
+
+    <!-- 게시글 조회수 증가 -->
     <update id="updateHitCount" parameterType="int">
         UPDATE
-            t_board
-        SET
-            hit_cnt = hit_cnt+1
-        WHERE
-            board_num = #{boardNum}
+            board
+        SET hit_cnt = hit_cnt + 1
+        WHERE board_num = #{boardNum}
     </update>
+
 </mapper>

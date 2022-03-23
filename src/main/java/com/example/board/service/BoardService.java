@@ -3,49 +3,50 @@ package com.example.board.service;
 import com.example.board.mapper.BoardMapper;
 import com.example.board.vo.Criteria;
 import com.example.board.vo.BoardVo;
-import com.example.board.vo.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 import java.util.List;
 
 @Service
-public class BoardService{
+public class BoardService {
 
     @Autowired
     private BoardMapper boardMapper;
 
-    public List<BoardVo> selectBoardList(Criteria criteria) throws Exception{
-
+    // 게시글 전체 리스트 for 화면
+    public List<BoardVo> selectBoardList(Criteria criteria) throws Exception {
         return boardMapper.selectBoardList(criteria);
     }
 
-    public List<BoardVo> selectBoardListNone() throws Exception{
-
+    // 게시글 전체 리스트 for RestApi
+    public List<BoardVo> selectBoardListNone() throws Exception {
         return boardMapper.selectBoardListNone();
     }
 
-    public int totalRecordCount() throws Exception{
+    // 게시글 전체 갯수 for 페이징
+    public int totalRecordCount() throws Exception {
         return boardMapper.totalRecordCount();
     }
 
+    // 게시글 작성
     public int insertBoard(BoardVo bdv) throws Exception {
-
         return boardMapper.insertBoard(bdv);
     }
 
-    public BoardVo getBoardDetail(int boardNum) throws Exception{
+    // 게시글 상세
+    public BoardVo getBoardDetail(int boardNum) throws Exception {
         boardMapper.updateHitCount(boardNum);
-        BoardVo board  = boardMapper.getBoardDetail(boardNum);
+        BoardVo board = boardMapper.getBoardDetail(boardNum);
         return board;
     }
 
-    public int updateBoard(BoardVo bdv) throws Exception{
-       return boardMapper.updateBoard(bdv);
+    // 게시글 수정
+    public int updateBoard(BoardVo bdv) throws Exception {
+        return boardMapper.updateBoard(bdv);
     }
 
-    public int deleteBoard(int boardNum) throws Exception{
+    // 게시글 삭제
+    public int deleteBoard(int boardNum) throws Exception {
         return boardMapper.deleteBoard(boardNum);
     }
 

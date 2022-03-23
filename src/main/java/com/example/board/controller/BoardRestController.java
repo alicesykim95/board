@@ -1,18 +1,14 @@
 package com.example.board.controller;
 
 import com.example.board.service.BoardService;
-import com.example.board.service.MemberService;
+import com.example.board.service.UserService;
 import com.example.board.vo.BoardVo;
-import com.example.board.vo.MemberVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -27,37 +23,42 @@ public class BoardRestController {
     private BoardService boardService;
 
     @Autowired
-    private MemberService memberService;
+    private UserService memberService;
 
     // 생성자로 호출해서 사용하는것이기 때문에 유지보수에 더 용이하다. 수정이 쉽고 빠름.
     // 그러나 차이는 별로 없다.
-//    private final BoardService boardService;
-//
-//    @Autowired
-//    public BoardRestController( BoardService boardService) {
-//        this.boardService = boardService;
-//    }
+    // private final BoardService boardService;
+    //
+    // @Autowired
+    // public BoardRestController( BoardService boardService) {
+    //     this.boardService = boardService;
+    // }
 
+    // 게시글 전체 페이지 목록
     @RequestMapping(value = "/board", method = RequestMethod.GET)
     public List<BoardVo> getListBoard() throws Exception {
         return boardService.selectBoardListNone();
     }
 
+    // 게시글 작성 처리
     @RequestMapping(value = "/board", method = RequestMethod.POST)
     public int addBoard(BoardVo bdv) throws Exception {
         return boardService.insertBoard(bdv);
     }
 
+    // 게시글 수정 처리
     @RequestMapping(value = "/board", method = RequestMethod.PUT)
     public int updateBoard(BoardVo bdv) throws Exception {
         return boardService.updateBoard(bdv);
     }
 
+    // 게시글 상세 목록
     @RequestMapping(value = "/board/{id}", method = RequestMethod.GET)
     public BoardVo getOneBoard(@PathVariable("id") int boardNum) throws Exception {
         return boardService.getBoardDetail(boardNum);
     }
 
+    // 게시글 삭제 처리
     @RequestMapping(value = "/board", method = RequestMethod.DELETE)
     public int deleteBoard(int boardNum) throws Exception {
         System.out.println(boardNum);

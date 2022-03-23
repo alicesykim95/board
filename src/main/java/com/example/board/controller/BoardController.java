@@ -7,7 +7,6 @@ import com.example.board.vo.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,16 +18,16 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-//    @CrossOrigin(value = "*")
+    //@CrossOrigin(value = "*")
+    // 게시글 전체 리스트 페이지
     @RequestMapping(value = "/boardListPage", method = RequestMethod.GET)
     public String openBoardList(Criteria criteria, Model model) throws Exception {
 
         // Access-Control-Allow-Origin : '*'
-        // AJAX - json 대신  www-form-urlencoded 형식으로 보내면된다 .
+        // AJAX - json 대신  www-form-urlencoded 형식으로 보내면된다.
         System.out.println("INIT");
         int boardtotalCount = boardService.totalRecordCount();
         Paging paging = new Paging(criteria, boardtotalCount);
-
 
         System.out.println(paging.getFirstPage());
         System.out.println(paging.isHasNextPage());
@@ -39,22 +38,26 @@ public class BoardController {
         return "board/bList";
     }
 
+    // 게시글 jQuery 페이징 구현 페이지
     @RequestMapping(value = "boardListTable", method = RequestMethod.GET)
     public String boardListTable() throws Exception {
-
         return "board/Datatables";
     }
 
+    // 게시글 작성 페이지
     @RequestMapping(value = "/boardWritePage", method = RequestMethod.GET)
     public String addBoardPage() throws Exception {
         return "board/bWrite";
     }
 
+    // 게시글 상세 페이지: 수정 및 삭제
     @RequestMapping(value = "/{boardNum}", method = RequestMethod.GET)
     public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum) throws Exception {
+
         ModelAndView mv = new ModelAndView("board/bDetail");
         BoardVo board = boardService.getBoardDetail(boardNum);
         mv.addObject("board", board);
+
         return mv;
     }
 

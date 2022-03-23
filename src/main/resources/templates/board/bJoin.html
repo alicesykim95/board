@@ -16,17 +16,17 @@
     <p class="join_title">Create Account</p>
     <div class="join_table">
         <div class="join_section">
-            <p><input type="text" id="mId" class="join_btn" placeholder="Username"></p>
+            <p><input type="text" id="userId" class="join_btn" placeholder="Id"></p>
         </div>
         <div class="join_section">
-            <p><input type="password" id="mPassword" class="join_btn" placeholder="Password"></p>
+            <p><input type="password" id="userPassword" class="join_btn" placeholder="Password"></p>
         </div>
         <div class="join_section">
-            <p><input type="password" id="mPasswordConfirm" class="join_btn" placeholder="Confirm Password"></p>
+            <p><input type="password" id="userPasswordConfirm" class="join_btn" placeholder="Confirm Password"></p>
         </div>
     </div>
     <div class="bottom_join">
-        <input type="button" class="join_bottom_btn" value="JOIN" onclick="joinBoard()">
+        <input type="button" class="join_bottom_btn" value="Join" onclick="joinBoard()">
     </div>
 </div>
 
@@ -35,39 +35,39 @@
 <script>
     function joinBoard() {
 
-        document.getElementById("mId").value = document.getElementById("mId").value.trim();
-        if (document.getElementById("mId").value === 0){
+        document.getElementById("userId").value = document.getElementById("userId").value.trim();
+        if (document.getElementById("userId").value === 0){
             alert("아이디를 입력해주세요.");
-            document.getElementById("mId").focus();
+            document.getElementById("userId").focus();
             return false;
         }
 
-        if (document.getElementById("mId").value < 4){
+        if (document.getElementById("userId").value < 4){
             alert("아이디를 4글자 이상 입력해주세요.");
-            document.getElementById("mId").focus();
+            document.getElementById("userId").focus();
             return false;
         }
 
-        document.getElementById("mPassword").value = document.getElementById("mPassword").value.trim();
-        if(document.getElementById("mPassword").value === 0){
+        document.getElementById("userPassword").value = document.getElementById("userPassword").value.trim();
+        if(document.getElementById("userPassword").value === 0){
             alert("비밀번호를 입력해주세요.");
-            document.getElementById("mPassword").focus();
+            document.getElementById("userPassword").focus();
             return false;
         }
 
-        document.getElementById("mPasswordConfirm").value = document.getElementById("mPasswordConfirm").value.trim();
-        if(document.getElementById("mPassword").value !== document.getElementById("mPasswordConfirm").value){
+        document.getElementById("userPasswordConfirm").value = document.getElementById("userPasswordConfirm").value.trim();
+        if(document.getElementById("userPassword").value !== document.getElementById("userPasswordConfirm").value){
             alert("비밀번호가 일치하지 않습니다.");
             return false;
         }
 
         const memberList = {
-            mId: document.getElementById("mId").value,
-            mPassword: document.getElementById("mPassword").value
+            userId: document.getElementById("userId").value,
+            userPassword: document.getElementById("userPassword").value
         }
 
         $.ajax({
-            url: '/memberJoin',
+            url: '/userJoin',
             type: 'POST',
             data: memberList,
             success: function() {

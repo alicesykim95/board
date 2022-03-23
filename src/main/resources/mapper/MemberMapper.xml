@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.board.mapper.MemberMapper">
-    <insert id="insertMember" parameterType="MemberVo">
-        INSERT INTO member (m_num,
-                            m_id,
-                            m_password)
-        VALUES (#{mNum},
-                #{mId},
-                #{mPassword})
+<mapper namespace="com.example.board.mapper.UserMapper">
+
+    <!-- 회원가입 -->
+    <insert id="insertMember" parameterType="UserVo">
+        INSERT INTO USER (user_num,
+                            user_id,
+                            user_password)
+        VALUES (#{userNum},
+                #{userId},
+                #{userPassword})
     </insert>
 
-    <select id="loginMember" parameterType="MemberVo" resultType="MemberVo">
+    <!-- 로그인 -->
+    <select id="loginMember" parameterType="UserVo" resultType="UserVo">
         SELECT
-            m_id,
-            m_password
+            user_id,
+            user_password
         FROM
-            member
+            user
         WHERE
-            m_id = #{mId} and m_password = #{mPassword}
+            user_id = #{userId} and user_password = #{userPassword}
     </select>
+
 </mapper>
