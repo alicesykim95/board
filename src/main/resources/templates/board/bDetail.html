@@ -37,18 +37,27 @@
         <input class="detail_btn btn" type="button" value="수정" id="update" onclick="updateBoard()">
         <input class="detail_btn btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
     </div>
+    <div class="comment_container">
+        <p class="comment_title">comment</p>
+        <div class="comment_form">
+            <input type="text" id="comment_content"/>
+            <input type="button" id="comment_insert" value="등록" onclick="insertComment()"/>
+        </div>
+    </div>
 </div>
 </body>
 </html>
 <script>
 
-    // const boardNum = $('#boardNum').val();
+    // 게시글 boardNum
     const boardNum = document.getElementById("boardNum").value;
 
+    // 게시글 삭제
     function deleteBoard() {
         loadAjax('/board', 'DELETE', {boardNum: boardNum}, true);
     }
 
+    // 게시글 수정
     function updateBoard() {
 
         const detailList = {
@@ -60,6 +69,7 @@
         loadAjax('/board', 'PUT', detailList, true);
     }
 
+    // 게시글 삭제 및 수정 ajax 동작
     function loadAjax(link, method, dataList, alertOK) {
         $.ajax({
             url: link,
@@ -78,6 +88,9 @@
             }
         });
     }
+
+
+    // 댓글
 
 
 </script>

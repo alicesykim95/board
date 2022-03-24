@@ -1,5 +1,7 @@
 package com.example.board.controller;
 
+import com.example.board.service.CommentService;
+import com.example.board.vo.CommentVo;
 import com.example.board.vo.Criteria;
 import com.example.board.service.BoardService;
 import com.example.board.vo.BoardVo;
@@ -17,6 +19,9 @@ public class BoardController {
 
     @Autowired
     BoardService boardService;
+
+    @Autowired
+    CommentService commentService;
 
     //@CrossOrigin(value = "*")
     // 게시글 전체 리스트 페이지
@@ -50,13 +55,16 @@ public class BoardController {
         return "board/bWrite";
     }
 
-    // 게시글 상세 페이지: 수정 및 삭제
+    // 게시글 상세 페이지: 게시글 수정 및 삭제 + 댓글 리스트 수정 및 삭제
     @RequestMapping(value = "/{boardNum}", method = RequestMethod.GET)
     public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum) throws Exception {
 
         ModelAndView mv = new ModelAndView("board/bDetail");
+
         BoardVo board = boardService.getBoardDetail(boardNum);
+
         mv.addObject("board", board);
+        mv.addObject("comment", commentService.commentList());
 
         return mv;
     }
