@@ -14,4 +14,7 @@ public interface CommentMapper {
     // 댓글 작성
     public int commentInsert(CommentVo cv) throws Exception;
 
+    // 댓글 수정
+    int updateComment(CommentVo cv) throws Exception;
+
 }

@@ -27,4 +27,12 @@
                 now())
     </insert>
 
+    <!-- 댓글 수정 -->
+    <update id="updateComment" parameterType="CommentVo">
+        UPDATE
+            comment
+        SET comment_content = #{commentContent}
+        WHERE comment_num = #{commentNum}
+    </update>
+
 </mapper>

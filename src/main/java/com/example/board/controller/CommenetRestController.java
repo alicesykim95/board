@@ -29,4 +29,10 @@ public class CommenetRestController {
         return commentService.commentList();
     }
 
+    // 댓글 수정
+    @RequestMapping(value = "/comment", method = RequestMethod.PUT)
+    public int updateComment(CommentVo cv) throws Exception {
+        return commentService.updateComment(cv);
+    }
+
 }

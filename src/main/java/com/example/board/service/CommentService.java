@@ -23,4 +23,9 @@ public class CommentService {
         return commentMapper.commentInsert(cv);
     }
 
+    // 댓글 수정
+    public int updateComment(CommentVo cv) throws Exception{
+        return commentMapper.updateComment(cv);
+    }
+
 }
