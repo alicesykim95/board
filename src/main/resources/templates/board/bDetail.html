@@ -33,15 +33,18 @@
     </table>
     <div>
         <input type="hidden" id="boardNum" th:value="${board.boardNum}">
+<!--        <input type="hidden" id="commentWriter" th:value="${session.login.userId}">-->
         <input class="detail_btn btn" type="button" value="목록" id="goBackList" onclick="location.href='/boardListPage'">
         <input class="detail_btn btn" type="button" value="수정" id="update" onclick="updateBoard()">
         <input class="detail_btn btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
     </div>
     <div class="comment_container">
-        <p class="comment_title">comment</p>
         <div class="comment_form">
-            <input type="text" id="comment_content"/>
-            <input type="button" id="comment_insert" value="등록" onclick="insertComment()"/>
+            <p class="comment_title">comment</p>
+            <input type="text" id="commentContent">
+            <input type="button" id="commentInsert" value="등록" onclick="insertComment()">
+        </div>
+        <div id = "getCommentList">
         </div>
     </div>
 </div>
@@ -89,8 +92,86 @@
         });
     }
 
+    // 댓글 등록
+    function insertComment() {
 
-    // 댓글
+        const commentList = {
+            boardNum: document.getElementById("boardNum").value,
+            commentContent: document.getElementById("commentContent").value,
+            commentWriter: document.getElementById("commentWriter").value
+        }
+
+        $.ajax({
+            url: '/comment',
+            type: 'POST',
+            data: commentList,
+            success: function() {
+                alert("성공 하였습니다.")
+                document.getElementById("commentContent").disabled = true;
+                getCommentList();
+            },
+            error: function() {
+                alert("실패 하였습니다.");
+            }
+        });
+
+    }
+
+    // 초기 페이지 로딩시 댓글 불러오기
+    $(document).ready(function(){
+        getCommentList();
+    });
+
+    // 댓글 리스트 출력
+    function getCommentList() {
+
+        $.ajax({
+            url: '/comment',
+            type: 'GET',
+            data: {boardNum: boardNum},
+            success: function(data){
+                let html = '';
+                let cCnt = data.length;
+
+                if(data.length > 0){
+                    for (i = 0; i < data.length; i++) {
+                        html += "<div class = 'comment_list'>";
+                        html += "<div class='comment_list_title'>" + data[i].commentWriter + "</div>";
+                        html += "<div class = 'comment_content'>" + data[i].commentContent + "</div>";
+                        html += "<div class = 'comment_time'>" + data[i].commentRegTime + "</div>";
+                        html += "<div class = 'comment_list_btn'>";
+                        html += "<input type='button' class='comment_update' value='수정' onclick='commentUpdate()'>";
+                        html += "<input type='button' class='comment_delete' value='삭제' onclick='commentDelete()'>";
+                        html += "</div>";
+                        html += "</div>";
+                    }
+
+                } else {
+                    html += "<div class='comment_list_none'>";
+                    html += "<div><p class = 'comment_list_title_none'>등록된 댓글이 없습니다.</p></div>";
+                    html += "</div>";
+                }
+
+                $("#cCnt").html(cCnt);
+                $("#getCommentList").html(html);
+
+            }
+        });
+
+    }
+
+    // 댓글 수정
+
+    function commentUpdate() {
+
+    }
+
+    // 댓글 삭제
+
+    function commentDelete() {
+
+    }
+
 
 
 </script>

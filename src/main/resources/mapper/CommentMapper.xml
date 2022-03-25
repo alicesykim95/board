@@ -8,7 +8,7 @@
         SELECT comment_num,
                board_num,
                comment_content,
-               user_id,
+               comment_writer,
                comment_reg_time
         FROM comment
     </select>
@@ -18,12 +18,12 @@
         INSERT INTO comment (comment_num,
                              board_num,
                              comment_content,
-                             user_id,
+                             comment_writer,
                              comment_reg_time)
         VALUES (#{commentNum},
                 #{boardNum},
-                #{comment_content},
-                #{user_id},
+                #{commentContent},
+                #{commentWriter},
                 now())
     </insert>
 

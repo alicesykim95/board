@@ -18,11 +18,11 @@
     </div>
     <div class="home_section" th:unless="${session.login == null}">
         <p class="home_user_text" th:inline="text">[[${session.login.userId}]] 님 어서오세요</p>
-        <a class="home_btn" th:href="@{/memberLogout}">Logout</a>
+        <a class="home_btn" th:href="@{/userLogout}">Logout</a>
         <a class="home_btn" th:href="@{/boardListPage}">Board</a>
     </div>
     <div class="home_section bottom_btn">
-        <p><a class="home_btn bottom_btn" th:href="@{/memberJoinPage}">Join</a></p>
+        <p><a class="home_btn bottom_btn" th:href="@{/userJoinPage}">Join</a></p>
     </div>
 </div>
 </body>

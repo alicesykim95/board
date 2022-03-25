@@ -46,7 +46,7 @@ public class UserLoginController {
         UserVo login = userService.loginMember(uv);
 
         if (login != null) {
-            session.setAttribute("login", login);
+              session.setAttribute("login", login);
             session.setMaxInactiveInterval(60 * 30);
             model.addAttribute("login", login);
             return 1;

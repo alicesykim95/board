@@ -1,11 +1,8 @@
 package com.example.board.controller;
 
 import com.example.board.service.CommentService;
-import com.example.board.vo.CommentVo;
-import com.example.board.vo.Criteria;
+import com.example.board.vo.*;
 import com.example.board.service.BoardService;
-import com.example.board.vo.BoardVo;
-import com.example.board.vo.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class BoardController {
@@ -57,14 +56,21 @@ public class BoardController {
 
     // 게시글 상세 페이지: 게시글 수정 및 삭제 + 댓글 리스트 수정 및 삭제
     @RequestMapping(value = "/{boardNum}", method = RequestMethod.GET)
-    public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum) throws Exception {
+    public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum, HttpServletRequest request) throws Exception {
+
+        HttpSession session = request.getSession();
+        UserVo userVo = (UserVo) session.getAttribute("login");
 
         ModelAndView mv = new ModelAndView("board/bDetail");
 
         BoardVo board = boardService.getBoardDetail(boardNum);
 
+        // 게시판 상세 내용
         mv.addObject("board", board);
+        // 게시판 댓글 리스트
         mv.addObject("comment", commentService.commentList());
+        // 로그인중인 아이디 가져오기
+        mv.addObject("login", userVo);
 
         return mv;
     }

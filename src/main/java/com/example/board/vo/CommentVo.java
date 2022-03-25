@@ -7,10 +7,10 @@ import java.util.Date;
 @Data
 public class CommentVo {
 
-    private int comment_num;
-    private int board_num;
-    private String comment_content;
-    private String user_id;
-    private Date comment_reg_time;
+    private int commentNum;
+    private int boardNum;
+    private String commentContent;
+    private String commentWriter;
+    private Date commentRegTime;
 
 }
