@@ -17,4 +17,6 @@ public interface CommentMapper {
     // 댓글 수정
     int updateComment(CommentVo cv) throws Exception;
 
+    // 댓글 삭제
+    int deleteComment(int commentNum) throws Exception;
 }

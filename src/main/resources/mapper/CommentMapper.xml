@@ -35,4 +35,11 @@
         WHERE comment_num = #{commentNum}
     </update>
 
+    <!-- 댓글 삭제  -->
+    <delete id="deleteComment" parameterType="int">
+        DELETE
+        FROM comment
+        WHERE comment_num = #{commentNum}
+    </delete>
+
 </mapper>

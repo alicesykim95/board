@@ -33,7 +33,7 @@
     </table>
     <div>
         <input type="hidden" id="boardNum" th:value="${board.boardNum}">
-<!--        <input type="hidden" id="commentWriter" th:value="${session.login.userId}">-->
+        <input type="hidden" id="commentWriter" th:value="${session.login.userId}">
         <input class="detail_btn btn" type="button" value="목록" id="goBackList" onclick="location.href='/boardListPage'">
         <input class="detail_btn btn" type="button" value="수정" id="update" onclick="updateBoard()">
         <input class="detail_btn btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
@@ -41,7 +41,7 @@
     <div class="comment_container">
         <div class="comment_form">
             <p class="comment_title">comment</p>
-            <input type="text" class="commentContent">
+            <input type="text" class="commentContent" id="commentContent">
             <input type="button" id="commentBtn" value="등록" onclick="insertComment()">
         </div>
         <div id = "getCommentList">
@@ -107,7 +107,6 @@
             data: commentList,
             success: function() {
                 alert("성공 하였습니다.")
-                document.getElementById("commentContent").disabled = true;
                 getCommentList();
             },
             error: function() {
@@ -141,7 +140,7 @@
                         html += "<div class = 'comment_time'>" + data[i].commentRegTime + "</div>";
                         html += "<div class = 'comment_list_btn'>";
                         html += "<input type='button' class='comment_update" + data[i].commentNum + "' value='수정' onclick='commentUpdate(\"" + data[i].commentNum + "\", \"" + data[i].commentContent + "\")'>";
-                        html += "<input type='button' class='comment_delete' value='삭제' onclick='commentDelete(" + data[i].commentNum + ")'>";
+                        html += "<input type='button' class='comment_delete' value='삭제' onclick='commentDelete(\"" + data[i].commentNum + "\")'>";
                         html += "</div>";
                         html += "</div>";
                     }
@@ -193,7 +192,15 @@
 
         $.ajax({
             url: '/comment',
-
+            type: 'DELETE',
+            data: {commentNum: commentNum},
+            success: function() {
+                alert("삭제되었습니다.");
+                getCommentList();
+            },
+            error: function() {
+                alert("삭제를 하지 못하였습니다.");
+            }
         });
 
     }

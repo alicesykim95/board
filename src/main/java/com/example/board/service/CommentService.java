@@ -28,4 +28,9 @@ public class CommentService {
         return commentMapper.updateComment(cv);
     }
 
+    // 댓글 삭제
+    public int deleteComment(int commentNum) throws Exception{
+        return commentMapper.deleteComment(commentNum);
+    }
+
 }

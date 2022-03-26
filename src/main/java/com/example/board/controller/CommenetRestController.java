@@ -35,4 +35,10 @@ public class CommenetRestController {
         return commentService.updateComment(cv);
     }
 
+    // 댓글 삭제
+    @RequestMapping(value = "/comment", method = RequestMethod.DELETE)
+    public int deleteComment(int commentNum) throws Exception{
+        return commentService.deleteComment(commentNum);
+    }
+
 }
