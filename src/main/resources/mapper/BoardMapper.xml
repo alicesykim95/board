@@ -10,7 +10,7 @@
                title,
                created_time,
                hit_cnt
-        FROM board
+        FROM board_ex
         ORDER BY board_num DESC
             LIMIT #{startPage}, #{perPageNum}
     </select>
@@ -22,19 +22,19 @@
                title,
                created_time,
                hit_cnt
-        FROM board
+        FROM board_ex
         ORDER BY board_num DESC
     </select>
 
     <!-- 게시글 전체 갯수 조회 for 페이징 -->
     <select id="totalRecordCount" resultType="int">
         SELECT COUNT(*)
-        FROM board;
+        FROM board_ex;
     </select>
 
     <!-- 게시글 삽입 -->
     <insert id="insertBoard" parameterType="BoardVo">
-        INSERT INTO board (board_num,
+        INSERT INTO board_ex (board_num,
                            writer,
                            title,
                            content,
@@ -56,14 +56,14 @@
                content,
                created_time,
                hit_cnt
-        FROM board
+        FROM board_ex
         WHERE board_num = #{boardNum}
     </select>
 
     <!-- 게시글 수정 -->
     <update id="updateBoard" parameterType="BoardVo">
         UPDATE
-            board
+            board_ex
         SET title   = #{title},
             content = #{content}
         WHERE board_num = #{boardNum}
@@ -72,14 +72,14 @@
     <!-- 게시글 삭제 -->
     <delete id="deleteBoard" parameterType="int">
         DELETE
-        FROM board
+        FROM board_ex
         WHERE board_num = #{boardNum}
     </delete>
 
     <!-- 게시글 조회수 증가 -->
     <update id="updateHitCount" parameterType="int">
         UPDATE
-            board
+            board_ex
         SET hit_cnt = hit_cnt + 1
         WHERE board_num = #{boardNum}
     </update>

@@ -25,8 +25,8 @@ public class CommenetRestController {
 
     // 댓글 리스트
     @RequestMapping(value = "/comment", method = RequestMethod.GET)
-    public List<CommentVo> getCommentList() throws Exception {
-        return commentService.commentList();
+    public List<CommentVo> getCommentList(int boardNum) throws Exception {
+        return commentService.commentList(boardNum);
     }
 
     // 댓글 수정

@@ -15,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     // 메인 페이지
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(value = {"/home","/"}, method = RequestMethod.GET)
     public String home() throws Exception {
         return "board/bHome";
     }

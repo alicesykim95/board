@@ -9,7 +9,7 @@ import java.util.List;
 public interface CommentMapper {
 
     // 댓글 목록
-    public List<CommentVo> commentList() throws Exception;
+    public List<CommentVo> commentList(int boardNum) throws Exception;
 
     // 댓글 작성
     public int commentInsert(CommentVo cv) throws Exception;

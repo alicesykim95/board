@@ -14,8 +14,8 @@ public class CommentService {
     CommentMapper commentMapper;
 
     // 댓글 리스트
-    public List<CommentVo> commentList() throws Exception{
-        return commentMapper.commentList();
+    public List<CommentVo> commentList(int boardNum) throws Exception{
+        return commentMapper.commentList(boardNum);
     }
 
     // 댓글 등록

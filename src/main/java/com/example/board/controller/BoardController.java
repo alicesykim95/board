@@ -3,6 +3,7 @@ package com.example.board.controller;
 import com.example.board.service.CommentService;
 import com.example.board.vo.*;
 import com.example.board.service.BoardService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequiredArgsConstructor
 public class BoardController {
 
-    @Autowired
-    BoardService boardService;
+    private final BoardService boardService;
 
-    @Autowired
-    CommentService commentService;
+    private final CommentService commentService;
 
     //@CrossOrigin(value = "*")
     // 게시글 전체 리스트 페이지
@@ -68,7 +68,7 @@ public class BoardController {
         // 게시판 상세 내용
         mv.addObject("board", board);
         // 게시판 댓글 리스트
-        mv.addObject("comment", commentService.commentList());
+        mv.addObject("comment", commentService.commentList(boardNum));
         // 로그인중인 아이디 가져오기
         mv.addObject("login", userVo);
 
