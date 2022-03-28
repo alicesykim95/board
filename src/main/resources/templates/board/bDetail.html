@@ -41,7 +41,7 @@
     <div class="comment_container">
         <div class="comment_form">
             <p class="comment_title">comment</p>
-            <input type="text" class="commentContent" id="commentContent">
+            <input type="text" class="commentContent" id="commentContent" placeholder="댓글을 입력하세요">
             <input type="button" id="commentBtn" value="등록" onclick="insertComment()">
         </div>
         <div id = "getCommentList">
@@ -137,11 +137,13 @@
                     for (i = 0; i < data.length; i++) {
                         html += "<div class = 'comment_list'>";
                         html += "<div class='comment_list_title'>" + data[i].commentWriter + "</div>";
-                        html += "<div class = 'comment_content" + data[i].commentNum + "'>" + data[i].commentContent + "</div>";
+                        html += "<div class='comment_content_container" + data[i].commentNum + "'>";
+                        html += "<div class = 'comment_content' >" + data[i].commentContent + "</div>";
                         html += "<div class = 'comment_time'>" + data[i].commentRegTime + "</div>";
                         html += "<div class = 'comment_list_btn'>";
                         html += "<input type='button' class='comment_update" + data[i].commentNum + "' value='수정' onclick='commentUpdate(\"" + data[i].commentNum + "\", \"" + data[i].commentContent + "\")'>";
                         html += "<input type='button' class='comment_delete' value='삭제' onclick='commentDelete(\"" + data[i].commentNum + "\")'>";
+                        html += "</div>";
                         html += "</div>";
                         html += "</div>";
                     }
@@ -165,12 +167,21 @@
     function commentUpdate(commentNum, commentContent) {
         let html = '';
 
-        html += "<div class='comment_content_update'>";
-        html += "<input type='text'  class='commentContent' id ='commentContent"+commentNum+"' value='"+ commentContent +"'/>"
+        html += "<div class='comment_content_container'>";
+        html += "<input type='text'  class='commentContent_update' id ='commentContent"+commentNum+"' value='"+ commentContent +"'/>"
         html += "<input type='button' id='commentBtn' value='완료' onclick='commentUpdatePro("+commentNum+")'/>";
+        html += "<div class='comment_list_btn'>";
+        html += "<input type='button' class='comment_cancel' value='취소' onclick='commentCancel()'>";
+        html += "<input type='button' class='comment_delete' value='삭제' onclick='commentDelete(\"" + commentNum + "\")'>";
+        html += "</div>";
         html += "</div>";
 
-        $(".comment_content"+commentNum).html(html);
+        $(".comment_content_container"+commentNum).html(html);
+       }
+
+    // 댓글 수정 취소
+    function commentCancel() {
+        getCommentList();
     }
 
     // 댓글 수정 데이터 전송

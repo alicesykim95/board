@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>게시글 작성</title>
@@ -12,7 +12,7 @@
     <table class="board_write">
         <tr class="write_head">
             <td class="write_title">작성자</td>
-            <td><input type="text" id="writer" size="68"></td>
+            <td><input type="text" id="writer" size="68" readonly th:value="${session.login.userId}"></td>
         </tr>
         <tr class="write_head">
             <td class="write_title">제목</td>

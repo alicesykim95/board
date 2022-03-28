@@ -6,6 +6,7 @@
 html, body {width: 100%;height: 100%;}
 html {overflow-y: scroll; }
 body {font: normal 14px/1 'Roboto', sans-serif;}
+textarea {font: normal 14px 'Roboto', sans-serif;}
 ul, li {list-style: none;}
 a {color:#333;text-decoration: none;}
 
@@ -35,8 +36,9 @@ a {color:#333;text-decoration: none;}
 .detail_head .head_title{border:1px solid black; background-color: black; padding: 18px; color: white; font-weight: bold;}
 .detail_head #title {width: 100%; border: none; padding: 10px;}
 .detail_head #title:focus {outline: none;}
-.detail_head #content {width: 100%; height: 300px; border: none; padding: 10px;  resize: none; font-weight: bold; }
+.detail_head #content {width: 100%; height: 300px; border: none; padding: 10px;  resize: none;}
 .detail_head #content:focus {outline: none;}
+
 
 /*bDetail.html: btn*/
 .detail_btn{margin:0 2px; padding: 8px 16px; color: white; font-weight: bolder; background-color: black; border-radius: 3px; border: none; left: 765px; position: relative; bottom: 12px;}
@@ -47,6 +49,7 @@ a {color:#333;text-decoration: none;}
 .comment_form input[type="text"] {font-size: 12px;}
 .comment_form {border-bottom: 1px solid #D0D0D0FF; padding-bottom: 30px;}
 .commentContent {width: 92.5%; height: 60px; border: 1px solid #d0d0d0; padding: 10px; font-size:12px;}
+.commentContent input::placeholder{color: #d7d7d7}
 .commentContent:focus {outline: none;}
 #commentBtn {background-color: black; padding: 20.5px 20.5px; border: none; color: white; font-weight: bold; border-radius: 3px; position: absolute;}
 
@@ -55,6 +58,10 @@ a {color:#333;text-decoration: none;}
 .comment_list .comment_list_btn input {border: none; background-color: black; margin: 10px 5px 30px 0; color: white; padding: 3px 9px; font-size: 11px; border-radius: 2px;}
 .comment_list .comment_content {margin:25px 0 10px 0; width: 100%; padding: 0 20px 0 0; font-size: 13px}
 .comment_list .comment_time {font-size: 8px; margin: 13px 0 10px 0;}
+.commentContent_update {width: 92.5%; height: 60px; border: 1px solid #d0d0d0; padding: 10px; font-size:12px;}
+.commentContent_update:focus {outline: none;}
+
+.comment_list_none {padding: 45px 0 15px 0; font-size: 12px;}
 
 
 /*bWrite.html: head*/

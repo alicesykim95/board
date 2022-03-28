@@ -4,6 +4,7 @@ import com.example.board.service.CommentService;
 import com.example.board.vo.*;
 import com.example.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +51,13 @@ public class BoardController {
 
     // 게시글 작성 페이지
     @RequestMapping(value = "/boardWritePage", method = RequestMethod.GET)
-    public String addBoardPage() throws Exception {
+    public String addBoardPage(HttpServletRequest request, Model model) throws Exception {
+
+        HttpSession session = request.getSession();
+        UserVo userVo = (UserVo) session.getAttribute("login");
+
+        model.addAttribute("login", userVo);
+
         return "board/bWrite";
     }
 
