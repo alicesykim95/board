@@ -31,21 +31,26 @@
             <td colspan="3"><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
         </tr>
     </table>
-    <div>
+    <div class="hidden_values_container">
         <input type="hidden" id="boardNum" th:value="${board.boardNum}">
         <input type="hidden" id="commentWriter" th:value="${session.login.userId}">
-        <input class="detail_btn btn" type="button" value="목록" id="goBackList" onclick="location.href='/boardListPage'">
-        <input class="detail_btn btn" type="button" value="수정" id="update" onclick="updateBoard()">
-        <input class="detail_btn btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
     </div>
+
+    <div class="detail_btn_container">
+        <div class="detail_btn_box1" th:if="${session.login.userId == board.writer}">
+            <input class="detail_btn" type="button" value="수정" id="update" onclick="updateBoard()">
+            <input class="detail_btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
+        </div>
+        <input class="detail_btn detail_btn_box2" type="button" value="목록" id="goBackList" onclick="location.href='/boardListPage'">
+    </div>
+
     <div class="comment_container">
         <div class="comment_form">
             <p class="comment_title">comment</p>
             <input type="text" class="commentContent" id="commentContent" placeholder="댓글을 입력하세요">
             <input type="button" id="commentBtn" value="등록" onclick="insertComment()">
         </div>
-        <div id = "getCommentList">
-        </div>
+        <div id="getCommentList"></div>
     </div>
 </div>
 </body>
