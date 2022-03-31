@@ -28,6 +28,13 @@ public class BoardService {
         return boardMapper.totalRecordCount();
     }
 
+    // 게시글 체크 박스 삭제
+    public void deleteBoardList(List<String> boardCheckList) throws Exception {
+        for (int i = 0; i < boardCheckList.size(); i++) {
+            boardMapper.deleteBoardList(Integer.parseInt(boardCheckList.get(i)));
+        }
+    }
+
     // 게시글 작성
     public int insertBoard(BoardVo bdv) throws Exception {
         return boardMapper.insertBoard(bdv);

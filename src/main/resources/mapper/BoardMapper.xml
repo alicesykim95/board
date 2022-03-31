@@ -32,6 +32,14 @@
         FROM board_ex;
     </select>
 
+    <!-- 게시글 체크박스 삭제-->
+    <delete id="deleteBoardList" parameterType="int">
+        DELETE
+        FROM board_ex
+        WHERE board_num = #{boardNum};
+    </delete>
+
+
     <!-- 게시글 삽입 -->
     <insert id="insertBoard" parameterType="BoardVo">
         INSERT INTO board_ex (board_num,

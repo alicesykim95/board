@@ -17,6 +17,9 @@ public interface BoardMapper {
     // 게시글 전체 갯수 for 페이징
     int totalRecordCount() throws Exception;
 
+    // 게시글 체크박스 삭제
+    int deleteBoardList(int boardNum) throws Exception;
+
     // 게시글 작성
     int insertBoard(BoardVo bdv) throws Exception;
 

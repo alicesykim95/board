@@ -4,16 +4,13 @@ import com.example.board.service.CommentService;
 import com.example.board.vo.*;
 import com.example.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,7 +40,15 @@ public class BoardController {
         return "board/bList";
     }
 
-    // 게시글 jQuery 페이징 구현 페이지
+    // 게시글 전체 리스트 페이지: 체크박스 선택 삭제
+    @ResponseBody
+    @RequestMapping(value = "/deleteBoardList", method = RequestMethod.POST)
+    public List<String> deleteBoardList(@RequestParam(value = "boardCheckList[]") List<String> boardCheckList) throws Exception {
+        boardService.deleteBoardList(boardCheckList);
+        return boardCheckList;
+    }
+
+    // 게시글 전체 리스트 페이지: jQuery 페이징
     @RequestMapping(value = "boardListTable", method = RequestMethod.GET)
     public String boardListTable() throws Exception {
         return "board/Datatables";
