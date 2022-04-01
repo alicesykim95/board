@@ -23,16 +23,19 @@ public class BoardService {
         return boardMapper.selectBoardListNone();
     }
 
-    // 게시글 전체 갯수 for 페이징
+    // 게시글 전체 리스트 갯수 for 페이징
     public int totalRecordCount() throws Exception {
         return boardMapper.totalRecordCount();
     }
 
-    // 게시글 체크 박스 삭제
-    public void deleteBoardList(List<String> boardCheckList) throws Exception {
-        for (int i = 0; i < boardCheckList.size(); i++) {
-            boardMapper.deleteBoardList(Integer.parseInt(boardCheckList.get(i)));
-        }
+    // 게시글 전체 리스트 체크 박스 삭제
+    public void deleteBoardList(int boardNum) throws Exception {
+        boardMapper.deleteBoardList(boardNum);
+    }
+
+    // 게시글 전체 리스트 댓글 갯수
+    public void updateCommentCount(int boardNum) throws Exception {
+        boardMapper.updateCommentCount(boardNum);
     }
 
     // 게시글 작성

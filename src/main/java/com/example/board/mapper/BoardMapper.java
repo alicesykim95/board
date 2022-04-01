@@ -11,14 +11,17 @@ public interface BoardMapper {
     // 게시글 전체 리스트 for 화면
     List<BoardVo> selectBoardList(Criteria criteria) throws Exception;
 
-    // 게시글 전체 for RestApi
+    // 게시글 전체 리스트 for RestApi
     List<BoardVo> selectBoardListNone() throws Exception;
 
-    // 게시글 전체 갯수 for 페이징
+    // 게시글 전체 리스트 갯수 for 페이징
     int totalRecordCount() throws Exception;
 
-    // 게시글 체크박스 삭제
-    int deleteBoardList(int boardNum) throws Exception;
+    // 게시글 전체 리스트 체크박스 삭제
+    void deleteBoardList(int boardNum) throws Exception;
+
+    // 게시글 전체 리스트 댓글 갯수
+    void updateCommentCount(int boardNum) throws Exception;
 
     // 게시글 작성
     int insertBoard(BoardVo bdv) throws Exception;

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,14 +21,10 @@ public class BoardController {
 
     private final CommentService commentService;
 
-    //@CrossOrigin(value = "*")
     // 게시글 전체 리스트 페이지
     @RequestMapping(value = "/boardListPage", method = RequestMethod.GET)
     public String openBoardList(Criteria criteria, Model model) throws Exception {
 
-        // Access-Control-Allow-Origin : '*'
-        // AJAX - json 대신  www-form-urlencoded 형식으로 보내면된다.
-        System.out.println("INIT");
         int boardtotalCount = boardService.totalRecordCount();
         Paging paging = new Paging(criteria, boardtotalCount);
 
@@ -43,9 +40,12 @@ public class BoardController {
     // 게시글 전체 리스트 페이지: 체크박스 선택 삭제
     @ResponseBody
     @RequestMapping(value = "/deleteBoardList", method = RequestMethod.POST)
-    public List<String> deleteBoardList(@RequestParam(value = "boardCheckList[]") List<String> boardCheckList) throws Exception {
-        boardService.deleteBoardList(boardCheckList);
-        return boardCheckList;
+    public String deleteBoardList(HttpServletRequest request)throws Exception {
+        String[] ajaxDataList = request.getParameterValues("boardCheckList");
+        for (int i = 0; i < ajaxDataList.length ; i++) {
+            boardService.deleteBoardList(Integer.parseInt(ajaxDataList[i]));
+        }
+        return "redirect:boardListPage";
     }
 
     // 게시글 전체 리스트 페이지: jQuery 페이징
@@ -69,6 +69,8 @@ public class BoardController {
     // 게시글 상세 페이지: 게시글 수정 및 삭제 + 댓글 리스트 수정 및 삭제
     @RequestMapping(value = "/{boardNum}", method = RequestMethod.GET)
     public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum, HttpServletRequest request) throws Exception {
+
+        boardService.updateCommentCount(boardNum);
 
         HttpSession session = request.getSession();
         UserVo userVo = (UserVo) session.getAttribute("login");

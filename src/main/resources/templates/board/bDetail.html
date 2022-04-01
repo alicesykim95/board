@@ -20,7 +20,7 @@
             <td class="head_title">작성자</td>
             <td th:text="${board.writer}"></td>
             <td class="head_title">작성일</td>
-            <td th:text="${board.createdTime}"></td>
+            <td th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
         </tr>
         <tr class="detail_head head3">
             <td class="head_title">제목</td>

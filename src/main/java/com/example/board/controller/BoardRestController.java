@@ -14,16 +14,8 @@ import java.util.List;
 @RestController
 public class BoardRestController {
 
-    // 자원 = uri, 행위 = method, 표현 = JSON, XML
-
-    // GET, POST , PUT =(PATCH), DELETE
-    // 조회, 삽입, 전체 변경=(일부 변경), 삭제
-
     @Autowired
     private BoardService boardService;
-
-    @Autowired
-    private UserService memberService;
 
     // 생성자로 호출해서 사용하는것이기 때문에 유지보수에 더 용이하다. 수정이 쉽고 빠름.
     // 그러나 차이는 별로 없다.

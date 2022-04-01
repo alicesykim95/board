@@ -34,7 +34,7 @@
             <td class="list_td list_td_no" th:text="${list.boardNum}"></td>
             <td class="list_td"><a th:href="@{'/'+ ${list.boardNum}}" th:text="${list.title}"></a></td>
             <td class="list_td" th:text="${list.writer}"></td>
-            <td class="list_td" th:text="${list.createdTime}"></td>
+            <td class="list_td" th:text="${#dates.format(list.createdTime, 'yyyy-MM-dd')}"></td>
             <td class="list_td" th:text="${list.hitCnt}"></td>
         </tr>
         </tbody>
@@ -110,14 +110,16 @@
     // 체크박스 선택 게시글 삭제
     function deleteBoardList(){
         let boardCheckList = [];
-
-        $("input:checkbox[name=rowCheck]:checked").each(function(){
-            boardCheckList.push($(this).val());
-        });
+        let list = $("input[name=rowCheck]");
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].checked){
+                boardCheckList.push(list[i].value);
+            }
+        }
 
         console.log(boardCheckList);
 
-        if(boardCheckList === ""){
+        if(boardCheckList == ""){
             alert("삭제할 항목을 선택해주세요.");
             return false;
         }
@@ -125,10 +127,9 @@
         $.ajax({
             url: '/deleteBoardList',
             type: 'POST',
-            data: boardCheckList,
+            data: 'boardCheckList',
             success: function (){
                 alert("성공적으로 삭제되었습니다.");
-                goPage(0);
             },
             error: function(){
                 alert("실패하였습니다.")
