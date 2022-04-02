@@ -9,7 +9,8 @@
                writer,
                title,
                created_time,
-               hit_cnt
+               hit_cnt,
+               comment_count
         FROM board_ex
         ORDER BY board_num DESC
             LIMIT #{startPage}, #{perPageNum}
@@ -34,20 +35,21 @@
     </select>
 
     <!-- 게시글 전체 리스트 체크박스 삭제-->
-    <delete id="deleteBoardList">
+    <delete id="deleteBoardList" parameterType="int">
         DELETE
         FROM board_ex
-        WHERE board_num = #{boardNum};
+        WHERE board_num = #{boardNum}
     </delete>
 
     <!-- 게시글 전체 리스트 댓글 개수 표시 -->
     <update id="updateCommentCount" parameterType="int">
-        UPDATE board_ex b
-        SET b.comment_count = (SELECT COUNT (comment_num) FROM comment_ex WHERE board_num = #{boardNum})
-        WHERE b.board_num = #{boardNum}
+            UPDATE board_ex b
+            SET b.comment_count = (SELECT COUNT (comment_num) FROM comment_ex WHERE board_num = #{boardNum})
+            WHERE b.board_num = #{boardNum}
     </update>
 
-    <!-- 게시글 삽입 -->
+
+        <!-- 게시글 삽입 -->
     <insert id="insertBoard" parameterType="BoardVo">
         INSERT INTO board_ex (board_num,
                            writer,

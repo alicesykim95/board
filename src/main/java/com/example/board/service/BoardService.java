@@ -5,6 +5,7 @@ import com.example.board.vo.Criteria;
 import com.example.board.vo.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service

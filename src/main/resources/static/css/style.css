@@ -27,9 +27,11 @@ a {color:#333;text-decoration: none;}
 .board_list .table_body {border-bottom: 1px solid lightgrey;}
 .board_list .table_body .list_td {padding: 12px 0; text-align: center; font-size: 13px;}
 .board_list .table_body .list_td_no {font-weight: bolder; color: #525151;}
+.board_list_comment_count {color: #ec5454; font-weight: bold;}
+
 
 /*bList.html: list_btn*/
-.list_btn {margin-top: 15px; padding: 8px 14px; color: white; font-weight: bolder; background-color: black; position: absolute; border: none; left: 890px; border-radius: 3px; }
+.list_btn {margin-left: 8px;padding: 8px 14px; color: white; font-weight: bolder; background-color: black; border: none; border-radius: 3px; float: right;}
 
 /*bDetail.html: head*/
 .detail_head{text-align: center; font-size: 13px; border: 1px solid lightgrey;}
@@ -77,10 +79,8 @@ a {color:#333;text-decoration: none;}
 .write_head #content:focus{outline: none;}
 .write_btn{padding: 8px 16px; color: white; font-weight: bolder; background-color: black; border-radius: 3px; border: none; left: 875px; position: relative; top: -12px;}
 
-.btn:hover {cursor: pointer;}
-
 /*paging*/
-.page_container{position: relative;left: 340px; top: -10px;}
+.page_container{position: relative;left: 340px; top: 9px;}
 .page_container .page_class{float: left;}
 .page_container .page_link{padding: 10px;}
 .page_container .page_btn{font-weight: 900;}

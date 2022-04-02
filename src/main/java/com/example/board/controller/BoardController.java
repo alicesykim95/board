@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
 
     private final BoardService boardService;
-
     private final CommentService commentService;
 
     // 게시글 전체 리스트 페이지
@@ -40,12 +40,13 @@ public class BoardController {
     // 게시글 전체 리스트 페이지: 체크박스 선택 삭제
     @ResponseBody
     @RequestMapping(value = "/deleteBoardList", method = RequestMethod.POST)
-    public String deleteBoardList(HttpServletRequest request)throws Exception {
-        String[] ajaxDataList = request.getParameterValues("boardCheckList");
-        for (int i = 0; i < ajaxDataList.length ; i++) {
-            boardService.deleteBoardList(Integer.parseInt(ajaxDataList[i]));
+    public String deleteBoardList(@RequestBody List<String> boardCheckList)throws Exception {
+
+        for (int i = 0; i < boardCheckList.size(); i++) {
+           boardService.deleteBoardList(Integer.parseInt(boardCheckList.get(i)));
         }
-        return "redirect:boardListPage";
+
+        return "redirect:/boardListPage";
     }
 
     // 게시글 전체 리스트 페이지: jQuery 페이징

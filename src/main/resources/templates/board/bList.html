@@ -11,12 +11,12 @@
     <h2 class="title">게시글 목록</h2>
     <table class="board_list">
         <colgroup>
-            <col th:width="10"/>
-            <col th:width="10"/>
-            <col th:width="40"/>
-            <col th:width="10"/>
-            <col th:width="20"/>
-            <col th:width="10"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="47%"/>
+            <col width="20%"/>
+            <col width="15%"/>
+            <col width="8%"/>
         </colgroup>
         <thead>
         <tr class="table_head">
@@ -32,19 +32,17 @@
         <tr class="table_body" th:each="list:${list}">
             <td class="list_td"><input type="checkbox" class="rowCheck" name="rowCheck" th:value="${list.boardNum}" onclick="rowCheck()"/></td>
             <td class="list_td list_td_no" th:text="${list.boardNum}"></td>
-            <td class="list_td"><a th:href="@{'/'+ ${list.boardNum}}" th:text="${list.title}"></a></td>
+            <td class="list_td list_title"><a th:href="@{'/'+ ${list.boardNum}}" th:inline="text">[[${list.title}]] <small class="board_list_comment_count" th:if="${list.commentCount} != 0">[ [[${list.commentCount}]] ]</small></a></td>
             <td class="list_td" th:text="${list.writer}"></td>
             <td class="list_td" th:text="${#dates.format(list.createdTime, 'yyyy-MM-dd')}"></td>
             <td class="list_td" th:text="${list.hitCnt}"></td>
         </tr>
         </tbody>
-        <tr>
-            <td>
-                <input class="list_btn btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
-                <input class="list_btn btn" type="button" value="선택삭제" onclick="deleteBoardList()">
-            </td>
-        </tr>
     </table>
+    <div>
+        <input class="list_btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
+        <input class="list_btn" type="button" value="선택삭제" onclick="deleteBoardList()">
+    </div>
 
     <div class="page_container">
         <!--이전 페이지 버튼-->
@@ -117,8 +115,6 @@
             }
         }
 
-        console.log(boardCheckList);
-
         if(boardCheckList == ""){
             alert("삭제할 항목을 선택해주세요.");
             return false;
@@ -127,13 +123,16 @@
         $.ajax({
             url: '/deleteBoardList',
             type: 'POST',
-            data: 'boardCheckList',
+            contentType: 'application/json',
+            data: JSON.stringify(boardCheckList),
             success: function (){
                 alert("성공적으로 삭제되었습니다.");
+                location.reload();
             },
             error: function(){
                 alert("실패하였습니다.")
             }
         });
     }
+
 </script>
