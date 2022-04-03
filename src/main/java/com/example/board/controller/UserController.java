@@ -2,6 +2,7 @@ package com.example.board.controller;
 
 import com.example.board.service.UserService;
 import com.example.board.vo.UserVo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     // 메인 페이지
     @RequestMapping(value = {"/home","/"}, method = RequestMethod.GET)

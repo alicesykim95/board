@@ -1,7 +1,9 @@
 package com.example.board.controller;
 
+import com.example.board.service.BoardService;
 import com.example.board.service.CommentService;
 import com.example.board.vo.CommentVo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,16 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class CommenetRestController {
 
-    @Autowired
-    CommentService commentService;
+    private final CommentService commentService;
 
     // 댓글 삽입
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public int commentInsert(CommentVo cv, @RequestParam(value="boardNum")int boardNum) throws Exception{
-
-        return commentService.commentInsert(cv);
+        return commentService.commentInsert(cv, boardNum);
     }
 
     // 댓글 리스트
@@ -38,8 +39,8 @@ public class CommenetRestController {
 
     // 댓글 삭제
     @RequestMapping(value = "/comment", method = RequestMethod.DELETE)
-    public int deleteComment(int commentNum) throws Exception{
-        return commentService.deleteComment(commentNum);
+    public int deleteComment(int commentNum, @RequestParam(value="boardNum")int boardNum) throws Exception{
+        return commentService.deleteComment(commentNum, boardNum);
     }
 
 }

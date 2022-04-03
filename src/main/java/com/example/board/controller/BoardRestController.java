@@ -3,28 +3,23 @@ package com.example.board.controller;
 import com.example.board.service.BoardService;
 import com.example.board.service.UserService;
 import com.example.board.vo.BoardVo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.File;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class BoardRestController {
 
-    @Autowired
-    private BoardService boardService;
-
-    // 생성자로 호출해서 사용하는것이기 때문에 유지보수에 더 용이하다. 수정이 쉽고 빠름.
-    // 그러나 차이는 별로 없다.
-    // private final BoardService boardService;
-    //
-    // @Autowired
-    // public BoardRestController( BoardService boardService) {
-    //     this.boardService = boardService;
-    // }
+    private final BoardService boardService;
 
     // 게시글 전체 페이지 목록
     @RequestMapping(value = "/board", method = RequestMethod.GET)
@@ -34,7 +29,13 @@ public class BoardRestController {
 
     // 게시글 작성 처리
     @RequestMapping(value = "/board", method = RequestMethod.POST)
-    public int addBoard(BoardVo bdv) throws Exception {
+    public int addBoard(BoardVo bdv, MultipartHttpServletRequest request) throws Exception {
+
+        MultipartFile file = request.getFile("uploadFile");
+        assert file != null;
+        System.out.println(file);
+        file.transferTo(new File("C:\\file_repo/"+file.getOriginalFilename()));
+
         return boardService.insertBoard(bdv);
     }
 

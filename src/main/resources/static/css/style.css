@@ -57,9 +57,9 @@ a {color:#333;text-decoration: none;}
 .commentContent:focus {outline: none;}
 #commentBtn {background-color: black; padding: 20.5px 20.5px; border: none; color: white; font-weight: bold; border-radius: 3px; position: absolute;}
 
-.comment_list{margin-top: 30px; border-bottom: 1px solid #D0D0D0FF; }
+.comment_list{margin-top: 30px; border-bottom: 1px solid #D0D0D0FF; padding-bottom: 20px}
 .comment_list .comment_list_title {font-size: 13px; font-weight: bold; margin: 0 2px 20px 0; width: 100px;}
-.comment_list .comment_list_btn input {border: none; background-color: black; margin: 10px 5px 30px 0; color: white; padding: 3px 9px; font-size: 11px; border-radius: 2px;}
+.comment_list .comment_list_btn input {border: none; background-color: black; margin: 10px 5px 10px 0; color: white; padding: 3px 9px; font-size: 11px; border-radius: 2px;}
 .comment_list .comment_content {margin:25px 0 10px 0; width: 100%; padding: 0 20px 0 0; font-size: 13px}
 .comment_list .comment_time {font-size: 8px; margin: 13px 0 10px 0;}
 .commentContent_update {width: 92.5%; height: 60px; border: 1px solid #d0d0d0; padding: 10px; font-size:12px;}

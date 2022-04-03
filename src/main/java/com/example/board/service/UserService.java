@@ -2,14 +2,15 @@ package com.example.board.service;
 
 import com.example.board.mapper.UserMapper;
 import com.example.board.vo.UserVo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     // 회원가입
     public int insertMember(UserVo uv) throws Exception{

@@ -48,7 +48,6 @@
             WHERE b.board_num = #{boardNum}
     </update>
 
-
         <!-- 게시글 삽입 -->
     <insert id="insertBoard" parameterType="BoardVo">
         INSERT INTO board_ex (board_num,

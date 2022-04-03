@@ -3,16 +3,17 @@ package com.example.board.service;
 import com.example.board.mapper.BoardMapper;
 import com.example.board.vo.Criteria;
 import com.example.board.vo.BoardVo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BoardService {
 
-    @Autowired
-    private BoardMapper boardMapper;
+    private final BoardMapper boardMapper;
 
     // 게시글 전체 리스트 for 화면
     public List<BoardVo> selectBoardList(Criteria criteria) throws Exception {
@@ -32,11 +33,6 @@ public class BoardService {
     // 게시글 전체 리스트 체크 박스 삭제
     public void deleteBoardList(int boardNum) throws Exception {
         boardMapper.deleteBoardList(boardNum);
-    }
-
-    // 게시글 전체 리스트 댓글 갯수
-    public void updateCommentCount(int boardNum) throws Exception {
-        boardMapper.updateCommentCount(boardNum);
     }
 
     // 게시글 작성
