@@ -1,72 +1,50 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org">
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org" :layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>게시글 작성</title>
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <script>
+        // 게시글 권한 설정 및 로그인안했을 시 Home 화면으로 이동
+        let userId = "[[${session.login}]]";
+        if (userId) {
+            $('.write_container').append(
+                "<input type=\"text\" id=\"writer\" size=\"68\" readonly th:value=\"${session.login.userId}\">"
+            )
+        }
+        else {
+            alert("로그인해주세요.")
+            location.href = "/loginPage"
+        }
+    </script>
 </head>
 <body>
-<div class="container">
-    <h2 class="title">게시글 작성</h2>
-    <table class="board_write">
-        <tr class="write_head">
-            <td class="write_title">작성자</td>
-            <td><input type="text" id="writer" size="68" readonly th:value="${session.login.userId}"></td>
-        </tr>
-        <tr class="write_head">
-            <td class="write_title">제목</td>
-            <td><input type="text" id="title" size="68"></td>
-        </tr>
-        <tr class="write_head">
-            <td class="write_title">글내용</td>
-            <td><textarea rows="10" cols="70" id="content"></textarea></td>
-        </tr>
-        <tr class="write_head">
-            <td class="write_title">파일 Upload</td>
-            <td><input type="file" id="uploadFile" size="68"></td>
-        </tr>
-    </table>
-    <input class="write_btn btn" type="button" value="작성완료" onclick="registerBoard()">
-</div>
+<th:block layout:fragment="content">
+    <div class="container">
+        <h2 class="title">게시글 작성</h2>
+        <table class="board_write">
+            <tr class="write_head">
+                <td class="write_title">작성자</td>
+                <td class="write_container"></td>
+            </tr>
+            <tr class="write_head">
+                <td class="write_title">제목</td>
+                <td><input type="text" id="title" size="68"></td>
+            </tr>
+            <tr class="write_head">
+                <td class="write_title">글내용</td>
+                <td><textarea rows="10" cols="70" id="content"></textarea></td>
+            </tr>
+            <tr class="write_head">
+                <td class="write_title">파일 Upload</td>
+                <td><input type="file" id="uploadFile" size="68"></td>
+            </tr>
+        </table>
+        <input class="write_btn btn" type="button" value="작성완료" onclick="registerBoard()">
+    </div>
+</th:block>
 </body>
 </html>
-<script>
-    function registerBoard() {
-
-        console.log($('#uploadFile'));
-        const uploadFile = $('#uploadFile')[0].files[0];
-
-        const formData = new FormData();
-
-        formData.append("uploadFile", uploadFile);
-
-
-
-        const dataList = {
-            writer : document.getElementById("writer").value,
-            title : document.getElementById("title").value,
-            content : document.getElementById("content").value
-        }
-
-        formData.append("writer", document.getElementById("writer").value);
-        formData.append("title", document.getElementById("title").value);
-        formData.append("content", document.getElementById("content").value);
-
-        $.ajax({
-            url:'/board',
-            type:'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function () {
-                alert("성공하였습니다.");
-                location.href="/boardListPage";
-            },
-            error: function (){
-                alert("실패하였습니다.");
-            }
-        });
-
-    }
-</script>
+<script th:src="@{/js/bWrite.js}" th:inline="javascript"></script>

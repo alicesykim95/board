@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org">
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org"
+      :layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>게시글목록</title>
@@ -7,132 +9,79 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
-    <h2 class="title">게시글 목록</h2>
-    <table class="board_list">
-        <colgroup>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="47%"/>
-            <col width="20%"/>
-            <col width="15%"/>
-            <col width="8%"/>
-        </colgroup>
-        <thead>
-        <tr class="table_head">
-            <th scope="col" class="list_th all_check"><input type="checkbox" class="allCheck" onclick="allCheck(this)"/></th>
-            <th scope="col" class="list_th">No</th>
-            <th scope="col" class="list_th">Title</th>
-            <th scope="col" class="list_th">Writer</th>
-            <th scope="col" class="list_th">Date</th>
-            <th scope="col" class="list_th">Hit</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="table_body" th:each="list:${list}">
-            <td class="list_td"><input type="checkbox" class="rowCheck" name="rowCheck" th:value="${list.boardNum}" onclick="rowCheck()"/></td>
-            <td class="list_td list_td_no" th:text="${list.boardNum}"></td>
-            <td class="list_td list_title"><a th:href="@{'/'+ ${list.boardNum}}" th:inline="text">[[${list.title}]] <small class="board_list_comment_count" th:if="${list.commentCount} != 0">[ [[${list.commentCount}]] ]</small></a></td>
-            <td class="list_td" th:text="${list.writer}"></td>
-            <td class="list_td" th:text="${#dates.format(list.createdTime, 'yyyy-MM-dd')}"></td>
-            <td class="list_td" th:text="${list.hitCnt}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <div>
-        <input class="list_btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
-        <input class="list_btn" type="button" value="선택삭제" onclick="deleteBoardList()">
-    </div>
+<th:block layout:fragment="content">
+    <div class="container">
+        <h2 class="title">게시글 목록</h2>
+        <table class="board_list">
+            <colgroup>
+                <col width="5%"/>
+                <col width="5%"/>
+                <col width="47%"/>
+                <col width="20%"/>
+                <col width="15%"/>
+                <col width="8%"/>
+            </colgroup>
+            <thead>
+            <tr class="table_head">
+                <th scope="col" class="list_th all_check"><input type="checkbox" class="allCheck"
+                                                                 onclick="allCheck(this)"/></th>
+                <th scope="col" class="list_th">No</th>
+                <th scope="col" class="list_th">Title</th>
+                <th scope="col" class="list_th">Writer</th>
+                <th scope="col" class="list_th">Date</th>
+                <th scope="col" class="list_th">Hit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table_body" th:each="list:${list}">
+                <td class="list_td"><input type="checkbox" class="rowCheck" name="rowCheck" th:value="${list.boardNum}"
+                                           onclick="rowCheck()"/></td>
+                <td class="list_td list_td_no" th:text="${list.boardNum}"></td>
+                <td class="list_td list_title"><a th:href="@{'/'+ ${list.boardNum}}" th:inline="text">[[${list.title}]]
+                    <small class="board_list_comment_count" th:if="${list.commentCount} != 0">[ [[${list.commentCount}]]
+                        ]</small></a></td>
+                <td class="list_td" th:text="${list.writer}"></td>
+                <td class="list_td" th:text="${#dates.format(list.createdTime, 'yyyy-MM-dd')}"></td>
+                <td class="list_td" th:text="${list.hitCnt}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <input class="list_btn" type="button" value="글쓰기" onclick="location.href='/boardWritePage'"/>
+            <input class="list_btn" type="button" value="선택삭제" onclick="deleteBoardList()">
+        </div>
 
-    <div class="page_container">
-        <!--이전 페이지 버튼-->
-        <li th:if="${paging.hasPreviousPage}" class="page_class">
-            <a class="page_link page_btn"
-               th:href="@{/boardListPage?currentPageNum={page} (page=${paging.firstPage}-1)}"
-               aria-label="Next">
-                <span aria-hidden="true"><</span>
-            </a>
-        </li>
-
-        <!--10개 페이지 버튼 로딩-->
-        <th:block th:with="start=${paging.firstPage}, end=${paging.lastPage}">
-            <li class="page_class" th:with="start=${paging.firstPage}, end=${paging.lastPage}"
-                th:each="pageButton : ${#numbers.sequence(paging.firstPage, paging.lastPage)}">
-                <a class="page_link page_number" th:href="@{/boardListPage?currentPageNum={page} (page=${pageButton})}"
-                   th:text="${pageButton}"></a>
+        <div class="page_container">
+            <!--이전 페이지 버튼-->
+            <li th:if="${paging.hasPreviousPage}" class="page_class">
+                <a class="page_link page_btn"
+                   th:href="@{/boardListPage?currentPageNum={page} (page=${paging.firstPage}-1)}"
+                   aria-label="Next">
+                    <span aria-hidden="true"><</span>
+                </a>
             </li>
-        </th:block>
 
-        <!--다음 페이지 버튼-->
-        <li th:if="${paging.hasNextPage}" class="page_class">
-            <a class="page_link page_btn"
-               th:href="@{/boardListPage?currentPageNum={page} (page=${paging.lastPage}+1)}"
-               aria-label="Next">
-                <span aria-hidden="true"> > </span>
-            </a>
-        </li>
+            <!--10개 페이지 버튼 로딩-->
+            <th:block th:with="start=${paging.firstPage}, end=${paging.lastPage}">
+                <li class="page_class" th:with="start=${paging.firstPage}, end=${paging.lastPage}"
+                    th:each="pageButton : ${#numbers.sequence(paging.firstPage, paging.lastPage)}">
+                    <a class="page_link page_number"
+                       th:href="@{/boardListPage?currentPageNum={page} (page=${pageButton})}"
+                       th:text="${pageButton}"></a>
+                </li>
+            </th:block>
+
+            <!--다음 페이지 버튼-->
+            <li th:if="${paging.hasNextPage}" class="page_class">
+                <a class="page_link page_btn"
+                   th:href="@{/boardListPage?currentPageNum={page} (page=${paging.lastPage}+1)}"
+                   aria-label="Next">
+                    <span aria-hidden="true"> > </span>
+                </a>
+            </li>
+        </div>
     </div>
-</div>
+</th:block>
 </body>
 </html>
-<script>
-
-    // 체크박스 전체 선택 및 해제 이벤트
-    function allCheck(target){
-
-        if($(target).is(":checked")){
-            $(".rowCheck").prop("checked", true);
-        }
-        else {
-            $(".rowCheck").prop("checked", false);
-        }
-
-    }
-
-    // 개별 체크박스 선택 이벤트
-    function rowCheck(){
-
-        let allCount = $("input:checkbox[name=rowCheck]").length;
-
-        let checkedCount = $("input:checkbox[name=rowCheck]:checked").length;
-
-        if(allCount === checkedCount){
-            $(".allCheck").prop("checked", true);
-        }
-        else{
-            $(".allCheck").prop("checked", false);
-        }
-
-    }
-
-    // 체크박스 선택 게시글 삭제
-    function deleteBoardList(){
-        let boardCheckList = [];
-        let list = $("input[name=rowCheck]");
-        for (let i = 0; i < list.length; i++) {
-            if (list[i].checked){
-                boardCheckList.push(list[i].value);
-            }
-        }
-
-        if(boardCheckList == ""){
-            alert("삭제할 항목을 선택해주세요.");
-            return false;
-        }
-
-        $.ajax({
-            url: '/deleteBoardList',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(boardCheckList),
-            success: function (){
-                alert("성공적으로 삭제되었습니다.");
-                location.reload();
-            },
-            error: function(){
-                alert("실패하였습니다.")
-            }
-        });
-    }
-
-</script>
+<script th:src="@{/js/bList.js}" th:inline="javascript"></script>

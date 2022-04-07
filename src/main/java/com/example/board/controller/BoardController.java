@@ -28,7 +28,7 @@ public class BoardController {
     private final CommentService commentService;
 
     // 게시글 전체 리스트 페이지
-    @RequestMapping(value = "/boardListPage", method = RequestMethod.GET)
+    @RequestMapping(value = {"/boardListPage", "/"}, method = RequestMethod.GET)
     public String openBoardList(Criteria criteria, Model model) throws Exception {
 
         int boardtotalCount = boardService.totalRecordCount();

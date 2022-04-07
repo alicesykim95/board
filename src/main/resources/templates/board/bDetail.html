@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org">
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org" :layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>게시글 상세 화면</title>
@@ -7,7 +8,7 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
     <script>
         // 게시글 권한 설정 및 로그인안했을 시 Home 화면으로 이동
-        let userId= "[[${session.userId}]]";
+        let userId = "[[${session.userId}]]";
         if (userId) {
             $('#btn_container').append(
                 "<div class=\"detail_btn_box1\">\n" +
@@ -16,59 +17,62 @@
                 "</div>"
             )
         } else {
-            location.href = "/home"
+            alert("로그인해주세요.")
+            location.href = "/loginPage"
         }
     </script>
 </head>
 <body>
-<div class="container">
-    <h2 class="title">게시글 작성</h2>
-    <table class="board_detail">
-        <tr class="detail_head head1">
-            <td class="head_title">글 번호</td>
-            <td th:text="${board.boardNum}"></td>
-            <td class="head_title">조회수</td>
-            <td th:text="${board.hitCnt}"></td>
-        </tr>
-        <tr class="detail_head head2">
-            <td class="head_title">작성자</td>
-            <td th:text="${board.writer}"></td>
-            <td class="head_title">작성일</td>
-            <td th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
-        </tr>
-        <tr class="detail_head head3">
-            <td class="head_title">제목</td>
-            <td class="head3_text" colspan="3"><input type="text" id="title" name="title" th:value="${board.title}">
-            </td>
-        </tr>
-        <tr class="detail_head head4">
-            <td class="head_title">내용</td>
-            <td colspan="3"><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
-        </tr>
-    </table>
+<th:block layout:fragment="content">
+    <div class="container">
+        <h2 class="title">게시글 작성</h2>
+        <table class="board_detail">
+            <tr class="detail_head head1">
+                <td class="head_title">글 번호</td>
+                <td th:text="${board.boardNum}"></td>
+                <td class="head_title">조회수</td>
+                <td th:text="${board.hitCnt}"></td>
+            </tr>
+            <tr class="detail_head head2">
+                <td class="head_title">작성자</td>
+                <td th:text="${board.writer}"></td>
+                <td class="head_title">작성일</td>
+                <td th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
+            </tr>
+            <tr class="detail_head head3">
+                <td class="head_title">제목</td>
+                <td class="head3_text" colspan="3"><input type="text" id="title" name="title" th:value="${board.title}">
+                </td>
+            </tr>
+            <tr class="detail_head head4">
+                <td class="head_title">내용</td>
+                <td colspan="3"><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
+            </tr>
+            <tr class="detail_head">
+                <td class="head_title">다운로드</td>
+                <td><button onclick="location.href='/downloadFile'">다운로드</button></td>
+            </tr>
+        </table>
 
-    <div class="hidden_values_container" >
-        <input type="hidden" id="boardNum" th:value="${board.boardNum}">
-    </div>
-
-    <div class="detail_btn_container" id="btn_container">
-        <input class="detail_btn detail_btn_box2" type="button" value="목록" id="goBackList" onclick="location.href='/boardListPage'">
-    </div>
-
-    <div class="comment_container">
-        <div class="comment_form">
-            <p class="comment_title">comment</p>
-            <input type="text" class="commentContent" id="commentContent" placeholder="댓글을 입력하세요">
-            <input type="button" id="commentBtn" value="등록" onclick="insertComment()">
+        <div class="hidden_values_container">
+            <input type="hidden" id="boardNum" th:value="${board.boardNum}">
         </div>
-        <div id="getCommentList"></div>
+
+        <div class="detail_btn_container" id="btn_container">
+            <input class="detail_btn detail_btn_box2" type="button" value="목록" id="goBackList"
+                   onclick="location.href='/boardListPage'">
+        </div>
+
+        <div class="comment_container">
+            <div class="comment_form">
+                <p class="comment_title">comment</p>
+                <input type="text" class="commentContent" id="commentContent" placeholder="댓글을 입력하세요">
+                <input type="button" id="commentBtn" value="등록" onclick="insertComment()">
+            </div>
+            <div id="getCommentList"></div>
+        </div>
     </div>
-
-<!--    <div>-->
-<!--        <button onclick="location.href='/downloadFile'">다운로드</button>-->
-
-<!--    </div>-->
-</div>
+</th:block>
 </body>
 </html>
 <script th:src="@{/js/bDetail.js}" th:inline="javascript"></script>

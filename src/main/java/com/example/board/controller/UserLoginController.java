@@ -20,7 +20,7 @@ public class UserLoginController {
 
     // 로그인 페이지
     @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-    public String loginPage(HttpServletRequest request) throws Exception {
+    public String loginPage(HttpServletRequest request) {
 
         HttpSession session = request.getSession();
 
@@ -55,7 +55,7 @@ public class UserLoginController {
 
     // 로그아웃 페이지
     @RequestMapping(value = "/userLogout", method = RequestMethod.GET)
-    public String LogoutPage(HttpServletRequest request) throws Exception {
+    public String LogoutPage(HttpServletRequest request) {
 
         try {
             HttpSession session = request.getSession();
@@ -63,7 +63,7 @@ public class UserLoginController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "board/bHome";
+        return "board/bLogout";
     }
 
 
