@@ -9,14 +9,8 @@
     <script>
         // 게시글 권한 설정 및 로그인안했을 시 Home 화면으로 이동
         let userId = "[[${session.userId}]]";
-        if (userId) {
-            $('#btn_container').append(
-                "<div class=\"detail_btn_box1\">\n" +
-                "<input class=\"detail_btn\" type=\"button\" value=\"수정\" id=\"update\" onclick=\"updateBoard()\">\n" +
-                "<input class=\"detail_btn\" type=\"button\" value=\"삭제\" id=\"delete\" onclick=\"deleteBoard()\">\n" +
-                "</div>"
-            )
-        } else {
+
+        if (userId === "") {
             alert("로그인해주세요.")
             location.href = "/loginPage"
         }
@@ -35,7 +29,7 @@
             </tr>
             <tr class="detail_head head2">
                 <td class="head_title">작성자</td>
-                <td th:text="${board.writer}"></td>
+                <td id="board_detail_writer" th:text="${board.writer}"></td>
                 <td class="head_title">작성일</td>
                 <td th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
             </tr>
@@ -59,6 +53,10 @@
         </div>
 
         <div class="detail_btn_container" id="btn_container">
+            <div class="detail_btn_box1" th:if="${board.writer == session.userId}">
+                <input class="detail_btn" type="button" value="수정" id="update" onclick="updateBoard()">
+                <input class="detail_btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
+            </div>
             <input class="detail_btn detail_btn_box2" type="button" value="목록" id="goBackList"
                    onclick="location.href='/boardListPage'">
         </div>

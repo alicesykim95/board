@@ -12,7 +12,7 @@
         <a class="header_btn" th:href="@{/loginPage}">Login</a>
         <a class="header_btn" th:href="@{/userJoinPage}">Join</a>
     </div>
-    <div th:unless="${session.login == null}">
+    <div th:if="${session.login != null}">
         <a class="header_btn2 login_session" th:inline="text">[[${session.login.userId}]]님</a>
         <a class="header_btn2 logout_session" th:href="@{/userLogout}">Logout</a>
     </div>

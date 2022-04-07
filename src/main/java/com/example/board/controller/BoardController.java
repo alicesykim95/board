@@ -63,9 +63,9 @@ public class BoardController {
     public String addBoardPage(HttpServletRequest request, Model model) throws Exception {
 
         HttpSession session = request.getSession();
-        UserVo userVo = (UserVo) session.getAttribute("login");
+        String userId = (String) session.getAttribute("userId");
 
-        model.addAttribute("login", userVo);
+        model.addAttribute("userId", userId);
 
         return "board/bWrite";
     }
@@ -75,7 +75,7 @@ public class BoardController {
     public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum, HttpServletRequest request) throws Exception {
 
         HttpSession session = request.getSession();
-        UserVo userVo = (UserVo) session.getAttribute("login");
+        String userId = (String) session.getAttribute("userId");
 
         ModelAndView mv = new ModelAndView("board/bDetail");
 
@@ -86,7 +86,7 @@ public class BoardController {
         // 게시판 댓글 리스트
         mv.addObject("comment", commentService.commentList(boardNum));
         // 로그인중인 아이디 가져오기
-        mv.addObject("login", userVo);
+        mv.addObject("userId", userId);
 
         return mv;
     }

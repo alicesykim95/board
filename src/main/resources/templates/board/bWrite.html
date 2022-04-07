@@ -8,13 +8,8 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
     <script>
         // 게시글 권한 설정 및 로그인안했을 시 Home 화면으로 이동
-        let userId = "[[${session.login}]]";
-        if (userId) {
-            $('.write_container').append(
-                "<input type=\"text\" id=\"writer\" size=\"68\" readonly th:value=\"${session.login.userId}\">"
-            )
-        }
-        else {
+        let userId = "[[${session.userId}]]";
+        if (userId === "") {
             alert("로그인해주세요.")
             location.href = "/loginPage"
         }
@@ -27,7 +22,7 @@
         <table class="board_write">
             <tr class="write_head">
                 <td class="write_title">작성자</td>
-                <td class="write_container"></td>
+                <td class="write_container"><input type="text" id="writer" size="68" readonly th:value="${session.userId}"></td>
             </tr>
             <tr class="write_head">
                 <td class="write_title">제목</td>
