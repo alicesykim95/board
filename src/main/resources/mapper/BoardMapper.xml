@@ -100,4 +100,19 @@
         WHERE board_num = #{boardNum}
     </update>
 
+    <insert id="uploadFile" parameterType="com.example.board.dto.FileDto">
+        INSERT INTO file_ex (
+            file_origianl_name,
+            file_saved_name,
+            file_path,
+            file_created_user,
+            board_num
+        )
+        VALUES (#{fileOriginalName},
+               #{fileSavedName},
+               #{filePath},
+               #{fileCreatedUser},
+               #{boardNum})
+    </insert>
+
 </mapper>

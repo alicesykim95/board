@@ -1,4 +1,6 @@
 package com.example.board.mapper;
+
+import com.example.board.dto.FileDto;
 import com.example.board.vo.BoardVo;
 import com.example.board.vo.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -37,4 +39,7 @@ public interface BoardMapper {
 
     // 게시글 조회수
     void updateHitCount(int boardNum) throws Exception;
+
+    // 파일 업로드
+    void uploadFile(FileDto fd)throws Exception;
 }

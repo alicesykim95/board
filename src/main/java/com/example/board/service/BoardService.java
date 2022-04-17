@@ -1,12 +1,16 @@
 package com.example.board.service;
 
+import com.example.board.dto.FileDto;
 import com.example.board.mapper.BoardMapper;
-import com.example.board.vo.Criteria;
 import com.example.board.vo.BoardVo;
+import com.example.board.vo.Criteria;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -55,6 +59,21 @@ public class BoardService {
     // 게시글 삭제
     public int deleteBoard(int boardNum) throws Exception {
         return boardMapper.deleteBoard(boardNum);
+    }
+
+
+    // 파일 업로드
+    public void fileUpload(Long boardNum, MultipartFile file, String userId) throws Exception {
+        assert file != null;
+        String originName = file.getOriginalFilename();
+        String filePath = "C:\\file_repo/";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss").withZone(ZoneOffset.UTC);
+        String savedName = formatter + "_" + originName;
+        file.transferTo(new File(filePath + savedName));
+
+        FileDto fd = new FileDto(originName, savedName, filePath, userId, boardNum);
+
+        boardMapper.uploadFile(fd);
     }
 
 
