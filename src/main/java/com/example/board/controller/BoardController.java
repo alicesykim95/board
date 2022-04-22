@@ -122,17 +122,19 @@ public class BoardController {
 
     @PostMapping("/uploadFile")
     @ResponseBody
-    public void uploadFile(@RequestParam("boardNum") String boardNum, @RequestParam(name = "uploadFile") MultipartFile uploadFile, HttpServletRequest request) throws Exception {
+    public void uploadFile( @RequestBody MultipartFile uploadFile, HttpServletRequest request) throws Exception {
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
 
-        if (!boardNum.equals("null")) {
-            Long boardNum2 = Long.parseLong(boardNum);
-            boardService.fileUpload(boardNum2, uploadFile, userId);
-        } else {
-            boardService.fileUpload(null, uploadFile, userId);
-        }
+//        if (!boardNum.equals("null")) {
+//            Long boardNum2 = Long.parseLong(boardNum);
+//            boardService.fileUpload(boardNum2, uploadFile, userId);
+//        } else {
+//            boardService.fileUpload(null, uploadFile, userId);
+//        }
+
+        boardService.fileUpload(uploadFile, userId);
 
 
     }

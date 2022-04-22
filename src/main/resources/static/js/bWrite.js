@@ -3,7 +3,6 @@ function registerFile() {
     const uploadFile = $('#uploadFile')[0].files[0];
     const formData = new FormData;
 
-    formData.append("boardNum", null);
     formData.append("uploadFile", uploadFile);
 
     $.ajax({

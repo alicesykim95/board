@@ -63,7 +63,7 @@ public class BoardService {
 
 
     // 파일 업로드
-    public void fileUpload(Long boardNum, MultipartFile file, String userId) throws Exception {
+    public void fileUpload(MultipartFile file, String userId) throws Exception {
         assert file != null;
         String originName = file.getOriginalFilename();
         String filePath = "C:\\file_repo/";
@@ -71,7 +71,7 @@ public class BoardService {
         String savedName = formatter + "_" + originName;
         file.transferTo(new File(filePath + savedName));
 
-        FileDto fd = new FileDto(originName, savedName, filePath, userId, boardNum);
+        FileDto fd = new FileDto(originName, savedName, filePath, userId);
 
         boardMapper.uploadFile(fd);
     }

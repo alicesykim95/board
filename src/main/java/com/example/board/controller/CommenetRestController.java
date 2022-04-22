@@ -1,11 +1,7 @@
 package com.example.board.controller;
-
-import com.example.board.service.BoardService;
 import com.example.board.service.CommentService;
 import com.example.board.vo.CommentVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
