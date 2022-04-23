@@ -1,4 +1,6 @@
-function registerFile() {
+let fileNum = "";
+
+function registerAction() {
     console.log($('#uploadFile'));
     const uploadFile = $('#uploadFile')[0].files[0];
     const formData = new FormData;
@@ -11,11 +13,13 @@ function registerFile() {
         data: formData,
         contentType: false,
         processData: false,
-        success: function() {
-            alert("성공하였습니다.");
+        success: function(data) {
+            console.log(data)
+                fileNum = data.fileNum;
+                registerBoard();
         },
-        error: function() {
-            alert("실패하였습니다.");
+        error: function(xhr, status, error) {
+            alert("파일등록에 오류가 있습니다.");
         }
 
     })
@@ -27,7 +31,8 @@ function registerBoard() {
     const dataList = {
         writer : document.getElementById("writer").value,
         title : document.getElementById("title").value,
-        content : document.getElementById("content").value
+        content : document.getElementById("content").value,
+        fileNum: fileNum
     }
 
     // formData.append("writer", document.getElementById("writer").value);
