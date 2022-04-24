@@ -49,19 +49,20 @@
     </update>
 
         <!-- 게시글 삽입 -->
-    <insert id="insertBoard" parameterType="BoardVo">
-        INSERT INTO board_ex (board_num,
+    <insert id="insertBoard" parameterType="com.example.board.dto.BoardInsertDto" useGeneratedKeys="true" keyProperty="boardNum"
+    keyColumn="BOARD_NUM">
+        INSERT INTO board_ex (
                            writer,
                            title,
                            content,
-                           created_time,
-                           hit_cnt)
-        VALUES (#{boardNum},
+                           created_time
+                           )
+        VALUES (
                 #{writer},
                 #{title},
                 #{content},
-                now(),
-                #{hitCnt})
+                now()
+                )
     </insert>
 
     <!-- 게시글 상세 조회 -->

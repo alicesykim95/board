@@ -12,12 +12,12 @@ public interface CommentMapper {
     List<CommentVo> commentList(int boardNum) throws Exception;
 
     // 댓글 작성
-    int commentInsert(CommentVo cv) throws Exception;
+    void commentInsert(CommentVo cv) throws Exception;
 
     // 댓글 수정
     int updateComment(CommentVo cv) throws Exception;
 
     // 댓글 삭제
-    int deleteComment(int commentNum) throws Exception;
+    void deleteComment(int commentNum) throws Exception;
 
 }

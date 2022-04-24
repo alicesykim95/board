@@ -1,5 +1,6 @@
 package com.example.board.mapper;
 
+import com.example.board.dto.BoardInsertDto;
 import com.example.board.vo.BoardVo;
 import com.example.board.vo.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,7 +26,7 @@ public interface BoardMapper {
     void updateCommentCount(int boardNum) throws Exception;
 
     // 게시글 작성
-    int insertBoard(BoardVo bdv) throws Exception;
+    int insertBoard(BoardInsertDto bdv) throws Exception;
 
     // 게시글 상세
     BoardVo getBoardDetail(int boardNum) throws Exception;

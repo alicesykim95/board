@@ -1,6 +1,7 @@
 package com.example.board.controller;
 
 import com.example.board.service.FileService;
+import com.example.board.vo.FileVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,16 @@ public class FileController {
 
     // 파일 다운로드
     @GetMapping("/downloadFile")
-    public void donwloadFile(ModelMap modelMap, HttpServletResponse response) throws UnsupportedEncodingException {
+    @ResponseBody
+    public void donwloadFile(ModelMap modelMap, HttpServletResponse response, @RequestBody int fileNum) throws Exception {
+
+        FileVo fv = (FileVo) fileService.fileDownload(fileNum);
+        String filePath = fv.getFilePath();
+        String savedName = fv.getFileSavedName();
+
         // board Id 를 우선 변수로 받음
         // BOARD 테이블에서 관련 boardId를 바탕으로 파일의 이름 (=즉 upload할때 등록했던 경로+ 파일 이름을 가지고옴)
-        File file = new File("C:\\file_repo/"+"99CBFB3C5AE2934205.jpg");
-        // modelMap.put("file", file);
+        File file = new File(filePath + savedName);
 
         // %20 = URL escape code 중 띄어쓰기 즉, 스페이스를 의미
         // 정규표현식에서 +는 "앞 문자가 1개 이상 존재할 수 있다"라는 뜻으로 특수문자인 +를 표현하기 위해서는 \\+로 표현한다.
@@ -55,7 +61,7 @@ public class FileController {
     // 파일 업로드
     @PostMapping("/uploadFile")
     @ResponseBody
-    public void uploadFile(@RequestBody MultipartFile uploadFile, HttpServletRequest request) throws Exception {
+    public int uploadFile(@RequestBody MultipartFile uploadFile, HttpServletRequest request) throws Exception {
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
@@ -67,7 +73,7 @@ public class FileController {
 //            boardService.fileUpload(null, uploadFile, userId);
 //        }
 
-        fileService.insertFile(uploadFile, userId);
+        return fileService.insertFile(uploadFile, userId);
 
     }
 

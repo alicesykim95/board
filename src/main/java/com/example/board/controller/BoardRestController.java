@@ -1,18 +1,16 @@
 package com.example.board.controller;
 
+import com.example.board.dto.BoardInsertDto;
 import com.example.board.service.BoardService;
-import com.example.board.service.UserService;
+import com.example.board.service.FileService;
 import com.example.board.vo.BoardVo;
+import com.example.board.vo.FileVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import java.io.File;
 import java.util.List;
 
 @RestController
@@ -20,6 +18,7 @@ import java.util.List;
 public class BoardRestController {
 
     private final BoardService boardService;
+    private final FileService fileService;
 
     // 게시글 전체 페이지 목록
     @RequestMapping(value = "/board", method = RequestMethod.GET)
@@ -29,14 +28,21 @@ public class BoardRestController {
 
     // 게시글 작성 처리
     @RequestMapping(value = "/board", method = RequestMethod.POST)
-    public int addBoard(BoardVo bdv, MultipartHttpServletRequest request) throws Exception {
+    public void addBoard(BoardInsertDto bdv) throws Exception {
 
-        MultipartFile file = request.getFile("uploadFile");
-        assert file != null;
-        System.out.println(file);
-        file.transferTo(new File("C:\\file_repo/"+file.getOriginalFilename()));
+//        MultipartFile file = request.getFile("uploadFile");
+//        assert file != null;
+//        System.out.println(file);
+//        file.transferTo(new File("C:\\file_repo/"+file.getOriginalFilename()));
 
-        return boardService.insertBoard(bdv);
+        int boardNum = boardService.insertBoard(bdv);
+
+        FileVo fv = new FileVo();
+        fv.setBoardNum(boardNum);
+        System.out.println(fv.getBoardNum());
+        fv.setFileNum(bdv.getFileNum());
+
+        fileService.insertBoardNum(fv);
     }
 
     // 게시글 수정 처리

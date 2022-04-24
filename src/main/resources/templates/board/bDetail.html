@@ -44,7 +44,14 @@
             </tr>
             <tr class="detail_head">
                 <td class="head_title">다운로드</td>
-                <td><button onclick="location.href='/downloadFile/{id}'">다운로드</button></td>
+                <td>
+                    <th:block th:each="file : ${files}">
+                        <a class="downloadFile" th:text="${file.fileOriginalName}"
+                             th:onclick="@{fileDownload({id} (id=${file.fileNum}))}"></a>
+                    </th:block>
+                </td>
+
+<!--                 <td><button onclick="location.href='/downloadFile/{id}'">다운로드</button></td>-->
             </tr>
         </table>
 

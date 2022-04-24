@@ -174,3 +174,22 @@ function commentDelete(commentNum) {
     });
 
 }
+
+// 파일 다운로드
+
+function fileDownload() {
+
+    $.ajax({
+        url: '/downloadFile',
+        type: 'GET',
+        data: {fileNum: fileNum},
+        success: function () {
+                alert("다운로드에 성공하였습니다.");
+        },
+        error: function () {
+            alert("다운로드에 실패하였습니다.");
+        }
+    });
+
+}
+

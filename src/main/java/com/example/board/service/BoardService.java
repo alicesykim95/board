@@ -1,5 +1,6 @@
 package com.example.board.service;
 
+import com.example.board.dto.BoardInsertDto;
 import com.example.board.mapper.BoardMapper;
 import com.example.board.vo.BoardVo;
 import com.example.board.vo.Criteria;
@@ -35,8 +36,14 @@ public class BoardService {
     }
 
     // 게시글 작성
-    public int insertBoard(BoardVo bdv) throws Exception {
-        return boardMapper.insertBoard(bdv);
+    public int insertBoard(BoardInsertDto bdv) throws Exception {
+        int success = boardMapper.insertBoard(bdv);
+
+        if (success == 1) {
+            return bdv.getBoardNum();
+        } else {
+            return 0;
+        }
     }
 
     // 게시글 상세

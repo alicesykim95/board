@@ -2,14 +2,17 @@ package com.example.board.controller;
 
 import com.example.board.service.BoardService;
 import com.example.board.service.CommentService;
+import com.example.board.service.FileService;
 import com.example.board.vo.BoardVo;
 import com.example.board.vo.Criteria;
+import com.example.board.vo.FileVo;
 import com.example.board.vo.Paging;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -20,6 +23,7 @@ public class BoardController {
 
     private final BoardService boardService;
     private final CommentService commentService;
+    private final FileService fileService;
 
     // 게시글 전체 리스트 페이지
     @RequestMapping(value = {"/boardListPage", "/"}, method = RequestMethod.GET)
@@ -75,12 +79,18 @@ public class BoardController {
 
         BoardVo board = boardService.getBoardDetail(boardNum);
 
+        List<FileVo> fv = fileService.selectFile(boardNum);
+
+        System.out.println("FILE=================" + fv);
+
         // 게시판 상세 내용
         mv.addObject("board", board);
         // 게시판 댓글 리스트
         mv.addObject("comment", commentService.commentList(boardNum));
         // 로그인중인 아이디 가져오기
         mv.addObject("userId", userId);
+        // 파일 조회 내용
+        mv.addObject("files", fv);
 
         return mv;
     }

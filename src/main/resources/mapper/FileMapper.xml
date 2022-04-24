@@ -15,5 +15,35 @@
                 #{fileSavedName},
                 #{filePath},
                 #{fileCreatedUser})
+
     </insert>
+
+    <!-- boarNum 업데이트 -->
+    <update id="insertBoardNum" parameterType="FileVo">
+        UPDATE file_ex
+        SET board_num = #{boardNum}
+        WHERE file_num = #{fileNum}
+    </update>
+
+    <!-- 파일 조회 -->
+    <select id="selectFile" parameterType="int" resultType="FileVo">
+        SELECT file_num,
+               file_original_name,
+               file_saved_name,
+               file_path,
+               board_num
+        FROM file_ex
+        WHERE board_num = #{boardNum} and file_delete = 0
+    </select>
+
+    <!-- 파일 다운로드 -->
+    <select id="fileDownload" parameterType="int" resultType="FileVo">
+        SELECT file_original_name,
+               file_saved_name,
+               file_path
+        FROM file_ex
+        WHERE file_num = #{fileNum} and file_delete = 0
+    </select>
+
+
 </mapper>

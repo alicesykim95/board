@@ -1,4 +1,4 @@
-let fileNum = "";
+let fileNum;
 
 function registerAction() {
     console.log($('#uploadFile'));
@@ -11,15 +11,18 @@ function registerAction() {
         url: '/uploadFile',
         type: 'POST',
         data: formData,
-        contentType: false,
+        encType : 'multipart/form-data',
         processData: false,
+        contentType: false,
         success: function(data) {
-            console.log(data)
-                fileNum = data.fileNum;
-                registerBoard();
+                console.log(data);
+                fileNum = data;
         },
         error: function(xhr, status, error) {
             alert("파일등록에 오류가 있습니다.");
+        },
+        complete: function () {
+            registerBoard();
         }
 
     })
@@ -27,6 +30,7 @@ function registerAction() {
 
 function registerBoard() {
 
+    console.log(fileNum);
 
     const dataList = {
         writer : document.getElementById("writer").value,
@@ -38,14 +42,14 @@ function registerBoard() {
     // formData.append("writer", document.getElementById("writer").value);
     // formData.append("title", document.getElementById("title").value);
     // formData.append("content", document.getElementById("content").value);
-
+    console.log(dataList)
     $.ajax({
         url:'/board',
         type:'POST',
-        data: 'dataList',
+        data: dataList,
         success: function () {
             alert("성공하였습니다.");
-            location.href="/boardListPage";
+            location.href="/";
         },
         error: function (){
             alert("실패하였습니다.");
