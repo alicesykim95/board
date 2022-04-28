@@ -11,19 +11,19 @@ a {color:#333;text-decoration: none;}
 
 
 /*전체 틀*/
-.container {max-width: 1024px; margin: 30px auto; padding: 30px; background-color: white;}
-.board_list{width:100%; border-bottom: 1px solid #ccc; margin:30px 0; border-collapse: collapse; position: relative;}
+.container {max-width: 1024px; margin: 30px auto; padding: 30px 60px; background-color: white; box-shadow: 3px 3px 10px #d4d9d8; border-radius:2px;}
+.board_list{width:100%; margin:30px 0; border-collapse: collapse; position: relative; border-bottom: 2px solid  #01987A;}
 .board_detail{width: 100%; border: 1px solid lightgrey; margin: 30px 0; border-collapse: collapse; position: relative;}
 .board_write{width: 100%; border: 1px solid lightgrey; margin: 30px 0; border-collapse: collapse; position: relative;}
-.board_home, .board_join, .board_login {width:500px; margin: 30px 10px; border-collapse: collapse; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; box-shadow: 4px 4px 4px #d97c7c; overflow: auto;}
-.title{font-size: 30px; border-bottom: 1px solid lightgrey; font-weight: bolder; position: relative; padding-bottom: 15px;}
+.board_home, .board_join, .board_login {width:500px; margin: 30px 10px; border-collapse: collapse; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; box-shadow: 2px 2px 8px #aec2bc; overflow: auto;}
+.title{font-size: 28px; border-bottom: 1px solid lightgrey; font-weight: bolder; position: relative; padding-bottom: 15px; color: #464646;}
 
 /*bList.html: list_th*/
-.board_list .table_head {background-color: #01987A;}
+.board_list .table_head {background-color: #01987A; border-collapse: separate; boarder-radius: 10px;}
 .board_list .table_head .list_th {color: white; text-align: center; padding: 17px 0;}
 
 /*bList.html: list_td*/
-.board_list {border-bottom: 2px solid #01987A;}
+.board_list_table {border-radius: 10px;}
 .board_list .table_body {border-bottom: 1px solid #E5E5E5;}
 .board_list .table_body .list_td {padding: 12px 0; text-align: center; font-size: 13px;}
 tbody tr:nth-child(even) .list_td_no {font-weight: 900; color: #01987A; }
@@ -33,7 +33,7 @@ tbody tr:nth-child(even) {background-color: #F3F3F3;}
 
 
 /*bList.html: list_btn*/
-.list_btn {margin-left: 8px;padding: 8px 14px; color: white; font-weight: bolder; background-color: #3f3f3f; border: none; border-radius: 3px; float: right;}
+.list_btn {margin-left: 8px;padding: 8px 14px; color: white; font-weight: bolder; background-color: #3f3f3f; border: none; border-radius: 3px; float: right; z-index: 1;}
 
 /*bDetail.html: head*/
 .detail_head{text-align: center; font-size: 13px; border: 1px solid lightgrey;}
@@ -76,12 +76,12 @@ tbody tr:nth-child(even) {background-color: #F3F3F3;}
 .write_btn{padding: 8px 16px; color: white; font-weight: bolder; background-color: black; border-radius: 3px; border: none; left: 875px; position: relative; top: -12px;}
 
 /*paging*/
-.page_container{position: relative; left: 340px; top: 5px; display: flex;}
-.page_container .page_link{position: relative; display: block; color: #01987A; background-color: white; border: 1px solid #01987A; height: 35px; }
-.page_container .page_link:hover{background-color:  #01987A;}
-.page_container .page_number{border-right: none; padding: 10px;}
-.page_continer .page_btn{padding: 20px;}
-.page_continer .page_btn_previous {border-right: none;}
+.page_container{display: flex; left: 310px; position: relative; transform: translateY(-50%); top: 17px; width: 100px;}
+.page_container .page_link{position: relative; display: block; color: #01987A; background-color: #f3f2f2; font-size: 13px;}
+.page_container .page_link:hover{background-color: #68c4b1; color: white;}
+.page_container .page_number{padding: 10px;}
+.page_container .page_link:focus{background-color: #68c4b1; color: white;}
+.page_container .page_btn{padding: 10px; display: block;}
 
 /*home*/
 .home_title{text-align: center; margin: 40px 0 30px 0; color: #3a3a3a; font-weight: 900; font-size: 30px;}
@@ -94,17 +94,17 @@ tbody tr:nth-child(even) {background-color: #F3F3F3;}
 .join_title{text-align: center; margin: 40px 0 20px 0; color: #3a3a3a; font-weight: 900; font-size: 30px;}
 .board_join {text-align: center; margin: 40px 0 30px 0;}
 .join_section{text-align: center;}
-.join_btn{width: 300px; padding: 15px 0 15px 20px ;display: inline-block; margin-top: 15px; position: relative;border: none; background-color: #e5e5e5;}
-.join_btn:focus{outline: 2px solid lightcoral;}
-input::placeholder{font-size: 12px; color: #4b4b4b;}
-.join_bottom_btn{width: 300px; text-align: center; padding-top: 15px; padding-bottom: 15px; background-color: lightcoral; color: white; display: inline-block; margin: 20px 0 50px 0; position: relative; font-weight: 700; border: none;}
+.join_btn{width: 300px; padding: 17px 0 17px 20px ;display: inline-block; margin-top: 15px; position: relative;border: none; background-color: #eeeeee;}
+.join_btn:focus{outline: 2px solid  #74c7b6;}
+input::placeholder{font-size: 12px; color: #4b4b4b; font-weight: 500;}
+.join_bottom_btn{width: 300px; text-align: center; padding: 17px 0; background-color:  #01987A; color: white; display: inline-block; margin: 20px 0 50px 0; position: relative; font-weight: 700; border: none;}
 
 /*login*/
 .login_title{text-align: center; margin: 40px 0 20px 0; color: #3a3a3a; font-weight: 900; font-size: 30px;}
 .login_section{text-align: center;}
-.login_btn{width: 300px; padding: 15px 0 15px 20px ;display: inline-block; margin-top: 15px; position: relative;border: none; background-color: #e5e5e5;}
-.login_btn:focus{outline: 2px solid lightcoral;}
-.login_bottom_btn{width: 300px; text-align: center; padding-top: 15px; padding-bottom: 15px; background-color: lightcoral; color: white; display: inline-block; margin: 20px 0 50px 0; position: relative; font-weight: 700; border: none;}
+.login_btn{width: 300px; padding: 17px 0 17px 20px ;display: inline-block; margin-top: 15px; position: relative;border: none; background-color: #eeeeee;}
+.login_btn:focus{outline: 2px solid #74c7b6;}
+.login_bottom_btn{width: 300px; text-align: center; padding: 17px 0; background-color: #01987A; color: white; display: inline-block; margin: 20px 0 50px 0; position: relative; font-weight: 700; border: none;}
 
 /*layout*/
 .headerContainer {width: 100%; background-color: #01987A; height: 55px;}

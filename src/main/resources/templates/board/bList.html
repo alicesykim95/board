@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
     <style>
-        body {background-color: #dcd7d7;}
+        body {background-color: #eef3f2;}
     </style>
 </head>
 <body>
@@ -56,32 +56,32 @@
 
         <div class="page_container">
             <!--이전 페이지 버튼-->
-            <li th:if="${paging.hasPreviousPage}" class="page_class">
-                <a class="page_link page_btn page_btn_previous"
+            <div th:if="${paging.hasPreviousPage}" class="page_class">
+                <a class="page_link"
                    th:href="@{/boardListPage?currentPageNum={page} (page=${paging.firstPage}-1)}"
                    aria-label="Next">
-                    <span aria-hidden="true">PREVIOUS</span>
+                    <span aria-hidden="true" class="page_btn_previous page_btn">PREVIOUS</span>
                 </a>
-            </li>
+            </div>
 
             <!--10개 페이지 버튼 로딩-->
             <th:block th:with="start=${paging.firstPage}, end=${paging.lastPage}">
-                <li class="page_class" th:with="start=${paging.firstPage}, end=${paging.lastPage}"
+                <div class="page_class" th:with="start=${paging.firstPage}, end=${paging.lastPage}"
                     th:each="pageButton : ${#numbers.sequence(paging.firstPage, paging.lastPage)}">
                     <a class="page_link page_number"
                        th:href="@{/boardListPage?currentPageNum={page} (page=${pageButton})}"
                        th:text="${pageButton}"></a>
-                </li>
+                </div>
             </th:block>
 
             <!--다음 페이지 버튼-->
-            <li th:if="${paging.hasNextPage}" class="page_class">
-                <a class="page_link page_btn"
+            <div th:if="${paging.hasNextPage}" class="page_class">
+                <a class="page_link"
                    th:href="@{/boardListPage?currentPageNum={page} (page=${paging.lastPage}+1)}"
                    aria-label="Next">
-                    <span aria-hidden="true">NEXT</span>
+                    <span aria-hidden="true" class="page_btn">NEXT</span>
                 </a>
-            </li>
+            </div>
         </div>
     </div>
 </th:block>
