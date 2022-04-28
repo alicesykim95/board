@@ -7,6 +7,9 @@
     <title>게시글목록</title>
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <style>
+        body {background-color: #dcd7d7;}
+    </style>
 </head>
 <body>
 <th:block layout:fragment="content">
@@ -54,10 +57,10 @@
         <div class="page_container">
             <!--이전 페이지 버튼-->
             <li th:if="${paging.hasPreviousPage}" class="page_class">
-                <a class="page_link page_btn"
+                <a class="page_link page_btn page_btn_previous"
                    th:href="@{/boardListPage?currentPageNum={page} (page=${paging.firstPage}-1)}"
                    aria-label="Next">
-                    <span aria-hidden="true"><</span>
+                    <span aria-hidden="true">PREVIOUS</span>
                 </a>
             </li>
 
@@ -76,7 +79,7 @@
                 <a class="page_link page_btn"
                    th:href="@{/boardListPage?currentPageNum={page} (page=${paging.lastPage}+1)}"
                    aria-label="Next">
-                    <span aria-hidden="true"> > </span>
+                    <span aria-hidden="true">NEXT</span>
                 </a>
             </li>
         </div>

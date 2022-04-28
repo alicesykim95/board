@@ -8,9 +8,6 @@
 </head>
 <body>
 <div class="headerContainer">
-    <div class="header_home_btn">
-        <a th:href="@{/}"><img class="home_btn" src="/static/img/home-button_icon-icons.com_72700.png" alt="home_btn_img"></a>
-    </div>
     <div th:if="${session.login == null}">
         <a class="header_btn" th:href="@{/loginPage}">Login</a>
         <a class="header_btn" th:href="@{/userJoinPage}">Join</a>
