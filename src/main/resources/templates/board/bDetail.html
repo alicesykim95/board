@@ -6,14 +6,19 @@
     <title>게시글 상세 화면</title>
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-color: #eef3f2;
+        }
+    </style>
     <script>
         // 게시글 권한 설정 및 로그인안했을 시 Home 화면으로 이동
-        let userId = "[[${session.userId}]]";
-
-        if (userId === "") {
-            alert("로그인해주세요.")
-            location.href = "/loginPage"
-        }
+        // let userId = "[[${session.userId}]]";
+        //
+        // if (userId === "") {
+        //     alert("로그인해주세요.")
+        //     location.href = "/loginPage"
+        // }
     </script>
 </head>
 <body>
@@ -27,18 +32,18 @@
                 <td class="head_title">조회수</td>
                 <td th:text="${board.hitCnt}"></td>
             </tr>
-            <tr class="detail_head head2">
+            <tr class="detail_head">
                 <td class="head_title">작성자</td>
                 <td id="board_detail_writer" th:text="${board.writer}"></td>
                 <td class="head_title">작성일</td>
                 <td th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
             </tr>
-            <tr class="detail_head head3">
+            <tr class="detail_head">
                 <td class="head_title">제목</td>
                 <td class="head3_text" colspan="3"><input type="text" id="title" name="title" th:value="${board.title}">
                 </td>
             </tr>
-            <tr class="detail_head head4">
+            <tr class="detail_head">
                 <td class="head_title">내용</td>
                 <td colspan="3"><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
             </tr>

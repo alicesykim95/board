@@ -6,39 +6,49 @@
     <title>게시글 작성</title>
     <script src="https://code.jquery.com//jquery-3.4.1.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-color: #eef3f2;
+        }
+    </style>
     <script>
         // 게시글 권한 설정 및 로그인안했을 시 Home 화면으로 이동
-        let userId = "[[${session.userId}]]";
-        if (userId === "") {
-            alert("로그인해주세요.")
-            location.href = "/loginPage"
-        }
+        // let userId = "[[${session.userId}]]";
+        // if (userId === "") {
+        //     alert("로그인해주세요.")
+        //     location.href = "/loginPage"
+        // }
     </script>
 </head>
 <body>
 <th:block layout:fragment="content">
     <div class="container">
         <h2 class="title">게시글 작성</h2>
-        <table class="board_write">
-            <tr class="write_head">
-                <td class="write_title">작성자</td>
-                <td class="write_container"><input type="text" id="writer" size="68" readonly th:value="${session.userId}"></td>
-            </tr>
-            <tr class="write_head">
-                <td class="write_title">제목</td>
-                <td><input type="text" id="title" size="68"></td>
-            </tr>
-            <tr class="write_head">
-                <td class="write_title">글내용</td>
-                <td><textarea rows="10" cols="70" id="content"></textarea></td>
-            </tr>
-            <tr class="write_head">
-                <td class="write_title">파일 Upload</td>
-                <td><input type="file" id="uploadFile" size="68"></td>
-<!--               <td><input type="button" value="파일업로드" onclick="registerFile()"></td>-->
-            </tr>
-        </table>
-        <input class="write_btn btn" type="button" value="작성완료" onclick="registerAction()">
+        <div class="board_write">
+            <div class="write_head">
+                <label class="write_title">작성자</label>
+                <input type="text" id="writer" size="68" readonly th:value="${session.userId}">
+            </div>
+            <div class="write_head">
+                <label class="write_title">이메일<span>*</span></label>
+                <input type="text" id="email" size="68">
+            </div>
+            <div class="write_head write_title">
+                <label>제목<span>*</span></label>
+                <input type="text" id="title" size="68">
+            </div>
+            <div class="write_head content">
+                <label>글내용<span>*</span></label>
+                <textarea rows="10" cols="70" id="content"></textarea>
+            </div>
+            <div class="write_head file">
+                <input type="file" id="uploadFile" size="68">
+            </div>
+            <div class="write_title">
+                <input class="write_btn" type="button" value="저장" onclick="registerAction()">
+                <input class="write_btn" type="button" value="목록" onclick="location.href ='/'">
+            </div>
+        </div>
     </div>
 </th:block>
 </body>
