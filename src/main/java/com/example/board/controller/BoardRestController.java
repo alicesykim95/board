@@ -1,17 +1,13 @@
 package com.example.board.controller;
 
-import com.example.board.dto.BoardInsertDto;
 import com.example.board.service.BoardService;
 import com.example.board.service.FileService;
 import com.example.board.vo.BoardVo;
-import com.example.board.vo.FileVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,16 +24,17 @@ public class BoardRestController {
 
     // 게시글 작성 처리
     @RequestMapping(value = "/board", method = RequestMethod.POST)
-    public void addBoard(BoardInsertDto bdv) throws Exception {
+    public Map<String, Object> addBoard(@RequestBody Map<String, Object> params) throws Exception {
 
-        int boardNum = boardService.insertBoard(bdv);
+        boardService.insertBoard(params);
 
-        FileVo fv = new FileVo();
-        fv.setBoardNum(boardNum);
-        System.out.println(fv.getBoardNum());
-        fv.setFileNum(bdv.getFileNum());
+        // FileVo fv = new FileVo();
+        // fv.setBoardNum(boardNum);
+        // System.out.println(fv.getBoardNum());
+        // fv.setFileNum(bdv.getFileNum());
 
-        fileService.insertBoardNum(fv);
+         fileService.insertBoardNum(params);
+         return params;
     }
 
     // 게시글 수정 처리

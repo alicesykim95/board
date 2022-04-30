@@ -72,8 +72,17 @@ public class FileService {
     }
 
     // 파일 보드넘버 삽입
-    public void insertBoardNum(FileVo fv)throws Exception{
-        fileMapper.insertBoardNum(fv);
+    public void insertBoardNum(Map<String, Object> params)throws Exception{
+
+        if (params.get("fileNums") != null){
+            String fileNums = ((String) params.get("fileNums")).replace("[", "").replace("]","");
+            String[] fileNumsArray = fileNums.split(",");
+
+            for (int i = 0; i < fileNumsArray.length; i++) {
+                params.put("fileNum", fileNumsArray[i]);
+                fileMapper.insertBoardNum(params);
+            }
+        }
     }
 
     // 파일 조회

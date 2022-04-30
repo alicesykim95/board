@@ -9,7 +9,7 @@ public class BoardInsertDto {
     private String writer;
     private String title;
     private String content;
-    private int fileNum;
+    private String fileNums;
 
 }
 

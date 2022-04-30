@@ -33,13 +33,15 @@ function fileAttach(target){
         fileCount = fileCount + fileArray.length;
     }
 
+
     fileArray.forEach(function(f){
         let reader = new FileReader();
         reader.onload = function(e){
+            let html = "";
             fileList.push(f);
-            console.log(fileList);
+
             $('#file_list').append(
-                '<div id="file' + fileNum + '" style="margin-bottom: 8px; grid-column: -1 / 1; " onclick="deleteFile(\'file' + fileNum + '\')">'
+                '<div id="file' + fileNum + '" style="padding-bottom: 10px;" onclick="deleteFile(\'file' + fileNum + '\')">'
                 + '<p style="font-size: 12px; color: #3a3a3a; float: left;">' + f.name + '</p>'
                 + '<img src="../images/103181_close_remove_delete_cross_icon.png" alt="delete_icon" style="width: 10px; height: 10px; margin-left: 5px; filter: invert(17%) sepia(0%) saturate(548%) hue-rotate(163deg) brightness(98%) contrast(76%); cursor: pointer; float: left;">'
                 + '</div>'
@@ -115,6 +117,7 @@ function registerBoard() {
         url:'/board',
         type:'POST',
         data: JSON.stringify(dataList),
+        contentType: 'application/json',
         success: function () {
             alert("성공하였습니다.");
             location.href="/";

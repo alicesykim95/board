@@ -18,7 +18,7 @@
     </insert>
 
     <!-- boarNum 업데이트 -->
-    <update id="insertBoardNum" parameterType="FileVo">
+    <update id="insertBoardNum">
         UPDATE file_ex
         SET board_num = #{boardNum}
         WHERE file_num = #{fileNum}

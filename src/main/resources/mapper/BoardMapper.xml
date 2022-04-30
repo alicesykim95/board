@@ -49,7 +49,7 @@
     </update>
 
         <!-- 게시글 삽입 -->
-    <insert id="insertBoard" parameterType="com.example.board.dto.BoardInsertDto" useGeneratedKeys="true" keyProperty="boardNum"
+    <insert id="insertBoard" useGeneratedKeys="true" keyProperty="boardNum"
     keyColumn="BOARD_NUM">
         INSERT INTO board_ex (
                            writer,

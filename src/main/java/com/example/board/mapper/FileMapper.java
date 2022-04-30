@@ -13,7 +13,7 @@ public interface FileMapper {
     void insertFile(Map<String, Object> file)throws Exception;
 
     // 보드 넘버 삽입
-    void insertBoardNum(FileVo fv)throws Exception;
+    void insertBoardNum(Map<String, Object> params)throws Exception;
 
     // 파일 리스트 조회
     List<FileVo> selectFile(int boardNum)throws Exception;
