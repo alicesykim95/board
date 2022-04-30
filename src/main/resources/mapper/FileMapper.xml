@@ -4,7 +4,7 @@
 <mapper namespace="com.example.board.mapper.FileMapper">
 
     <!-- 파일 업로드 -->
-    <insert id="insertFile" parameterType="FileVo" useGeneratedKeys="true" keyProperty="fileNum">
+    <insert id="insertFile" useGeneratedKeys="true" keyProperty="fileNum">
         INSERT INTO file_ex (
             file_original_name,
             file_saved_name,
@@ -15,7 +15,6 @@
                 #{fileSavedName},
                 #{filePath},
                 #{fileCreatedUser})
-
     </insert>
 
     <!-- boarNum 업데이트 -->

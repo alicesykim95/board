@@ -13,52 +13,57 @@
     </style>
     <script>
         // 게시글 권한 설정 및 로그인안했을 시 Home 화면으로 이동
-        // let userId = "[[${session.userId}]]";
-        //
-        // if (userId === "") {
-        //     alert("로그인해주세요.")
-        //     location.href = "/loginPage"
-        // }
+        let userId = "[[${session.userId}]]";
+
+        if (userId === "") {
+            alert("로그인해주세요.")
+            location.href = "/loginPage"
+        }
     </script>
 </head>
 <body>
 <th:block layout:fragment="content">
     <div class="container">
-        <h2 class="title">게시글 작성</h2>
-        <table class="board_detail">
-            <tr class="detail_head head1">
-                <td class="head_title">글 번호</td>
-                <td th:text="${board.boardNum}"></td>
-                <td class="head_title">조회수</td>
-                <td th:text="${board.hitCnt}"></td>
-            </tr>
-            <tr class="detail_head">
-                <td class="head_title">작성자</td>
-                <td id="board_detail_writer" th:text="${board.writer}"></td>
-                <td class="head_title">작성일</td>
-                <td th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
-            </tr>
-            <tr class="detail_head">
-                <td class="head_title">제목</td>
-                <td class="head3_text" colspan="3"><input type="text" id="title" name="title" th:value="${board.title}">
-                </td>
-            </tr>
-            <tr class="detail_head">
-                <td class="head_title">내용</td>
-                <td colspan="3"><textarea id="content" name="content" th:text="${board.content}"></textarea></td>
-            </tr>
-            <tr class="detail_head">
-                <td class="head_title">다운로드</td>
-                <td>
+        <h2 class="title">게시글 내용</h2>
+        <div class="board_detail">
+            <div class="detail_head">
+                <label class="head_title">글 번호</label>
+                <input type="text" class="detail_text" th:value="${board.boardNum}" readonly>
+            </div>
+            <div class="detail_head">
+                <label class="head_title">조회수</label>
+                <input type="text" class="detail_text" th:value="${board.hitCnt}" readonly>
+            </div>
+            <div class="detail_head">
+                <label class="head_title">작성자</label>
+                <input type="text" class="detail_text" th:value="${board.writer}" readonly>
+<!--                id="board_detail_writer"-->
+            </div>
+            <div class="detail_head">
+                <label class="head_title">작성일</label>
+                <input type="text" class="detail_text" th:value="${#dates.format(board.createdTime, 'yyyy-MM-dd')}" readonly>
+            </div>
+            <div class="detail_head wide_width">
+                <label class="head_title">제목</label>
+               <input type="text" class="detail_text" id="title" name="title" th:value="${board.title}">
+            </div>
+            <div class="detail_head wide_width">
+                <label class="head_title">내용</label>
+                <textarea class="detail_text" id="content" name="content" th:text="${board.content}"></textarea>
+            </div>
+            <div class="detail_head">
+                <label class="head_title">다운로드</label>
+                <div>
                     <th:block th:each="file : ${files}">
-                        <a class="downloadFile" th:text="${file.fileOriginalName}"
-                             th:onclick="@{fileDownload({id} (id=${file.fileNum}))}"></a>
+                        <div class="download_attach_div">
+                            <p class="downloadFile file_attach" th:text="${file.fileOriginalName}" th:onclick="@{fileDownload({id} (id=${file.fileNum}))}"></p>
+                            <a><img src="../images/Download_alt_font_awesome.svg" alt="download_icon" class="detail_icon file_attach"></a>
+                            <a><img src="../images/103181_close_remove_delete_cross_icon.png" alt="delete_icon" class="detail_icon file_attach"></a>
+                        </div>
                     </th:block>
-                </td>
-
-<!--                 <td><button onclick="location.href='/downloadFile/{id}'">다운로드</button></td>-->
-            </tr>
-        </table>
+                </div>
+            </div>
+        </div>
 
         <div class="hidden_values_container">
             <input type="hidden" id="boardNum" th:value="${board.boardNum}">

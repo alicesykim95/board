@@ -7,10 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -61,17 +60,10 @@ public class FileController {
     // 파일 업로드
     @PostMapping("/uploadFile")
     @ResponseBody
-    public int uploadFile(@RequestBody MultipartFile uploadFile, HttpServletRequest request) throws Exception {
+    public Map<String, Object> uploadFile(@RequestParam("fileList")List<MultipartFile> uploadFile, HttpServletRequest request) throws Exception {
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
-
-//        if (!boardNum.equals("null")) {
-//            Long boardNum2 = Long.parseLong(boardNum);
-//            boardService.fileUpload(boardNum2, uploadFile, userId);
-//        } else {
-//            boardService.fileUpload(null, uploadFile, userId);
-//        }
 
         return fileService.insertFile(uploadFile, userId);
 

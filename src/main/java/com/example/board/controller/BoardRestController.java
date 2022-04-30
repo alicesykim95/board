@@ -30,11 +30,6 @@ public class BoardRestController {
     @RequestMapping(value = "/board", method = RequestMethod.POST)
     public void addBoard(BoardInsertDto bdv) throws Exception {
 
-//        MultipartFile file = request.getFile("uploadFile");
-//        assert file != null;
-//        System.out.println(file);
-//        file.transferTo(new File("C:\\file_repo/"+file.getOriginalFilename()));
-
         int boardNum = boardService.insertBoard(bdv);
 
         FileVo fv = new FileVo();

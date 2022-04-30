@@ -4,12 +4,13 @@ import com.example.board.vo.FileVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface FileMapper {
 
     // 파일 업로드
-    void insertFile(FileVo fv)throws Exception;
+    void insertFile(Map<String, Object> file)throws Exception;
 
     // 보드 넘버 삽입
     void insertBoardNum(FileVo fv)throws Exception;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org" :layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}"
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org"
+      :layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -13,11 +14,11 @@
     </style>
     <script>
         // 게시글 권한 설정 및 로그인안했을 시 Home 화면으로 이동
-        // let userId = "[[${session.userId}]]";
-        // if (userId === "") {
-        //     alert("로그인해주세요.")
-        //     location.href = "/loginPage"
-        // }
+        let userId = "[[${session.userId}]]";
+        if (userId === "") {
+            alert("로그인해주세요.")
+            location.href = "/loginPage"
+        }
     </script>
 </head>
 <body>
@@ -25,30 +26,36 @@
     <div class="container">
         <h2 class="title">게시글 작성</h2>
         <div class="board_write">
-            <div class="write_head">
-                <label class="write_title">작성자</label>
-                <input type="text" id="writer" size="68" readonly th:value="${session.userId}">
+                <div class="write_head">
+                    <label class="write_title">작성자</label>
+                    <input type="text" id="writer" size="68" readonly th:value="${session.userId}">
+                </div>
+                <div class="write_head">
+                    <label class="write_title">이메일<span>*</span></label>
+                    <input type="text" id="email" size="68" placeholder="ex) abcd1234@gmail.com">
+                </div>
+                <div class="write_head write_title">
+                    <label>제목<span>*</span></label>
+                    <input type="text" id="title" size="68">
+                </div>
+                <div class="write_head content">
+                    <label>글내용<span>*</span></label>
+                    <textarea rows="10" cols="70" id="content"></textarea>
+                </div>
+                <div class="file_container">
+                    <button id="write_file_upload" onclick="fileClick()" type="button">파일추가</button>
+                    <input type="file" multiple="multiple" id="write_hidden_file" onclick="fileAttach(this)" size="68" style="display: none;">
+                    <span style="font-size: 10px; color: #575757; margin-left: 10px; padding: 0;">첨부파일은 최대 <span style="color:#ec5454; ">10</span>개까지 등록이 가능합니다.</span>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="file_list" id="file_list"></div>
+                </div>
+                <div class="write_title">
+                    <input class="write_btn" type="button" value="저장" onclick="registerAction()">
+                    <input class="write_btn" type="button" value="목록" onclick="location.href ='/'">
+                </div>
             </div>
-            <div class="write_head">
-                <label class="write_title">이메일<span>*</span></label>
-                <input type="text" id="email" size="68">
-            </div>
-            <div class="write_head write_title">
-                <label>제목<span>*</span></label>
-                <input type="text" id="title" size="68">
-            </div>
-            <div class="write_head content">
-                <label>글내용<span>*</span></label>
-                <textarea rows="10" cols="70" id="content"></textarea>
-            </div>
-            <div class="write_head file">
-                <input type="file" id="uploadFile" size="68">
-            </div>
-            <div class="write_title">
-                <input class="write_btn" type="button" value="저장" onclick="registerAction()">
-                <input class="write_btn" type="button" value="목록" onclick="location.href ='/'">
-            </div>
-        </div>
     </div>
 </th:block>
 </body>
