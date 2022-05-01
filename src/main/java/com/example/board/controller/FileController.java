@@ -3,6 +3,8 @@ package com.example.board.controller;
 import com.example.board.service.FileService;
 import com.example.board.vo.FileVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +37,17 @@ public class FileController {
 
         File file = new File(filePath + savedName);
 
-        //  String fileName = URLEncoder.encode(file.getName(), String.valueOf(StandardCharsets.UTF_8)).replaceAll("\\+", "%20");
-        // response.addHeader(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;; filename=\"%s\"", fileName));
-        // response.setContentLength((int) file.length()); // 유효성 검사
+        String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        if (mimeType == null) {
+            mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
+        }
+
+        String fileName = URLEncoder.encode(file.getName(), String.valueOf(StandardCharsets.UTF_8)).replaceAll("\\+", "%20");
+        response.setContentType(mimeType);
+        response.addHeader(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;; filename=\"%s\"", fileName));
+        // X가 사용자가 지정한 헤더라는 뜻이지만 요새는 통상적으로 사용하게되어 원래 있는 헤더 정도로 인식하면 좋다.
+        response.addHeader("X-Content-Type-Options", "nosniff");
+        response.setContentLength((int) file.length()); // 유효성 검사
 
         try (
 

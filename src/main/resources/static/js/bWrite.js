@@ -37,7 +37,6 @@ function fileAttach(target){
     fileArray.forEach(function(f){
         let reader = new FileReader();
         reader.onload = function(e){
-            let html = "";
             fileList.push(f);
 
             $('#file_list').append(

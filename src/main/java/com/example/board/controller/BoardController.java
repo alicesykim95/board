@@ -1,5 +1,6 @@
 package com.example.board.controller;
 
+import com.example.board.dto.LikeDislikeDto;
 import com.example.board.service.BoardService;
 import com.example.board.service.CommentService;
 import com.example.board.service.FileService;
@@ -93,6 +94,19 @@ public class BoardController {
         mv.addObject("files", fv);
 
         return mv;
+    }
+
+    //좋아요 싫어요
+    @ResponseBody
+    @RequestMapping(value="/likeDislike", method = RequestMethod.POST)
+    public int likeDislike(LikeDislikeDto ldd, HttpServletRequest request) throws Exception{
+
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("userId");
+        ldd.setUserId(userId);
+        boardService.likeDislike(ldd);
+
+        return 1;
     }
 
 }

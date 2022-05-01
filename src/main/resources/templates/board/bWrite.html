@@ -44,7 +44,7 @@
             </div>
             <div class="file_container">
                 <button id="write_file_upload" onclick="fileClick()" type="button">파일추가</button>
-                <input type="file" multiple="multiple" id="write_hidden_file" onclick="fileAttach(this)" size="68" style="display: none;">
+                <input type="file" multiple="multiple" id="write_hidden_file" onchange="fileAttach(this)" size="68" style="display: none;">
                 <span style="font-size: 10px; color: #575757; margin-left: 10px; padding: 0;">첨부파일은 최대 <span style="color:#ec5454; ">10</span>개까지 등록이 가능합니다.</span>
             </div>
             <div class="file_list" id="file_list"></div>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -29,13 +30,15 @@ public class FileService {
 
         result.put("result", "ERROR");
         try {
-            if (multipartFile.size() > 0 && !multipartFile.get(0).getOriginalFilename().equals("")) {
+            if (multipartFile.size() > 0 && !Objects.equals(multipartFile.get(0).getOriginalFilename(), "")) {
 
                 for (MultipartFile file : multipartFile) {
                     String originName = file.getOriginalFilename();
                     String filePath = "C:\\file_repo/";
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss").withZone(ZoneOffset.UTC);
-                    String savedName = formatter + "_" + originName;
+                    LocalDateTime now = LocalDateTime.now();
+                    String formatNow = now.format(formatter);
+                    String savedName = formatNow + "_" + originName;
                     file.transferTo(new File(filePath + savedName));
 
                     result.put("fileOriginalName", originName);
@@ -91,7 +94,7 @@ public class FileService {
     }
 
     // 파일 다운로드
-    public List<FileVo> fileDownload(int fileNum)throws Exception {
+    public FileVo fileDownload(int fileNum)throws Exception {
         return fileMapper.fileDownload(fileNum);
     }
 }

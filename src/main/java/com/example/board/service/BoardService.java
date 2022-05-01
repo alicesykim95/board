@@ -1,5 +1,6 @@
 package com.example.board.service;
 
+import com.example.board.dto.LikeDislikeDto;
 import com.example.board.mapper.BoardMapper;
 import com.example.board.vo.BoardVo;
 import com.example.board.vo.Criteria;
@@ -55,6 +56,32 @@ public class BoardService {
     // 게시글 삭제
     public int deleteBoard(int boardNum) throws Exception {
         return boardMapper.deleteBoard(boardNum);
+    }
+
+    // 좋아요 싫어요
+    public void likeDislike(LikeDislikeDto ldd) throws Exception {
+
+
+        if (ldd.getLike() == 1){
+            ldd.setLikeDisLike("LIKE");
+        } else if(ldd.getLike() == -1) {
+            ldd.setLikeDisLike("DISLIKE");
+        }
+
+        String num = boardMapper.selectLikeInfo(ldd);
+
+        if (num == null) {
+            boardMapper.like(ldd);
+        } else {
+            if (num.equals(ldd.getLikeDisLike())) {
+                // 삭제 로직
+            } else {
+                // 좋아요가 있는데 싫어요오를 누른 경우
+            }
+        }
+        
+
+
     }
 
 

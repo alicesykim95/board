@@ -157,7 +157,6 @@ function commentUpdatePro(commentNum) {
 }
 
 // 댓글 삭제
-
 function commentDelete(commentNum) {
 
     $.ajax({
@@ -176,7 +175,6 @@ function commentDelete(commentNum) {
 }
 
 // 파일 다운로드
-
 function fileDownload() {
 
     $.ajax({
@@ -188,6 +186,24 @@ function fileDownload() {
         },
         error: function () {
             alert("다운로드에 실패하였습니다.");
+        }
+    });
+
+}
+
+// 좋아요 싫어요
+function like_dislike_action(likeNum) {
+
+    $.ajax({
+        url: '/likeDislike',
+        type: 'POST',
+        data: {likeNum: likeNum,
+                boardNum: document.getElementById("boardNum").value},
+        success: function() {
+            alert("성공하였습니다.")
+        },
+        error: function() {
+            alert("실패하였습니다.")
         }
     });
 

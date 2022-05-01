@@ -19,5 +19,5 @@ public interface FileMapper {
     List<FileVo> selectFile(int boardNum)throws Exception;
 
     // 파일 다운로드
-    List<FileVo> fileDownload(int fileNum)throws Exception;
+    FileVo fileDownload(int fileNum)throws Exception;
 }
