@@ -101,34 +101,34 @@
         WHERE board_num = #{boardNum}
     </update>
 
-    <!-- 좋아요 -->
-    <insert id="like" parameterType="com.example.board.dto.LikeDislikeDto.java">
-        INSERT INTO like_dislike_ex (
-                                     ${likeDisLike},
-                                     board_num,
-                                     user_id)
-        VALUES (#{like},
-                #{boardNum},
-                 #{userId})
-    </insert>
+<!--    &lt;!&ndash; 좋아요 &ndash;&gt;-->
+<!--    <insert id="like" parameterType="com.example.board.dto.LikeDislikeDto.java">-->
+<!--        INSERT INTO like_dislike_ex (-->
+<!--                                     ${likeDisLike},-->
+<!--                                     board_num,-->
+<!--                                     user_id)-->
+<!--        VALUES (#{like},-->
+<!--                #{boardNum},-->
+<!--                 #{userId})-->
+<!--    </insert>-->
 
-    <!-- 싫어요 -->
-    <insert id="dislike" parameterType="com.example.board.dto.LikeDislikeDto.java">
-        INSERT INTO like_dislike_ex (
-            dislike,
-            board_num,
-            user_id)
-        VALUES (#{dislike},
-                #{boardNum},
-                #{userId})
-    </insert>
+<!--    &lt;!&ndash; 싫어요 &ndash;&gt;-->
+<!--    <insert id="dislike" parameterType="com.example.board.dto.LikeDislikeDto.java">-->
+<!--        INSERT INTO like_dislike_ex (-->
+<!--            dislike,-->
+<!--            board_num,-->
+<!--            user_id)-->
+<!--        VALUES (#{dislike},-->
+<!--                #{boardNum},-->
+<!--                #{userId})-->
+<!--    </insert>-->
 
 
-    <select id="selectLikeInfo" parameterType="com.example.board.dto.LikeDislikeDto">
-        SELECT ${likeDisLike}
-        FROM like_dislike_ex
-        WHERE USER_ID = #{userId}
-        AND BOARD_NUM = #{boardNum}
-    </select>
+<!--    <select id="selectLikeInfo" parameterType="com.example.board.dto.LikeDislikeDto">-->
+<!--        SELECT ${likeDisLike}-->
+<!--        FROM like_dislike_ex-->
+<!--        WHERE USER_ID = #{userId}-->
+<!--        AND BOARD_NUM = #{boardNum}-->
+<!--    </select>-->
 
 </mapper>

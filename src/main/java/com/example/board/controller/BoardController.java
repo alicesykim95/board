@@ -97,16 +97,16 @@ public class BoardController {
     }
 
     //좋아요 싫어요
-    @ResponseBody
-    @RequestMapping(value="/likeDislike", method = RequestMethod.POST)
-    public int likeDislike(LikeDislikeDto ldd, HttpServletRequest request) throws Exception{
-
-        HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-        ldd.setUserId(userId);
-        boardService.likeDislike(ldd);
-
-        return 1;
-    }
+//    @ResponseBody
+//    @RequestMapping(value="/likeDislike", method = RequestMethod.POST)
+//    public int likeDislike(LikeDislikeDto ldd, HttpServletRequest request) throws Exception{
+//
+//        HttpSession session = request.getSession();
+//        String userId = (String) session.getAttribute("userId");
+//        ldd.setUserId(userId);
+//        boardService.likeDislike(ldd);
+//
+//        return 1;
+//    }
 
 }
