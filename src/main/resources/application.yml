@@ -19,7 +19,7 @@ spring:
     cache: false
 
 server:
-  port: 3306
+  port: 8085
 
 mybatis:
   type-aliases-package: com.example.board.vo

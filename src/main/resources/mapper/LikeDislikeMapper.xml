@@ -2,5 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.board.mapper.LikeDislikeMapper">
+    <!-- 좋아요 클릭시 테이블에 정보 입력 -->
+    <insert id="likeSave" parameterType="LikeDislikeVo">
+        INSERT INTO like_dislike_ex(
+                                    board_num,
+                                    user_id,
+                                    input_time
+                                    )
+        VALUES(
+               #{boardNum},
+               #{userId},
+               now()
+              )
+    </insert>
 
+    <!-- 좋아요 추천수 추가 -->
+    <update id="likeUpdate" parameterType="LikeDislikeVo">
+        UPDATE like_dislike_ex
+        SET like = like + 1
+        WHERE board_num = #{boardNum} AND user_id = #{userId}
+    </update>
+
+    <!-- 좋아요 추천수 삭제 -->
+    <delete id="likeDelete" parameterType="LikeDislikeVo">
+        DELETE FROM like_dislike_ex
+        WHERE board_num = #{boardNum} AND user_id = #{userId}
+    </delete>
+
+    <!-- 추천수 가져오기 -->
+    <select id="likeCount" parameterType="LikeDislikeVo" resultType="int">
+        SELECT COUNT (like)
+        FROM like_dislike_ex
+        WHERE board_num = #{boardNum}
+    </select>
 </mapper>
