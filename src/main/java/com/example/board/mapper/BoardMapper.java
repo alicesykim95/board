@@ -40,12 +40,4 @@ public interface BoardMapper {
     // 게시글 조회수
     void updateHitCount(int boardNum) throws Exception;
 
-    // 좋아요
-//    void like(LikeDislikeDto ldd) throws Exception;
-//
-//    // 싫어요
-//    void dislike(LikeDislikeDto ldd) throws Exception;
-//
-//    String selectLikeInfo(LikeDislikeDto ldd) throws Exception;
-
 }
