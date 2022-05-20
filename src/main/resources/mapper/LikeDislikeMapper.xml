@@ -24,15 +24,16 @@
     </update>
 
     <!-- 좋아요 추천수 삭제 -->
-    <delete id="likeDelete" parameterType="LikeDislikeVo">
+    <update id="likeDelete" parameterType="LikeDislikeVo">
         DELETE FROM like_dislike_ex
+        SET like = like - 1
         WHERE board_num = #{boardNum} AND user_id = #{userId}
-    </delete>
+    </update>
 
     <!-- 추천수 가져오기 -->
     <select id="likeCount" parameterType="LikeDislikeVo" resultType="int">
         SELECT COUNT (like)
         FROM like_dislike_ex
-        WHERE board_num = #{boardNum}
+        WHERE board_num = #{boardNum} AND user_id = #{userId}
     </select>
 </mapper>
