@@ -63,9 +63,10 @@
                     </th:block>
                 </div>
             </div>
-            <div>
-                <button type="button" class="detail_like" onclick="like_dislike_action(1)">LIKE</button>
-                <button type="button" class="detail_dislike" onclick="like_dislike_action(-1)">DISLIKE</button>
+            <div class="like_dislike_container">
+                <div th:if="${like == 0}">
+                    <img src="../images/KakaoTalk_20220519_213453200.png">
+                </div>
             </div>
         </div>
 

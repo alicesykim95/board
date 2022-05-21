@@ -25,6 +25,9 @@ public class LikeDislikeController {
         String userId = (String) session.getAttribute("userId");
         ldv.setUserId(userId);
 
+        if (likeDislikeService.likeInfoUpdate(ldv) == 0){
+        }
+
         return likeDislikeService.likeInfoUpdate(ldv);
     }
 }

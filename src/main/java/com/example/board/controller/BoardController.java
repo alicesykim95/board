@@ -3,10 +3,8 @@ package com.example.board.controller;
 import com.example.board.service.BoardService;
 import com.example.board.service.CommentService;
 import com.example.board.service.FileService;
-import com.example.board.vo.BoardVo;
-import com.example.board.vo.Criteria;
-import com.example.board.vo.FileVo;
-import com.example.board.vo.Paging;
+import com.example.board.service.LikeDislikeService;
+import com.example.board.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +22,7 @@ public class BoardController {
     private final BoardService boardService;
     private final CommentService commentService;
     private final FileService fileService;
+    private final LikeDislikeService likeDislikeService;
 
     // 게시글 전체 리스트 페이지
     @RequestMapping(value = {"/boardListPage", "/"}, method = RequestMethod.GET)
@@ -70,7 +69,7 @@ public class BoardController {
 
     // 게시글 상세 페이지: 게시글 수정 및 삭제 + 댓글 리스트 수정 및 삭제
     @RequestMapping(value = "/{boardNum}", method = RequestMethod.GET)
-    public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum, HttpServletRequest request) throws Exception {
+    public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum, HttpServletRequest request, LikeDislikeVo ldv) throws Exception {
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
@@ -81,7 +80,9 @@ public class BoardController {
 
         List<FileVo> fv = fileService.selectFile(boardNum);
 
-        System.out.println("FILE=================" + fv);
+        ldv.setUserId(userId);
+        ldv.setBoardNum(boardNum);
+        int like = likeDislikeService.likeInfoUpdate(ldv);
 
         // 게시판 상세 내용
         mv.addObject("board", board);
@@ -91,6 +92,8 @@ public class BoardController {
         mv.addObject("userId", userId);
         // 파일 조회 내용
         mv.addObject("files", fv);
+        // 좋아요 싫어요
+        mv.addObject("like", like);
 
         return mv;
     }
