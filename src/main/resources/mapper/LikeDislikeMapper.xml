@@ -19,21 +19,28 @@
     <!-- 좋아요 추천수 추가 -->
     <update id="likeUpdate" parameterType="LikeDislikeVo">
         UPDATE like_dislike_ex
-        SET like = like + 1
+        SET like_btn = likeBtn + 1
         WHERE board_num = #{boardNum} AND user_id = #{userId}
     </update>
 
     <!-- 좋아요 추천수 삭제 -->
     <update id="likeDelete" parameterType="LikeDislikeVo">
         DELETE FROM like_dislike_ex
-        SET like = like - 1
+        SET like_btn = likeBtn - 1
         WHERE board_num = #{boardNum} AND user_id = #{userId}
     </update>
 
-    <!-- 추천수 가져오기 -->
+    <!-- likeCheck: 추천수 가져오기 -->
     <select id="likeCount" parameterType="LikeDislikeVo" resultType="int">
-        SELECT COUNT (like)
+        SELECT COUNT (*)
         FROM like_dislike_ex
         WHERE board_num = #{boardNum} AND user_id = #{userId}
+    </select>
+
+    <!-- likeTotalCheck: 추천수 가져오기 -->
+    <select id="likeTotalCount" parameterType="LikeDislikeVo" resultType="int">
+        SELECT like_btn
+        FROM like_dislike_ex
+        WHERE board_num = #{boardNum}
     </select>
 </mapper>

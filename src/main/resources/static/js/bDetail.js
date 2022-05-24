@@ -191,5 +191,27 @@ function fileDownload() {
 
 }
 
-// 좋아요 싫어요
+// 좋아요
+function like(){
+
+    $.ajax({
+        url: '/likeInfoUpdate',
+        type: 'POST',
+        date: {boardNum: document.getElementById("boardNum").value},
+        success: function(data){
+            if (data.likeCheck == 0){
+                $("#likeBtn").attributes("src", "../images/like_btn_click.png");
+                $("#likeTotalCount").empty();
+                $("#likeTotalCount").append(data.likeTotalCount);
+            }
+            else if (data.likeCheck == 1){
+                $("#likeBtn").attributes("src", "../images/like_btn.png");
+                $("#likeTotalCount").empty();
+                $("#likeTotalCount").append(data.likeTotalCount);
+            }
+        }
+
+    })
+}
+
 

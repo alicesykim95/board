@@ -82,7 +82,8 @@ public class BoardController {
 
         ldv.setUserId(userId);
         ldv.setBoardNum(boardNum);
-        int like = likeDislikeService.likeInfoUpdate(ldv);
+        int likeCount = likeDislikeService.likeCount(ldv);
+        int likeTotalCount = likeDislikeService.likeTotalCount(ldv);
 
         // 게시판 상세 내용
         mv.addObject("board", board);
@@ -92,8 +93,10 @@ public class BoardController {
         mv.addObject("userId", userId);
         // 파일 조회 내용
         mv.addObject("files", fv);
-        // 좋아요 싫어요
-        mv.addObject("like", like);
+        // 좋아요 Check
+        mv.addObject("likeCount", likeCount);
+        // 좋아요 Total Count
+        mv.addObject("likeTotalCount", likeTotalCount);
 
         return mv;
     }

@@ -63,10 +63,17 @@
                     </th:block>
                 </div>
             </div>
-            <div class="like_dislike_container">
-                <div th:if="${like == 0}">
-                    <img src="../images/KakaoTalk_20220519_213453200.png">
+            <div class="like_dislike_container wide_width">
+                <div class="like_container">
+                    <th:block th:if="${likeCount} == 0 or ${likeCount} == null">
+                        <a href="#" onchange="like()"><img src="../images/like_btn.png" id="likeBtn" style="width: 65px; height: 65px; cursor: pointer;"></a>
+                    </th:block>
+                    <th:block th:unless="${likeCount} == 0 or ${likeCount} == null">
+                        <a href="#" onchange="like()"><img src="../images/likes_btn_click.png" alt="dislikes_btn" id="likeClickBtn"  style="width: 65px; height: 65px; cursor: pointer;"></a>
+                    </th:block>
+                    <div th:text="${likeTotalCount}" class="like_total_count" id="likeTotalCount"></div>
                 </div>
+
             </div>
         </div>
 
