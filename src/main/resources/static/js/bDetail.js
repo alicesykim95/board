@@ -197,18 +197,21 @@ function like(){
     $.ajax({
         url: '/likeInfoUpdate',
         type: 'POST',
-        date: {boardNum: document.getElementById("boardNum").value},
+        data: {boardNum: boardNum},
         success: function(data){
             if (data.likeCheck == 0){
-                $("#likeBtn").attributes("src", "../images/like_btn_click.png");
+                $("#likeBtn").attr("src", "../images/like_btn_click.png");
                 $("#likeTotalCount").empty();
                 $("#likeTotalCount").append(data.likeTotalCount);
             }
             else if (data.likeCheck == 1){
-                $("#likeBtn").attributes("src", "../images/like_btn.png");
+                $("#likeBtn").attr("src", "../images/like_btn.png");
                 $("#likeTotalCount").empty();
                 $("#likeTotalCount").append(data.likeTotalCount);
             }
+        },
+        error: function(){
+            alert("실패하였습니다.")
         }
 
     })

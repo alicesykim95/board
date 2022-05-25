@@ -64,12 +64,12 @@
                 </div>
             </div>
             <div class="like_dislike_container wide_width">
-                <div class="like_container">
+                <div class="like_container" id="like_container">
                     <th:block th:if="${likeCount} == 0 or ${likeCount} == null">
-                        <a href="#" onchange="like()"><img src="../images/like_btn.png" id="likeBtn" style="width: 65px; height: 65px; cursor: pointer;"></a>
+                        <img src="../images/like_btn.png" id="likeBtn" onclick="like()"  style="width: 65px; height: 65px; cursor: pointer;">
                     </th:block>
                     <th:block th:unless="${likeCount} == 0 or ${likeCount} == null">
-                        <a href="#" onchange="like()"><img src="../images/likes_btn_click.png" alt="dislikes_btn" id="likeClickBtn"  style="width: 65px; height: 65px; cursor: pointer;"></a>
+                        <img src="../images/like_btn_click.png" id="likeBtn" onclick="like()" style="width: 65px; height: 65px; cursor: pointer;">
                     </th:block>
                     <div th:text="${likeTotalCount}" class="like_total_count" id="likeTotalCount"></div>
                 </div>

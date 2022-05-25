@@ -8,5 +8,4 @@ public class LikeDislikeDto {
     private int dislikeBtn;
     private int boardNum;
     private String userId;
-    private String likeDisLike;
 }
