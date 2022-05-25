@@ -17,12 +17,12 @@ public class LikeDislikeController {
 
     private final LikeDislikeService likeDislikeService;
 
+    // 좋아요 처리
     @ResponseBody
     @RequestMapping(value = "/likeInfoUpdate", method = RequestMethod.POST)
     public Map<String, Object> likeInfoUpdate(HttpServletRequest request, LikeDislikeVo ldv, int boardNum) throws Exception{
 
-        Map<String, Object> likeCheckMap = new HashMap<>();
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> likeResult = new HashMap<>();
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
@@ -31,17 +31,50 @@ public class LikeDislikeController {
 
         int likeCheck = 0;
 
-        if (likeDislikeService.likeCount(ldv) == 0){
-            likeDislikeService.likeSave(ldv);
+        if (likeDislikeService.likeCount(ldv) == 2){
+            likeDislikeService.likeDislikeSave(ldv);
             likeDislikeService.likeUpdate(ldv);
         } else if(likeDislikeService.likeCount(ldv) == 1){
             likeDislikeService.likeDelete(ldv);
             likeCheck = 1;
+        } else if (likeDislikeService.likeCount(ldv) == 0){
+            likeDislikeService.likeUpdate(ldv);
         }
 
-        result.put("likeCheck", likeCheck);
-        result.put("likeTotalCount", likeDislikeService.likeTotalCount(ldv));
+        likeResult.put("likeCheck", likeCheck);
+        likeResult.put("likeTotalCount", likeDislikeService.likeTotalCount(ldv));
 
-        return result;
+        return likeResult;
     }
+
+    // 싫어요 처리
+    @ResponseBody
+    @RequestMapping(value = "/dislikeInfoUpdate", method = RequestMethod.POST)
+    public Map<String, Object> dislikeInfoUpdate(HttpServletRequest request, LikeDislikeVo ldv, int boardNum) throws Exception{
+
+        Map<String, Object> dislikeResult = new HashMap<>();
+
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("userId");
+        ldv.setUserId(userId);
+        ldv.setBoardNum(boardNum);
+
+        int dislikeCheck = 0;
+
+       if (likeDislikeService.dislikeCount(ldv) == 2){
+            likeDislikeService.likeDislikeSave(ldv);
+            likeDislikeService.dislikeUpdate(ldv);
+        } else if(likeDislikeService.dislikeCount(ldv) == 1){
+            likeDislikeService.dislikeDelete(ldv);
+            dislikeCheck = 1;
+        } else if (likeDislikeService.dislikeCount(ldv) == 0){
+            likeDislikeService.dislikeUpdate(ldv);
+        }
+
+        dislikeResult.put("dislikeCheck", dislikeCheck);
+        dislikeResult.put("dislikeTotalCount", likeDislikeService.dislikeTotalCount(ldv));
+
+        return dislikeResult;
+    }
+
 }

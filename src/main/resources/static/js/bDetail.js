@@ -217,4 +217,29 @@ function like(){
     })
 }
 
+// 싫어요
+function dislike(){
+
+    $.ajax({
+        url: '/dislikeInfoUpdate',
+        type: 'POST',
+        data: {boardNum: boardNum},
+        success: function(data){
+            if (data.dislikeCheck == 0){
+                $("#dislikeBtn").attr("src", "../images/dislike_btn_click.png");
+                $("#dislikeTotalCount").empty();
+                $("#dislikeTotalCount").append(data.dislikeTotalCount);
+            }
+            else if (data.dislikeCheck == 1){
+                $("#dislikeBtn").attr("src", "../images/dislike_btn.png");
+                $("#dislikeTotalCount").empty();
+                $("#dislikeTotalCount").append(data.dislikeTotalCount);
+            }
+        },
+        error: function(){
+            alert("실패하였습니다.")
+        }
+
+    })
+}
 

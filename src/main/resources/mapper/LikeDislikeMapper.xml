@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.board.mapper.LikeDislikeMapper">
-    <!-- 좋아요 클릭시 테이블에 정보 입력 -->
-    <insert id="likeSave" parameterType="LikeDislikeVo">
+    <!-- 좋아요 및 싫어요 클릭시 테이블에 정보 입력 -->
+    <insert id="likeDislikeSave" parameterType="LikeDislikeVo">
         INSERT INTO like_dislike_ex(
                                     board_num,
                                     user_id,
@@ -16,31 +16,63 @@
               )
     </insert>
 
-    <!-- 좋아요 추천수 추가 -->
+    <!-- 좋아요 추가 -->
     <update id="likeUpdate" parameterType="LikeDislikeVo">
         UPDATE like_dislike_ex
         SET like_btn = like_btn + 1
         WHERE board_num = #{boardNum} AND user_id = #{userId}
     </update>
 
-    <!-- 좋아요 추천수 삭제 -->
+    <!-- 좋아요 삭제 -->
     <update id="likeDelete" parameterType="LikeDislikeVo">
         UPDATE like_dislike_ex
         SET like_btn = like_btn - 1
         WHERE board_num = #{boardNum} AND user_id = #{userId}
     </update>
 
-    <!-- likeCheck: 추천수 가져오기 -->
+    <!-- likeCheck: 좋아요 체크-->
     <select id="likeCount" parameterType="LikeDislikeVo" resultType="int">
-        SELECT COUNT (*)
-        FROM like_dislike_ex
+        SELECT IFNULL(MAX(a.like_btn), 2) AS likeDuplicateCheck
+        FROM like_dislike_ex a
         WHERE board_num = #{boardNum} AND user_id = #{userId}
     </select>
 
-    <!-- likeTotalCheck: 추천수 가져오기 -->
+    <!-- likeTotalCheck: 좋아요 전체 가져오기 -->
     <select id="likeTotalCount" parameterType="LikeDislikeVo" resultType="int">
-        SELECT COUNT(like_btn) as likeTotalCount
+        SELECT COUNT(like_btn) AS likeCnt
         FROM like_dislike_ex
         WHERE board_num = #{boardNum} AND like_btn = 1
     </select>
+
+    <!-- 싫어요 추가 -->
+    <update id="dislikeUpdate" parameterType="LikeDislikeVo">
+        UPDATE like_dislike_ex
+        SET dislike_btn = dislike_btn + 1
+        WHERE board_num = #{boardNum} AND user_id = #{userId}
+    </update>
+
+    <!-- 싫어요 삭제 -->
+    <update id="dislikeDelete" parameterType="LikeDislikeVo">
+        UPDATE like_dislike_ex
+        SET dislike_btn = dislike_btn - 1
+        WHERE board_num = #{boardNum} AND user_id = #{userId}
+    </update>
+
+    <!-- dislikeCheck: 싫어요 체크 -->
+    <select id="dislikeCount" parameterType="LikeDislikeVo" resultType="int">
+        SELECT IFNULL(MAX(a.dislike_btn), 2) AS dislikeDuplicateCheck
+        FROM like_dislike_ex a
+        WHERE board_num = #{boardNum} AND user_id = #{userId}
+    </select>
+
+    <!-- dislikeTotalCheck: 싫어요 전체 가져오기 -->
+    <select id="dislikeTotalCount" parameterType="LikeDislikeVo" resultType="int">
+        SELECT COUNT(dislike_btn) AS dislikeCnt
+        FROM like_dislike_ex
+        WHERE board_num = #{boardNum} AND dislike_btn = 1
+    </select>
+
+
+
+
 </mapper>

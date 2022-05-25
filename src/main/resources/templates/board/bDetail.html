@@ -51,7 +51,7 @@
                 <label class="head_title">내용</label>
                 <textarea class="detail_text" id="content" name="content" th:text="${board.content}"></textarea>
             </div>
-            <div class="detail_head">
+            <div class="detail_head ">
                 <label class="head_title">다운로드</label>
                 <div>
                     <th:block th:each="file : ${files}">
@@ -65,15 +65,23 @@
             </div>
             <div class="like_dislike_container wide_width">
                 <div class="like_container" id="like_container">
-                    <th:block th:if="${likeCount} == 0 or ${likeCount} == null">
+                    <th:block th:if="${likeDislike.likeCheck} == 0 or ${likeDislike.likeCheck} == 2">
                         <img src="../images/like_btn.png" id="likeBtn" onclick="like()"  style="width: 65px; height: 65px; cursor: pointer;">
                     </th:block>
-                    <th:block th:unless="${likeCount} == 0 or ${likeCount} == null">
+                    <th:block th:unless="${likeDislike.likeCheck} == 0 or ${likeDislike.likeCheck} == 2">
                         <img src="../images/like_btn_click.png" id="likeBtn" onclick="like()" style="width: 65px; height: 65px; cursor: pointer;">
                     </th:block>
-                    <div th:text="${likeTotalCount}" class="like_total_count" id="likeTotalCount"></div>
+                    <div th:text="${likeDislike.likeCnt}" class="like_total_count" id="likeTotalCount"></div>
                 </div>
-
+                <div class="dislike_container" id="dislike_container">
+                    <th:block th:if="${likeDislike.dislikeCheck} == 0 or ${likeDislike.dislikeCheck} == 2">
+                        <img src="../images/dislike_btn.png" id="dislikeBtn" onclick="dislike()"  style="width: 65px; height: 65px; cursor: pointer;">
+                    </th:block>
+                    <th:block th:unless="${likeDislike.dislikeCheck} == 0 or ${likeDislike.dislikeCheck} == 2">
+                        <img src="../images/dislike_btn_click.png" id="dislikeBtn" onclick="dislike()" style="width: 65px; height: 65px; cursor: pointer;">
+                    </th:block>
+                    <div th:text="${likeDislike.dislikeCnt}" class="dislike_total_count" id="dislikeTotalCount"></div>
+                </div>
             </div>
         </div>
 

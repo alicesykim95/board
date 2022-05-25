@@ -1,5 +1,6 @@
 package com.example.board.controller;
 
+import com.example.board.dto.LikeDislikeDto;
 import com.example.board.service.BoardService;
 import com.example.board.service.CommentService;
 import com.example.board.service.FileService;
@@ -69,7 +70,7 @@ public class BoardController {
 
     // 게시글 상세 페이지: 게시글 수정 및 삭제 + 댓글 리스트 수정 및 삭제
     @RequestMapping(value = "/{boardNum}", method = RequestMethod.GET)
-    public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum, HttpServletRequest request, LikeDislikeVo ldv) throws Exception {
+    public ModelAndView openBoardDetail(@PathVariable("boardNum") int boardNum, HttpServletRequest request, LikeDislikeVo ldv, LikeDislikeDto ldd) throws Exception {
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
@@ -82,8 +83,11 @@ public class BoardController {
 
         ldv.setUserId(userId);
         ldv.setBoardNum(boardNum);
-        int likeCount = likeDislikeService.likeCount(ldv);
-        int likeTotalCount = likeDislikeService.likeTotalCount(ldv);
+
+        ldd.setLikeCheck(likeDislikeService.likeCount(ldv));
+        ldd.setLikeCnt(likeDislikeService.likeTotalCount(ldv));
+        ldd.setDislikeCheck(likeDislikeService.dislikeCount(ldv));
+        ldd.setDislikeCnt(likeDislikeService.dislikeTotalCount(ldv));
 
         // 게시판 상세 내용
         mv.addObject("board", board);
@@ -93,10 +97,8 @@ public class BoardController {
         mv.addObject("userId", userId);
         // 파일 조회 내용
         mv.addObject("files", fv);
-        // 좋아요 Check
-        mv.addObject("likeCount", likeCount);
-        // 좋아요 Total Count
-        mv.addObject("likeTotalCount", likeTotalCount);
+        // 좋아요 싫어요
+        mv.addObject("likeDislike", ldd);
 
         return mv;
     }

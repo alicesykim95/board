@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class LikeDislikeDto {
-    private int likeBtn;
-    private int dislikeBtn;
-    private int boardNum;
-    private String userId;
+    private int likeCnt;
+    private int likeCheck;
+    private int dislikeCnt;
+    private int dislikeCheck;
 }
