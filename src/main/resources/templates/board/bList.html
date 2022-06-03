@@ -17,6 +17,14 @@
 <th:block layout:fragment="content">
     <div class="container">
         <h2 class="title">게시글 목록</h2>
+        <div class="search_container">
+            <div class="search_btn search">
+                <img src="../images/search_icon.png" id="search" onclick="search()" alt="search_icon">
+            </div>
+            <div class="search_text search">
+                <input type="text" name="keyword" id="keyword">
+            </div>
+        </div>
         <table class="board_list">
             <colgroup>
                 <col width="5%"/>
