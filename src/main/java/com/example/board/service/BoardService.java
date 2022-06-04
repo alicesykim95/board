@@ -25,8 +25,8 @@ public class BoardService {
     }
 
     // 게시글 전체 리스트 갯수 for 페이징
-    public int totalRecordCount() throws Exception {
-        return boardMapper.totalRecordCount();
+    public int totalRecordCount(Criteria criteria) throws Exception {
+        return boardMapper.totalRecordCount(criteria);
     }
 
     // 게시글 전체 리스트 체크 박스 삭제

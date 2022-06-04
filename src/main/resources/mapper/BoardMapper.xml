@@ -12,12 +12,17 @@
                hit_cnt,
                comment_count
         FROM board_ex
+        <if test="keyword != null">
+            where title like concat('%',#{keyword},'%')
+            OR content like concat('%', #{keyword}, '%')
+            OR writer like concat('%', #{keyword}, '%')
+        </if>
         ORDER BY board_num DESC
             LIMIT #{startPage}, #{perPageNum}
     </select>
 
     <!-- 게시글 전체 리스트 조회 for RestApi -->
-    <select id="selectBoardListNone" resultType="BoardVo">
+    <select id="getSearchList" parameterType="Criteria" resultType="BoardVo">
         SELECT board_num,
                writer,
                title,
@@ -29,9 +34,14 @@
     </select>
 
     <!-- 게시글 전체 갯수 조회 for 페이징 -->
-    <select id="totalRecordCount" resultType="int">
+    <select id="totalRecordCount" parameterType="Criteria" resultType="int">
         SELECT COUNT(*)
-        FROM board_ex;
+        FROM board_ex
+        <if test="keyword != null">
+            where title like concat('%',#{keyword},'%')
+            OR content like concat('%', #{keyword}, '%')
+            OR writer like concat('%', #{keyword}, '%')
+        </if>
     </select>
 
     <!-- 게시글 전체 리스트 체크박스 삭제-->

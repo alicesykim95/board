@@ -26,13 +26,7 @@ public class BoardRestController {
     @RequestMapping(value = "/board", method = RequestMethod.POST)
     public Map<String, Object> addBoard(@RequestBody Map<String, Object> params) throws Exception {
 
-        boardService.insertBoard(params);
-
-        // FileVo fv = new FileVo();
-        // fv.setBoardNum(boardNum);
-        // System.out.println(fv.getBoardNum());
-        // fv.setFileNum(bdv.getFileNum());
-
+         boardService.insertBoard(params);
          fileService.insertBoardNum(params);
          return params;
     }

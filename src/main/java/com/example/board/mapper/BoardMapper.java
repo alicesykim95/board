@@ -17,7 +17,7 @@ public interface BoardMapper {
     List<BoardVo> selectBoardListNone() throws Exception;
 
     // 게시글 전체 리스트 갯수 for 페이징
-    int totalRecordCount() throws Exception;
+    int totalRecordCount(Criteria criteria) throws Exception;
 
     // 게시글 전체 리스트 체크박스 삭제
     void deleteBoardList(int boardNum) throws Exception;

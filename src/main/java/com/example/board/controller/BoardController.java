@@ -27,15 +27,23 @@ public class BoardController {
 
     // 게시글 전체 리스트 페이지
     @RequestMapping(value = {"/boardListPage", "/"}, method = RequestMethod.GET)
-    public String openBoardList(Criteria criteria, Model model) throws Exception {
+    public String openBoardList(Criteria criteria, Model model, @RequestParam(value = "keyword", required = false) String keyword) throws Exception {
 
-        int boardtotalCount = boardService.totalRecordCount();
+        criteria.setKeyword(keyword);
+        int boardtotalCount = boardService.totalRecordCount(criteria);
         Paging paging = new Paging(criteria, boardtotalCount);
+
 
         model.addAttribute("paging", paging);
         model.addAttribute("list", boardService.selectBoardList(criteria));
 
         return "board/bList";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getSearchList", method = RequestMethod.POST)
+    public List<BoardVo> getSearchList(Criteria criteria) throws Exception {
+        return boardService.selectBoardList(criteria);
     }
 
     // 게시글 전체 리스트 페이지: 체크박스 선택 삭제

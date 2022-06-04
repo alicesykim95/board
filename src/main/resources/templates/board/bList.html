@@ -17,14 +17,14 @@
 <th:block layout:fragment="content">
     <div class="container">
         <h2 class="title">게시글 목록</h2>
-        <div class="search_container">
+        <form class="search_container">
             <div class="search_btn search">
-                <img src="../images/search_icon.png" id="search" onclick="search()" alt="search_icon">
+                <input type="submit" name="search_submit" id="search_submit"><img src="../images/search_icon.png" id="search" alt="search_icon"></input>
             </div>
             <div class="search_text search">
-                <input type="text" name="keyword" id="keyword">
+                <input type="text" name="keyword" id="keyword" placeholder="Search">
             </div>
-        </div>
+        </form>
         <table class="board_list">
             <colgroup>
                 <col width="5%"/>
@@ -45,7 +45,7 @@
                 <th scope="col" class="list_th">Hit</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="table_body_container">
             <tr class="table_body" th:each="list:${list}">
                 <td class="list_td"><input type="checkbox" class="rowCheck" name="rowCheck" th:value="${list.boardNum}"
                                            onclick="rowCheck()"/></td>

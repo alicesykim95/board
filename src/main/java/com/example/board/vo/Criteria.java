@@ -10,6 +10,8 @@ public class Criteria {
     private int perPageNum;
     // 화면 하단에 출력할 페이지 사이즈
     private int pageSize;
+    // 검색 키워드
+    private String keyword;
 
     public Criteria() {
         this.currentPageNum = 1;
