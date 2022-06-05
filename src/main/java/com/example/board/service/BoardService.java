@@ -5,6 +5,7 @@ import com.example.board.vo.BoardVo;
 import com.example.board.vo.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Map;
 
@@ -42,8 +43,7 @@ public class BoardService {
     // 게시글 상세
     public BoardVo getBoardDetail(int boardNum) throws Exception {
         boardMapper.updateHitCount(boardNum);
-        BoardVo board = boardMapper.getBoardDetail(boardNum);
-        return board;
+        return boardMapper.getBoardDetail(boardNum);
     }
 
     // 게시글 수정

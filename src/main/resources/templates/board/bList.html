@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="http://thymeleaf.org"
-      :layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}"
+<html lang="ko" xmlns xmlns:th="http://www.w3.org/1999/xhtml" :th="https://thymeleaf.org"
+      :layout="https://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -17,12 +17,12 @@
 <th:block layout:fragment="content">
     <div class="container">
         <h2 class="title">게시글 목록</h2>
-        <form class="search_container">
+        <form class="search_container" action="/boardListPage" method="GET">
             <div class="search_btn search">
-                <input type="submit" name="search_submit" id="search_submit"><img src="../images/search_icon.png" id="search" alt="search_icon"></input>
+                <button><img src="../images/search_icon.png" id="search" alt="search_icon"></button>
             </div>
             <div class="search_text search">
-                <input type="text" name="keyword" id="keyword" placeholder="Search">
+                <input type="text" name="keyword" id="keyword" placeholder="Search" th:text="${keyword}">
             </div>
         </form>
         <table class="board_list">
@@ -68,7 +68,7 @@
             <!--이전 페이지 버튼-->
             <div th:if="${paging.hasPreviousPage}" class="page_class">
                 <a class="page_link"
-                   th:href="@{/boardListPage?currentPageNum={page} (page=${paging.firstPage}-1)}"
+                   th:href="@{/boardListPage?currentPageNum={page}&keyword={keyword} (page=${paging.firstPage}-1, keyword=${keyword})}"
                    aria-label="Next">
                     <span aria-hidden="true" class="page_btn_previous page_btn">PREV</span>
                 </a>
@@ -77,9 +77,9 @@
             <!--10개 페이지 버튼 로딩-->
             <th:block th:with="start=${paging.firstPage}, end=${paging.lastPage}">
                 <div class="page_class" th:with="start=${paging.firstPage}, end=${paging.lastPage}"
-                    th:each="pageButton : ${#numbers.sequence(paging.firstPage, paging.lastPage)}">
+                     th:each="pageButton : ${#numbers.sequence(paging.firstPage, paging.lastPage)}">
                     <a class="page_link page_number"
-                       th:href="@{/boardListPage?currentPageNum={page} (page=${pageButton})}"
+                       th:href="@{/boardListPage?currentPageNum={page}&keyword={keyword} (page=${pageButton}, keyword=${keyword})}"
                        th:text="${pageButton}"></a>
                 </div>
             </th:block>
@@ -87,7 +87,7 @@
             <!--다음 페이지 버튼-->
             <div th:if="${paging.hasNextPage}" class="page_class">
                 <a class="page_link"
-                   th:href="@{/boardListPage?currentPageNum={page} (page=${paging.lastPage}+1)}"
+                   th:href="@{/boardListPage?currentPageNum={page}&keyword={keyword} (page=${paging.lastPage}+1, keyword=${keyword})}"
                    aria-label="Next">
                     <span aria-hidden="true" class="page_btn">NEXT</span>
                 </a>

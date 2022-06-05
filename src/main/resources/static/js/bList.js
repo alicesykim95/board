@@ -36,7 +36,7 @@ function deleteBoardList(){
         }
     }
 
-    if(boardCheckList == ""){
+    if(boardCheckList === ""){
         alert("삭제할 항목을 선택해주세요.");
         return false;
     }
@@ -55,35 +55,3 @@ function deleteBoardList(){
         }
     });
 }
-
-// 검색
-// function search() {
-//
-//     const keyword = $("#keyword").val();
-//
-//     $.ajax({
-//         url: '/getSearchList',
-//         type: 'POST',
-//         contentType: 'application/json',
-//         data: {keyword: keyword},
-//         success: function(result){
-//             console.log(result);
-//             $("#table_body_container").empty();
-//             let html = "";
-//             $.each(result, function(idx, list){
-//                 html += '<tr>';
-//                 html += '<td class="list_td"><input type="checkbox" class="rowCheck" name="rowCheck" onClick="rowCheck()/></td>';
-//                 html += '<td class="list_td list_td_no">"+ list.boardNum +"</td>';
-//                 html += '<td class="list_td list_title"><a href="/ '+list.boardNum +'">' + list.title + '<small class="board_list_comment_count">' + list.commentCount + ' </small></a></td>';
-//                 html += '<td class="list_td">' + list.writer + '</td>';
-//                 html += '<td class="list_td">' + list.createdTime + '</td>';
-//                 html += '<td class="list_td">' + list.hitCnt + '</td>';
-//                 html += '<tr>';
-//             });
-//             $("#table_body_container").append(html);
-//         },
-//         error: function (){
-//             alert("실패하였습니다.");
-//         }
-//     })
-// }

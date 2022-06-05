@@ -27,32 +27,27 @@ public class BoardController {
 
     // 게시글 전체 리스트 페이지
     @RequestMapping(value = {"/boardListPage", "/"}, method = RequestMethod.GET)
-    public String openBoardList(Criteria criteria, Model model, @RequestParam(value = "keyword", required = false) String keyword) throws Exception {
+    public String openBoardList(Criteria criteria, Model model) throws Exception {
 
-        criteria.setKeyword(keyword);
         int boardtotalCount = boardService.totalRecordCount(criteria);
         Paging paging = new Paging(criteria, boardtotalCount);
 
 
         model.addAttribute("paging", paging);
         model.addAttribute("list", boardService.selectBoardList(criteria));
+        model.addAttribute("keyword", criteria.getKeyword());
 
         return "board/bList";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/getSearchList", method = RequestMethod.POST)
-    public List<BoardVo> getSearchList(Criteria criteria) throws Exception {
-        return boardService.selectBoardList(criteria);
-    }
 
     // 게시글 전체 리스트 페이지: 체크박스 선택 삭제
     @ResponseBody
     @RequestMapping(value = "/deleteBoardList", method = RequestMethod.POST)
     public String deleteBoardList(@RequestBody List<String> boardCheckList)throws Exception {
 
-        for (int i = 0; i < boardCheckList.size(); i++) {
-           boardService.deleteBoardList(Integer.parseInt(boardCheckList.get(i)));
+        for (String boardCheck : boardCheckList) {
+            boardService.deleteBoardList(Integer.parseInt(boardCheck));
         }
 
         return "redirect:/boardListPage";
@@ -60,17 +55,16 @@ public class BoardController {
 
     // 게시글 전체 리스트 페이지: jQuery 페이징
     @RequestMapping(value = "/boardListTable", method = RequestMethod.GET)
-    public String boardListTable() throws Exception {
+    public String boardListTable() {
         return "board/Datatables";
     }
 
     // 게시글 작성 페이지
     @RequestMapping(value = "/boardWritePage", method = RequestMethod.GET)
-    public String addBoardPage(HttpServletRequest request, Model model) throws Exception {
+    public String addBoardPage(HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
-
         model.addAttribute("userId", userId);
 
         return "board/bWrite";
