@@ -16,13 +16,16 @@ import java.util.Map;
 public class LikeDislikeController {
 
     private final LikeDislikeService likeDislikeService;
+    Map<String, Object> likeResult = new HashMap<>();
+    Map<String, Object> dislikeResult = new HashMap<>();
 
     // 좋아요 처리
     @ResponseBody
     @RequestMapping(value = "/likeInfoUpdate", method = RequestMethod.POST)
     public Map<String, Object> likeInfoUpdate(HttpServletRequest request, LikeDislikeVo ldv, int boardNum) throws Exception{
 
-        Map<String, Object> likeResult = new HashMap<>();
+        likeResult = new HashMap<>();
+        dislikeResult = new HashMap<>();
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
@@ -52,7 +55,8 @@ public class LikeDislikeController {
     @RequestMapping(value = "/dislikeInfoUpdate", method = RequestMethod.POST)
     public Map<String, Object> dislikeInfoUpdate(HttpServletRequest request, LikeDislikeVo ldv, int boardNum) throws Exception{
 
-        Map<String, Object> dislikeResult = new HashMap<>();
+        likeResult = new HashMap<>();
+        dislikeResult = new HashMap<>();
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
