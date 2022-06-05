@@ -1,5 +1,19 @@
 function joinBoard() {
 
+    document.getElementById("userName").value = document.getElementById("userName").value.trim();
+    if (document.getElementById("userName").value === 0){
+        alert("이름을 입력해주세요.");
+        document.getElementById("userName").focus();
+        return false;
+    }
+
+    document.getElementById("userEmail").value = document.getElementById("userEmail").value.trim();
+    if (document.getElementById("userEmail").value === 0){
+        alert("이메일을 입력해주세요.");
+        document.getElementById("userEmail").focus();
+        return false;
+    }
+
     document.getElementById("userId").value = document.getElementById("userId").value.trim();
     if (document.getElementById("userId").value === 0){
         alert("아이디를 입력해주세요.");
@@ -28,7 +42,9 @@ function joinBoard() {
 
     const memberList = {
         userId: document.getElementById("userId").value,
-        userPassword: document.getElementById("userPassword").value
+        userPassword: document.getElementById("userPassword").value,
+        userName: document.getElementById("userName").value,
+        userEmail: document.getElementById("userEmail").value
     }
 
     $.ajax({
@@ -37,7 +53,7 @@ function joinBoard() {
         data: memberList,
         success: function() {
             alert("성공하였습니다.");
-            location.href="/home";
+            location.href="/boardListPage";
         },
         error: function() {
             alert("실패하였습니다.");

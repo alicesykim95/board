@@ -7,5 +7,6 @@ public class UserVo {
     private int userNum;
     private String userId;
     private String userPassword;
-
+    private String userName;
+    private String userEmail;
 }

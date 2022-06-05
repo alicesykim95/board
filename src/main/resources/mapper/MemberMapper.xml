@@ -7,10 +7,14 @@
     <insert id="insertMember" parameterType="UserVo">
         INSERT INTO user_ex (user_num,
                             user_id,
-                            user_password)
+                            user_password,
+                            user_name,
+                            user_email)
         VALUES (#{userNum},
                 #{userId},
-                #{userPassword})
+                #{userPassword},
+                #{userName},
+                #{userEmail})
     </insert>
 
     <!-- 로그인 -->
