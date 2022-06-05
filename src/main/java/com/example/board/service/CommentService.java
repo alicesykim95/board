@@ -2,10 +2,8 @@ package com.example.board.service;
 
 import com.example.board.mapper.BoardMapper;
 import com.example.board.mapper.CommentMapper;
-import com.example.board.vo.BoardVo;
 import com.example.board.vo.CommentVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +21,7 @@ public class CommentService {
     }
 
     // 댓글 등록 및 댓글 갯수 업데이트
-    public int commentInsert(CommentVo cv, int boardNum) throws Exception {
+    public int commentInsert(CommentVo cv, int boardNum) {
         try {
             commentMapper.commentInsert(cv);
             boardMapper.updateCommentCount(boardNum);
@@ -39,12 +37,12 @@ public class CommentService {
     }
 
     // 댓글 삭제 및 댓글 갯수 업데이트
-    public int deleteComment(int commentNum, int boardNum) throws Exception {
+    public int deleteComment(int commentNum, int boardNum) {
         try {
             commentMapper.deleteComment(commentNum);
             boardMapper.updateCommentCount(boardNum);
             return 1;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return 0;
         }
     }
