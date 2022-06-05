@@ -24,9 +24,9 @@ public class FileService {
         // assert: 확성을 확인하는 용도로 file이 null이 아니면 지나가고, 반대면 AssertionError예외가 발생한다.
         // assert file != null;
 
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
 
-        List<String> fileNums = new ArrayList<String>();
+        List<String> fileNums = new ArrayList<>();
 
         result.put("result", "ERROR");
         try {
@@ -56,7 +56,7 @@ public class FileService {
             } else {
                 result.put("result", "SUCCESS");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             result.put("result", "ERROR");
         }
@@ -75,10 +75,10 @@ public class FileService {
     }
 
     // 파일 보드넘버 삽입
-    public void insertBoardNum(Map<String, Object> params)throws Exception{
+    public void insertBoardNum(Map<String, Object> params) throws Exception {
 
-        if (params.get("fileNums") != null){
-            String fileNums = ((String) params.get("fileNums")).replace("[", "").replace("]","");
+        if (params.get("fileNums") != null) {
+            String fileNums = ((String) params.get("fileNums")).replace("[", "").replace("]", "");
             String[] fileNumsArray = fileNums.split(",");
 
             for (int i = 0; i < fileNumsArray.length; i++) {
@@ -89,12 +89,12 @@ public class FileService {
     }
 
     // 파일 조회
-    public List<FileVo> selectFile(int boardNum)throws Exception{
+    public List<FileVo> selectFile(int boardNum) throws Exception {
         return fileMapper.selectFile(boardNum);
     }
 
     // 파일 다운로드
-    public FileVo fileDownload(int fileNum)throws Exception {
+    public FileVo fileDownload(int fileNum) throws Exception {
         return fileMapper.fileDownload(fileNum);
     }
 }
