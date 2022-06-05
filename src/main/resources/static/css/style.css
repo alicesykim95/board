@@ -38,8 +38,9 @@ a {color:#333;text-decoration: none;}
 .search_container .search_type:focus {outline: none;}
 .search_container .search_btn {background-color: #01987AFF; height: 100%; width: 45px;}
 .search_container .search_btn img {cursor: pointer; width: 14px; height: 14px; margin-top: 6px; filter: brightness(0) saturate(100%) invert(100%) sepia(12%) saturate(7500%) hue-rotate(189deg) brightness(115%) contrast(110%); }
+.search_container .search_btn .search_btn_action {border: none; background: transparent;}
 
-/*bList.html: list_btn*/
+    /*bList.html: list_btn*/
 .list_btn {margin-left: 8px; padding: 8px 14px; color: white; font-weight: bolder; background-color: #3f3f3f; border: none; border-radius: 3px; float: right; top: 5.5px; position: relative;}
 
 /*bWrite.html: head*/
@@ -109,14 +110,16 @@ a {color:#333;text-decoration: none;}
 .join_section{text-align: center;}
 .join_btn{width: 300px; padding: 17px 0 17px 20px ;display: inline-block; margin-top: 15px; position: relative;border: none; background-color: #eeeeee;}
 .join_btn:focus{outline: 2px solid  #74c7b6;}
-.join_bottom_btn{width: 300px; text-align: center; padding: 17px 0; background-color:  #01987A; color: white; display: inline-block; margin: 20px 0 50px 0; position: relative; font-weight: 700; border: none;}
+
+/*common btn css*/
+.common_bottom_btn{width: 300px; text-align: center; padding: 17px 0; background-color:  #01987A; color: white; display: inline-block; margin: 20px 0 50px 0; position: relative; font-weight: 700; border: none; cursor: pointer;}
 
 /*login*/
 .login_title{text-align: center; margin: 40px 0 20px 0; color: #3a3a3a; font-weight: 900; font-size: 30px;}
 .login_section{text-align: center;}
 .login_btn{width: 300px; padding: 17px 0 17px 20px ;display: inline-block; margin-top: 15px; position: relative;border: none; background-color: #eeeeee;}
 .login_btn:focus{outline: 2px solid #74c7b6;}
-.login_bottom_btn{width: 300px; text-align: center; padding: 17px 0; background-color: #01987A; color: white; display: inline-block; margin: 20px 0 50px 0; position: relative; font-weight: 700; border: none;}
+
 
 /*layout*/
 .headerContainer {width: 100%; background-color: #01987A; height: 55px; }

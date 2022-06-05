@@ -55,3 +55,8 @@ function deleteBoardList(){
         }
     });
 }
+
+// 검색
+// $("#keyword").ready(function() {
+//    $('input').removerattr('placeholder');
+// });
