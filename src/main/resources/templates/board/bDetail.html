@@ -100,7 +100,10 @@
 
         <div class="comment_container">
             <div class="comment_form">
-                <p class="comment_title">comment</p>
+                <p class="comment_title">comment
+                    <span><img src="../images/comment_icon.svg" alt="comment_icon" style="width: 15px; height: 15px; margin-left: 6px; "></span>
+                    <span th:inline="text" class="" id="comment_cnt" style="font-size: 12px; color: #EC5454FF;">[[${board.commentCount}]]</span>
+                </p>
                 <input type="text" class="commentContent" id="commentContent" placeholder="댓글을 입력하세요">
                 <input type="button" id="commentBtn" value="등록" onclick="insertComment()">
             </div>

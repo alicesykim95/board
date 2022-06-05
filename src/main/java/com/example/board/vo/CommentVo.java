@@ -12,5 +12,5 @@ public class CommentVo {
     private String commentContent;
     private String commentWriter;
     private Date commentRegTime;
-
+    private int commentCount;
 }

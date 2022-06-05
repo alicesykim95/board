@@ -11,7 +11,6 @@
                comment_writer,
                comment_reg_time
         FROM comment_ex
-        
         WHERE board_num = #{boardNum}
     </select>
 

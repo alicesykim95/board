@@ -82,7 +82,8 @@
                title,
                content,
                created_time,
-               hit_cnt
+               hit_cnt,
+               comment_count
         FROM board_ex
         WHERE board_num = #{boardNum}
     </select>
