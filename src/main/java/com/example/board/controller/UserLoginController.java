@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +28,6 @@ public class UserLoginController {
         Object loginYn = session.getAttribute("login");
 
         if (loginYn != null) {
-            System.out.println(loginYn.toString());
             return "board/bHome";
         }
 
@@ -43,8 +43,8 @@ public class UserLoginController {
         UserVo login = userService.loginMember(uv);
 
         if (login != null) {
-              session.setAttribute("login", login);
-              session.setAttribute("userId", login.getUserId());
+            session.setAttribute("login", login);
+            session.setAttribute("userId", login.getUserId());
             session.setMaxInactiveInterval(60 * 30);
             model.addAttribute("login", login);
             return 1;
