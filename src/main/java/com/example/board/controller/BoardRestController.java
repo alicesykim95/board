@@ -45,9 +45,7 @@ public class BoardRestController {
 
     // 게시글 삭제 처리
     @RequestMapping(value = "/board", method = RequestMethod.DELETE)
-    public int deleteBoard(int boardNum) throws Exception {
+    public int deleteBoard(int boardNum) throws Exception  {
         return boardService.deleteBoard(boardNum);
     }
-
-
 }

@@ -56,8 +56,7 @@
                 <div>
                     <th:block th:each="file : ${files}">
                         <div class="download_attach_div">
-                            <a class="downloadFile file_attach" th:text="${file.fileOriginalName}" th:href="@{'/downloadFile/'+ ${file.fileNum}}">
-                                <img src="../images/Download_alt_font_awesome.svg" alt="download_icon" class="detail_icon file_attach"></a>
+                            <a class="downloadFile file_attach" th:text="${file.fileOriginalName}" th:href="@{'/downloadFile/'+ ${file.fileNum}}"></a>
                             <a><img src="../images/103181_close_remove_delete_cross_icon.png" alt="delete_icon" class="detail_icon file_attach"></a>
                         </div>
                     </th:block>

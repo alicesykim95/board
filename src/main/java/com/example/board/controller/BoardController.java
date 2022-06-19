@@ -102,8 +102,9 @@ public class BoardController {
         // 좋아요 싫어요
         mv.addObject("likeDislike", ldd);
 
-        return mv;
-    }
+        throw new Exception("에러");
 
+//        return mv;
+    }
 
 }
