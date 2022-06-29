@@ -1,5 +1,6 @@
 package com.example.board.mapper;
 
+import com.example.board.exception.AbstractException;
 import com.example.board.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,5 +11,5 @@ public interface UserMapper {
     int insertMember(UserVo uv) throws Exception;
 
     // 로그인
-    UserVo loginMember(UserVo uv) throws Exception;
+    UserVo loginMember(UserVo uv)throws AbstractException;
 }

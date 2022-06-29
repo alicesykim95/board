@@ -62,16 +62,6 @@ public class FileService {
         }
 
         return result;
-
-        // FileDto fd = new FileDto(originName, savedName, filePath, userId);
-        // FileVo fv = new FileVo();
-        // fv.setFileOriginalName(originName);
-        // fv.setFilePath(filePath);
-        // fv.setFileSavedName(savedName);
-        // fv.setFileCreatedUser(userId);
-        // int fileNum = fv.getFileNum();
-        // System.out.println(fileNum);
-        // return fileNum;
     }
 
     // 파일 보드넘버 삽입
