@@ -1,6 +1,5 @@
 package com.example.board.controller;
 
-import com.example.board.exception.AbstractException;
 import com.example.board.service.UserService;
 import com.example.board.vo.UserVo;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +37,7 @@ public class UserLoginController {
     // 로그인 처리
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     @ResponseBody
-    public int login(UserVo uv, HttpServletRequest request, Model model)throws AbstractException {
+    public int login(UserVo uv, HttpServletRequest request, Model model)throws Exception {
 
         HttpSession session = request.getSession();
         UserVo login = userService.loginMember(uv);

@@ -34,12 +34,16 @@ public class LikeDislikeController {
 
         int likeCheck = 0;
 
+        if (likeDislikeService.dislikeCount(ldv) == 1){
+            likeCheck = 1;
+        }
+
         if (likeDislikeService.likeCount(ldv) == 2){
             likeDislikeService.likeDislikeSave(ldv);
             likeDislikeService.likeUpdate(ldv);
         } else if(likeDislikeService.likeCount(ldv) == 1){
             likeDislikeService.likeDelete(ldv);
-            likeCheck = 1;
+            likeCheck = 2;
         } else if (likeDislikeService.likeCount(ldv) == 0){
             likeDislikeService.likeUpdate(ldv);
         }
@@ -65,12 +69,16 @@ public class LikeDislikeController {
 
         int dislikeCheck = 0;
 
+        if (likeDislikeService.likeCount(ldv) == 1){
+            dislikeCheck = 1;
+        }
+
        if (likeDislikeService.dislikeCount(ldv) == 2){
             likeDislikeService.likeDislikeSave(ldv);
             likeDislikeService.dislikeUpdate(ldv);
         } else if(likeDislikeService.dislikeCount(ldv) == 1){
             likeDislikeService.dislikeDelete(ldv);
-            dislikeCheck = 1;
+            dislikeCheck = 2;
         } else if (likeDislikeService.dislikeCount(ldv) == 0){
             likeDislikeService.dislikeUpdate(ldv);
         }

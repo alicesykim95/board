@@ -13,9 +13,6 @@ public interface BoardMapper {
     // 게시글 전체 리스트 for 화면
     List<BoardVo> selectBoardList(Criteria criteria) throws Exception;
 
-    // 게시글 전체 리스트 for RestApi
-    List<BoardVo> selectBoardListNone() throws Exception;
-
     // 게시글 전체 리스트 갯수 for 페이징
     int totalRecordCount(Criteria criteria) throws Exception;
 

@@ -16,12 +16,6 @@ public class BoardRestController {
     private final BoardService boardService;
     private final FileService fileService;
 
-    // 게시글 전체 페이지 목록
-    @RequestMapping(value = "/board", method = RequestMethod.GET)
-    public List<BoardVo> getListBoard() throws Exception {
-        return boardService.selectBoardListNone();
-    }
-
     // 게시글 작성 처리
     @RequestMapping(value = "/board", method = RequestMethod.POST)
     public Map<String, Object> addBoard(@RequestBody Map<String, Object> params) throws Exception {
@@ -38,8 +32,8 @@ public class BoardRestController {
     }
 
     // 게시글 상세 목록
-    @RequestMapping(value = "/board/{id}", method = RequestMethod.GET)
-    public BoardVo getOneBoard(@PathVariable("id") int boardNum) throws Exception {
+    @RequestMapping(value = "/board", method = RequestMethod.GET)
+    public BoardVo getOneBoard(@RequestParam(value="boardNum")int boardNum) throws Exception {
         return boardService.getBoardDetail(boardNum);
     }
 

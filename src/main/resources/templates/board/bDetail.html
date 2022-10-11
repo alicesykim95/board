@@ -28,7 +28,7 @@
         <div class="board_detail">
             <div class="detail_head">
                 <label class="head_title">글 번호</label>
-                <input type="text" class="detail_text" th:value="${board.boardNum}" readonly>
+                <input type="text" class="detail_text" id="board_num" th:value="${board.boardNum}" readonly>
             </div>
             <div class="detail_head">
                 <label class="head_title">조회수</label>
@@ -57,7 +57,7 @@
                     <th:block th:each="file : ${files}">
                         <div class="download_attach_div">
                             <a class="downloadFile file_attach" th:text="${file.fileOriginalName}" th:href="@{'/downloadFile/'+ ${file.fileNum}}"></a>
-                            <a><img src="../images/103181_close_remove_delete_cross_icon.png" alt="delete_icon" class="detail_icon file_attach"></a>
+                            <a><img src="../images/delete_icon.png" alt="delete_icon" class="detail_icon file_attach"></a>
                         </div>
                     </th:block>
                 </div>

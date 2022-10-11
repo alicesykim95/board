@@ -17,7 +17,7 @@ public class CommentRestController {
 
     // 댓글 삽입
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public int commentInsert(CommentVo cv, @RequestParam(value="boardNum")int boardNum) throws Exception{
+    public int commentInsert(CommentVo cv, @RequestParam(value="boardNum")int boardNum) {
         return commentService.commentInsert(cv, boardNum);
     }
 
@@ -35,7 +35,7 @@ public class CommentRestController {
 
     // 댓글 삭제
     @RequestMapping(value = "/comment", method = RequestMethod.DELETE)
-    public int deleteComment(int commentNum, @RequestParam(value="boardNum")int boardNum) throws Exception{
+    public int deleteComment(int commentNum, @RequestParam(value="boardNum")int boardNum) {
         return commentService.deleteComment(commentNum, boardNum);
     }
 

@@ -129,5 +129,5 @@ a {color:#333;text-decoration: none;}
 .login_session{margin: 21px 20px 0 0; }
 .logout_session{margin: 14px 20px 0 0; color: white; border: 1px solid white; padding :6px 15px 6px 15px; border-radius: 3px;}
 .logout_session:hover {background-color:white; color: black;}
-.home_btn_image{height: 25px; width: 25px; filter: brightness(0) invert(1);}
+.home_btn_image{height: 25px; width: 25px;}
 .middle {float: left; margin: 14px 0 0 14px;}

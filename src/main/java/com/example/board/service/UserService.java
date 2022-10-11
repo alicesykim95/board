@@ -1,12 +1,9 @@
 package com.example.board.service;
 
-import com.example.board.exception.AbstractException;
 import com.example.board.mapper.UserMapper;
 import com.example.board.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import static com.example.board.exception.ErrorCode.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -20,15 +17,11 @@ public class UserService {
     }
 
     // 로그인
-    public UserVo loginMember(UserVo uv)throws AbstractException{
+    public UserVo loginMember(UserVo uv)throws Exception{
 
         UserVo userVo = userMapper.loginMember(uv);
 
-        if (userVo != null) {
-            return userVo;
-        } else {
-            throw new AbstractException(USER_NOT_FOUND);
-        }
+        return userVo;
     }
 
 }

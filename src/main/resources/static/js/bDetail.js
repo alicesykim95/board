@@ -55,6 +55,7 @@ function insertComment() {
             alert("성공 하였습니다.")
             getCommentList();
             $(".commentContent").val("");
+            getCommentCount();
         },
         error: function () {
             alert("실패 하였습니다.");
@@ -166,6 +167,7 @@ function commentDelete(commentNum) {
         success: function () {
             alert("삭제되었습니다.");
             getCommentList();
+            getCommentCount();
         },
         error: function () {
             alert("삭제를 하지 못하였습니다.");
@@ -173,6 +175,26 @@ function commentDelete(commentNum) {
     });
 
 }
+
+// 댓글 갯수 업데이트
+function getCommentCount() {
+
+    $.ajax({
+        url: '/board',
+        type: 'GET',
+        data: {boardNum: boardNum},
+        success: function(data){
+            $("#comment_cnt").empty();
+            $("#comment_cnt").append(data.commentCount);
+        },
+        error: function(){
+            alert("댓글 갯수를 가져오는데 실패하였습니다.")
+        }
+    });
+
+}
+
+
 
 // 파일 다운로드
 function fileDownload() {
@@ -205,6 +227,9 @@ function like(){
                 $("#likeTotalCount").append(data.likeTotalCount);
             }
             else if (data.likeCheck == 1){
+                alert("싫어요를 먼저 취소해주세요.");
+            }
+            else if (data.likeCheck == 2){
                 $("#likeBtn").attr("src", "../images/like_btn.png");
                 $("#likeTotalCount").empty();
                 $("#likeTotalCount").append(data.likeTotalCount);
@@ -231,6 +256,9 @@ function dislike(){
                 $("#dislikeTotalCount").append(data.dislikeTotalCount);
             }
             else if (data.dislikeCheck == 1){
+                alert("좋어요를 먼저 취소해주세요.");
+            }
+            else if (data.dislikeCheck == 2){
                 $("#dislikeBtn").attr("src", "../images/dislike_btn.png");
                 $("#dislikeTotalCount").empty();
                 $("#dislikeTotalCount").append(data.dislikeTotalCount);
