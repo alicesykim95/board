@@ -1,13 +1,38 @@
-// 게시글 boardNum
+// 전역 변수
 const boardNum = document.getElementById("boardNum").value;
+const titleSet = document.getElementById("title");
+const contentSet = document.getElementById("content");
+const updateBtn = document.getElementById("update");
+const completeBtn = document.getElementById("complete");
 
 // 게시글 삭제
 function deleteBoard() {
     loadAjax('/board', 'DELETE', {boardNum: boardNum}, true);
 }
 
+// 게시글 수정 페이지 이동
+function goUpdatePage(){
+
+    updateBtn.setAttribute("type", "hidden");
+    completeBtn.setAttribute("type", "button");
+
+    titleSet.readOnly = false;
+    titleSet.style.cssText = "border-bottom: 2px solid #01987A; outline: none; background-color: #eeeeee;";
+
+    contentSet.readOnly = false;
+    contentSet.style.cssText = "border-bottom: 2px solid #01987A; outline: none; background-color: #eeeeee;";
+
+    let commentImgHtml = '';
+    commentImgHtml += "<a><img src='../images/delete_icon.png' alt='delete_icon' class='detail_icon file_attach'></a>";
+    $("#downloadFileBtn_container").html(commentImgHtml);
+
+}
+
 // 게시글 수정
 function updateBoard() {
+
+    titleSet.readonly = true;
+    contentSet.readonly = true;
 
     const detailList = {
         title: document.getElementById("title").value,

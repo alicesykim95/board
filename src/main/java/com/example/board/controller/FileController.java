@@ -45,7 +45,6 @@ public class FileController {
         String fileName = URLEncoder.encode(file.getName(), String.valueOf(StandardCharsets.UTF_8)).replaceAll("\\+", "%20");
         response.setContentType(mimeType);
         response.addHeader(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;; filename=\"%s\"", fileName));
-        // X가 사용자가 지정한 헤더라는 뜻이지만 요새는 통상적으로 사용하게되어 원래 있는 헤더 정도로 인식하면 좋다.
         response.addHeader("X-Content-Type-Options", "nosniff");
         response.setContentLength((int) file.length()); // 유효성 검사
 

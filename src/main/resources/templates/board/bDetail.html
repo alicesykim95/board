@@ -45,19 +45,19 @@
             </div>
             <div class="detail_head wide_width">
                 <label class="head_title">제목</label>
-               <input type="text" class="detail_text" id="title" name="title" th:value="${board.title}">
+               <input type="text" class="detail_text" id="title" name="title" th:value="${board.title}" readonly>
             </div>
             <div class="detail_head wide_width">
                 <label class="head_title">내용</label>
-                <textarea class="detail_text" id="content" name="content" th:text="${board.content}"></textarea>
+                <textarea class="detail_text" id="content" name="content" th:text="${board.content}" readonly></textarea>
             </div>
             <div class="detail_head ">
                 <label class="head_title">다운로드</label>
                 <div>
                     <th:block th:each="file : ${files}">
                         <div class="download_attach_div">
-                            <a class="downloadFile file_attach" th:text="${file.fileOriginalName}" th:href="@{'/downloadFile/'+ ${file.fileNum}}"></a>
-                            <a><img src="../images/delete_icon.png" alt="delete_icon" class="detail_icon file_attach"></a>
+                            <div><a class="downloadFile" th:text="${file.fileOriginalName}" th:href="@{'/downloadFile/'+ ${file.fileNum}}"></a></div>
+                            <div id="downloadFileBtn_container"></div>
                         </div>
                     </th:block>
                 </div>
@@ -90,7 +90,8 @@
 
         <div class="detail_btn_container" id="btn_container">
             <div class="detail_btn_box1" th:if="${board.writer == session.userId}">
-                <input class="detail_btn" type="button" value="수정" id="update" onclick="updateBoard()">
+                <input class="detail_btn" type="hidden" value="완료" id="complete" onclick="updateBoard()">
+                <input class="detail_btn" type="button" value="수정" id="update" onclick="goUpdatePage()">
                 <input class="detail_btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
             </div>
             <input class="detail_btn detail_btn_box2" type="button" value="목록" id="goBackList"
