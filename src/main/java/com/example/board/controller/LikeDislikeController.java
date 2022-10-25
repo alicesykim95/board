@@ -24,8 +24,7 @@ public class LikeDislikeController {
     @RequestMapping(value = "/likeInfoUpdate", method = RequestMethod.POST)
     public Map<String, Object> likeInfoUpdate(HttpServletRequest request, LikeDislikeVo ldv, int boardNum) throws Exception{
 
-        likeResult = new HashMap<>();
-        dislikeResult = new HashMap<>();
+        Map<String, Object> likeResult = new HashMap<>();
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
@@ -33,23 +32,29 @@ public class LikeDislikeController {
         ldv.setBoardNum(boardNum);
 
         int likeCheck = 0;
+        int likeDataReturn = likeDislikeService.likeCount(ldv);
+        int dislikeDateReturn = likeDislikeService.dislikeCount(ldv);
 
-        if (likeDislikeService.dislikeCount(ldv) == 1){
-            likeCheck = 1;
-        }
-
-        if (likeDislikeService.likeCount(ldv) == 2){
+        if (likeDataReturn == 2){
             likeDislikeService.likeDislikeSave(ldv);
             likeDislikeService.likeUpdate(ldv);
-        } else if(likeDislikeService.likeCount(ldv) == 1){
+            likeCheck = 1;
+        } else if (likeDataReturn == 0){
+            likeDislikeService.likeUpdate(ldv);
+            likeCheck = 1;
+        } else if(likeDataReturn == 1) {
             likeDislikeService.likeDelete(ldv);
             likeCheck = 2;
-        } else if (likeDislikeService.likeCount(ldv) == 0){
-            likeDislikeService.likeUpdate(ldv);
+        }
+
+        if (dislikeDateReturn == 1){
+            likeDislikeService.dislikeDelete(ldv);
+            likeCheck = 3;
         }
 
         likeResult.put("likeCheck", likeCheck);
         likeResult.put("likeTotalCount", likeDislikeService.likeTotalCount(ldv));
+        likeResult.put("dislikeTotalCount", likeDislikeService.dislikeTotalCount(ldv));
 
         return likeResult;
     }
@@ -59,32 +64,35 @@ public class LikeDislikeController {
     @RequestMapping(value = "/dislikeInfoUpdate", method = RequestMethod.POST)
     public Map<String, Object> dislikeInfoUpdate(HttpServletRequest request, LikeDislikeVo ldv, int boardNum) throws Exception{
 
-        likeResult = new HashMap<>();
-        dislikeResult = new HashMap<>();
-
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         ldv.setUserId(userId);
         ldv.setBoardNum(boardNum);
 
         int dislikeCheck = 0;
+        int likeDataReturn = likeDislikeService.likeCount(ldv);
+        int dislikeDateReturn = likeDislikeService.dislikeCount(ldv);
 
-        if (likeDislikeService.likeCount(ldv) == 1){
-            dislikeCheck = 1;
-        }
-
-       if (likeDislikeService.dislikeCount(ldv) == 2){
+       if (dislikeDateReturn == 2){
             likeDislikeService.likeDislikeSave(ldv);
             likeDislikeService.dislikeUpdate(ldv);
-        } else if(likeDislikeService.dislikeCount(ldv) == 1){
+           dislikeCheck = 1;
+        } else if(dislikeDateReturn == 1){
             likeDislikeService.dislikeDelete(ldv);
-            dislikeCheck = 2;
-        } else if (likeDislikeService.dislikeCount(ldv) == 0){
+            dislikeCheck = 1;
+        } else if (dislikeDateReturn == 0){
             likeDislikeService.dislikeUpdate(ldv);
+           dislikeCheck = 2;
+        }
+
+        if (likeDataReturn == 1){
+            likeDislikeService.likeDelete(ldv);
+            dislikeCheck = 3;
         }
 
         dislikeResult.put("dislikeCheck", dislikeCheck);
         dislikeResult.put("dislikeTotalCount", likeDislikeService.dislikeTotalCount(ldv));
+        dislikeResult.put("likeTotalCount", likeDislikeService.likeTotalCount(ldv));
 
         return dislikeResult;
     }

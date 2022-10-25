@@ -238,6 +238,12 @@ function fileDownload() {
 
 }
 
+// 좋아요 싫어요 변수 선언
+let dislikeTotalCount = $("#dislikeTotalCount");
+let likeTotalCount = $("#likeTotalCount");
+let dislikeBtn = $("#dislikeBtn");
+let likeBtn = $("#likeBtn");
+
 // 좋아요
 function like(){
 
@@ -246,18 +252,24 @@ function like(){
         type: 'POST',
         data: {boardNum: boardNum},
         success: function(data){
-            if (data.likeCheck == 0){
-                $("#likeBtn").attr("src", "../images/like_btn_click.png");
-                $("#likeTotalCount").empty();
-                $("#likeTotalCount").append(data.likeTotalCount);
-            }
-            else if (data.likeCheck == 1){
-                alert("싫어요를 먼저 취소해주세요.");
+            if (data.likeCheck === 1){
+                likeBtn.attr("src", "../images/like_btn_click.png");
+                likeTotalCount.empty();
+                likeTotalCount.append(data.likeTotalCount);
             }
             else if (data.likeCheck == 2){
-                $("#likeBtn").attr("src", "../images/like_btn.png");
-                $("#likeTotalCount").empty();
-                $("#likeTotalCount").append(data.likeTotalCount);
+                likeBtn.attr("src", "../images/like_btn.png");
+                likeTotalCount.empty();
+                likeTotalCount.append(data.likeTotalCount);
+            }
+            else if (data.likeCheck === 3){
+                dislikeBtn.attr("src", "../images/dislike_btn.png");
+                dislikeTotalCount.empty();
+                dislikeTotalCount.append(data.dislikeTotalCount);
+
+                likeBtn.attr("src", "../images/like_btn_click.png");
+                likeTotalCount.empty();
+                likeTotalCount.append(data.likeTotalCount);
             }
         },
         error: function(){
@@ -275,18 +287,24 @@ function dislike(){
         type: 'POST',
         data: {boardNum: boardNum},
         success: function(data){
-            if (data.dislikeCheck == 0){
-                $("#dislikeBtn").attr("src", "../images/dislike_btn_click.png");
-                $("#dislikeTotalCount").empty();
-                $("#dislikeTotalCount").append(data.dislikeTotalCount);
+            if (data.dislikeCheck === 1){
+                dislikeBtn.attr("src", "../images/dislike_btn_click.png");
+                dislikeTotalCount.empty();
+                dislikeTotalCount.append(data.dislikeTotalCount);
             }
-            else if (data.dislikeCheck == 1){
-                alert("좋어요를 먼저 취소해주세요.");
+            else if (data.dislikeCheck === 2){
+                dislikeBtn.attr("src", "../images/dislike_btn.png");
+                dislikeTotalCount.empty();
+                dislikeTotalCount.append(data.dislikeTotalCount);
             }
-            else if (data.dislikeCheck == 2){
-                $("#dislikeBtn").attr("src", "../images/dislike_btn.png");
-                $("#dislikeTotalCount").empty();
-                $("#dislikeTotalCount").append(data.dislikeTotalCount);
+            else if (data.dislikeCheck === 3){
+                likeBtn.attr("src", "../images/like_btn.png");
+                likeTotalCount.empty();
+                likeTotalCount.append(data.likeTotalCount);
+
+                dislikeBtn.attr("src", "../images/dislike_btn_click.png");
+                dislikeTotalCount.empty();
+                dislikeTotalCount.append(data.dislikeTotalCount);
             }
         },
         error: function(){
