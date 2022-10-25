@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mariadb://ec2-3-129-195-197.us-east-2.compute.amazonaws.com/KSY
-    username: ksy
-    password: ksy1010%%
-    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board_practice
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   devtools:
     livereload:

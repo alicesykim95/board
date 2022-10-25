@@ -41,7 +41,7 @@
             </div>
             <div class="detail_head">
                 <label class="head_title">작성일</label>
-                <input type="text" class="detail_text" th:value="${#dates.format(board.createdTime, 'yyyy-MM-dd')}" readonly>
+                <input type="text" class="detail_text" th:value="${#dates.format(board.modifiedTime, 'yyyy-MM-dd HH:mm:ss')}" readonly>
             </div>
             <div class="detail_head wide_width">
                 <label class="head_title">제목</label>

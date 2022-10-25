@@ -11,6 +11,7 @@ public class BoardVo {
     private String title;
     private String content;
     private Date createdTime;
+    private Date modifiedTime;
     private int hitCnt;
     private int commentCount;
 }

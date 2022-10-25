@@ -120,7 +120,7 @@ function getCommentList() {
                     html += "<div class='comment_list_title'>" + data[i].commentWriter + "</div>";
                     html += "<div class='comment_content_container" + data[i].commentNum + "'>";
                     html += "<div class = 'comment_content' >" + data[i].commentContent + "</div>";
-                    html += "<div class = 'comment_time'>" + data[i].commentRegTime + "</div>";
+                    html += "<div class = 'comment_time'>" + data[i].commentModiTime + "</div>";
                     html += "<div class = 'comment_list_btn' >";
                     html += editHtml;
                     html += deleteHtml;

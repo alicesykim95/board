@@ -1,5 +1,6 @@
 package com.example.board.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,5 +13,6 @@ public class CommentVo {
     private String commentContent;
     private String commentWriter;
     private Date commentRegTime;
-    private int commentCount;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Soul")
+    private Date commentModiTime;
 }

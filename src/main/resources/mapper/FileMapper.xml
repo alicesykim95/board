@@ -5,21 +5,23 @@
 
     <!-- 파일 업로드 -->
     <insert id="insertFile" useGeneratedKeys="true" keyProperty="fileNum">
-        INSERT INTO file_ex (
+        INSERT INTO file (
             file_original_name,
             file_saved_name,
             file_path,
-            file_created_user
+            file_created_user,
+            file_created_time
         )
         VALUES (#{fileOriginalName},
                 #{fileSavedName},
                 #{filePath},
-                #{fileCreatedUser})
+                #{fileCreatedUser},
+                now())
     </insert>
 
     <!-- boarNum 업데이트 -->
     <update id="insertBoardNum">
-        UPDATE file_ex
+        UPDATE file
         SET board_num = #{boardNum}
         WHERE file_num = #{fileNum}
     </update>
@@ -31,7 +33,7 @@
                file_saved_name,
                file_path,
                board_num
-        FROM file_ex
+        FROM file
         WHERE board_num = #{boardNum} and file_delete = 0
     </select>
 
@@ -40,7 +42,7 @@
         SELECT file_original_name,
                file_saved_name,
                file_path
-        FROM file_ex
+        FROM file
         WHERE file_num = #{fileNum} and file_delete = 0
     </select>
 

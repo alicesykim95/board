@@ -9,37 +9,38 @@
                board_num,
                comment_content,
                comment_writer,
-               comment_reg_time
-        FROM comment_ex
+               comment_modi_time
+        FROM comment
         WHERE board_num = #{boardNum}
     </select>
 
     <!-- 댓글 입력 -->
     <insert id="commentInsert" parameterType="CommentVo">
-        INSERT INTO comment_ex (comment_num,
-                             board_num,
+        INSERT INTO comment (board_num,
                              comment_content,
                              comment_writer,
-                             comment_reg_time)
-        VALUES (#{commentNum},
-                #{boardNum},
+                             comment_reg_time,
+                             comment_modi_time)
+        VALUES (#{boardNum},
                 #{commentContent},
                 #{commentWriter},
+                now(),
                 now())
     </insert>
 
     <!-- 댓글 수정 -->
     <update id="updateComment" parameterType="CommentVo">
         UPDATE
-            comment_ex
-        SET comment_content = #{commentContent}
+            comment
+        SET comment_content = #{commentContent},
+            comment_modi_time = now()
         WHERE comment_num = #{commentNum}
     </update>
 
     <!-- 댓글 삭제  -->
     <delete id="deleteComment" parameterType="int">
         DELETE
-        FROM comment_ex
+        FROM comment
         WHERE comment_num = #{commentNum}
     </delete>
 

@@ -77,11 +77,11 @@ public class LikeDislikeController {
             likeDislikeService.likeDislikeSave(ldv);
             likeDislikeService.dislikeUpdate(ldv);
            dislikeCheck = 1;
-        } else if(dislikeDateReturn == 1){
+        } else if(dislikeDateReturn == 0){
+           likeDislikeService.dislikeUpdate(ldv);
+           dislikeCheck = 1;
+        } else if (dislikeDateReturn == 1){
             likeDislikeService.dislikeDelete(ldv);
-            dislikeCheck = 1;
-        } else if (dislikeDateReturn == 0){
-            likeDislikeService.dislikeUpdate(ldv);
            dislikeCheck = 2;
         }
 

@@ -6,6 +6,7 @@ import com.example.board.vo.CommentVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -34,6 +35,7 @@ public class CommentService {
 
     // 댓글 수정
     public int updateComment(CommentVo cv) throws Exception {
+
         return commentMapper.updateComment(cv);
     }
 

@@ -51,10 +51,9 @@
                                            onclick="rowCheck()"/></td>
                 <td class="list_td list_td_no" th:text="${paging.totalRecordCount - (((paging.criteria.currentPageNum -1) * paging.criteria.perPageNum) + list.index)}"></td>
                 <td class="list_td list_title"><a th:href="@{'/'+ ${board.boardNum}}" th:inline="text">[[${board.title}]]
-                    <small class="board_list_comment_count" th:if="${board.commentCount} != 0">[ [[${board.commentCount}]]
-                        ]</small></a></td>
+                    <small class="board_list_comment_count" th:if="${board.commentCount} != 0">[ [[${board.commentCount}]] ]</small></a></td>
                 <td class="list_td" th:text="${board.writer}"></td>
-                <td class="list_td" th:text="${#dates.format(board.createdTime, 'yyyy-MM-dd')}"></td>
+                <td class="list_td" th:text="${#dates.format(board.modifiedTime, 'yyyy-MM-dd')}"></td>
                 <td class="list_td" th:text="${board.hitCnt}"></td>
             </tr>
             </tbody>

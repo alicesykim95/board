@@ -8,10 +8,10 @@
         SELECT board_num,
                writer,
                title,
-               created_time,
+               modified_time,
                hit_cnt,
                comment_count
-        FROM board_ex
+        FROM board
         <if test="keyword != null">
             where title like concat('%',#{keyword},'%')
             OR content like concat('%', #{keyword}, '%')
@@ -24,7 +24,7 @@
     <!-- 게시글 전체 갯수 조회 for 페이징 -->
     <select id="totalRecordCount" parameterType="Criteria" resultType="int">
         SELECT COUNT(*)
-        FROM board_ex
+        FROM board
         <if test="keyword != null">
             where title like concat('%',#{keyword},'%')
             OR content like concat('%', #{keyword}, '%')
@@ -35,30 +35,32 @@
     <!-- 게시글 전체 리스트 체크박스 삭제-->
     <delete id="deleteBoardList" parameterType="int">
         DELETE
-        FROM board_ex
+        FROM board
         WHERE board_num = #{boardNum}
     </delete>
 
     <!-- 게시글 전체 리스트 댓글 개수 표시 -->
     <update id="updateCommentCount" parameterType="int">
-            UPDATE board_ex b
-            SET b.comment_count = (SELECT COUNT (comment_num) FROM comment_ex WHERE board_num = #{boardNum})
+            UPDATE board b
+            SET b.comment_count = (SELECT COUNT(comment_num) FROM comment WHERE board_num = #{boardNum})
             WHERE b.board_num = #{boardNum}
     </update>
 
         <!-- 게시글 삽입 -->
     <insert id="insertBoard" useGeneratedKeys="true" keyProperty="boardNum"
     keyColumn="BOARD_NUM">
-        INSERT INTO board_ex (
+        INSERT INTO board (
                            writer,
                            title,
                            content,
-                           created_time
+                           created_time,
+                           modified_time
                            )
         VALUES (
                 #{writer},
                 #{title},
                 #{content},
+                now(),
                 now()
                 )
     </insert>
@@ -69,33 +71,34 @@
                writer,
                title,
                content,
-               created_time,
+               modified_time,
                hit_cnt,
                comment_count
-        FROM board_ex
+        FROM board
         WHERE board_num = #{boardNum}
     </select>
 
     <!-- 게시글 수정 -->
     <update id="updateBoard" parameterType="BoardVo">
         UPDATE
-            board_ex
+            board
         SET title   = #{title},
-            content = #{content}
+            content = #{content},
+            modified_time = now()
         WHERE board_num = #{boardNum}
     </update>
 
     <!-- 게시글 삭제 -->
     <delete id="deleteBoard" parameterType="int">
         DELETE
-        FROM board_ex
+        FROM board
         WHERE board_num = #{boardNum}
     </delete>
 
     <!-- 게시글 조회수 증가 -->
     <update id="updateHitCount" parameterType="int">
         UPDATE
-            board_ex
+            board
         SET hit_cnt = hit_cnt + 1
         WHERE board_num = #{boardNum}
     </update>

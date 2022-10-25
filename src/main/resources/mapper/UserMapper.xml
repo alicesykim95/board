@@ -5,16 +5,18 @@
 
     <!-- 회원가입 -->
     <insert id="insertMember" parameterType="UserVo">
-        INSERT INTO user_ex (user_num,
+        INSERT INTO user (user_num,
                             user_id,
                             user_password,
                             user_name,
-                            user_email)
+                            user_email,
+                            user_join_time)
         VALUES (#{userNum},
                 #{userId},
                 #{userPassword},
                 #{userName},
-                #{userEmail})
+                #{userEmail},
+                now())
     </insert>
 
     <!-- 로그인 -->
@@ -23,7 +25,7 @@
             user_id,
             user_password
         FROM
-            user_ex
+            user
         WHERE
             user_id = #{userId} and user_password = #{userPassword}
     </select>
