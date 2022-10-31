@@ -71,6 +71,7 @@
                writer,
                title,
                content,
+               created_time,
                modified_time,
                hit_cnt,
                comment_count

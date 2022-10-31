@@ -78,6 +78,9 @@ public class FileService {
         }
     }
 
+    // 기존 파일 삭제
+
+
     // 파일 조회
     public List<FileVo> selectFile(int boardNum) throws Exception {
         return fileMapper.selectFile(boardNum);

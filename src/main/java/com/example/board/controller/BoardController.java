@@ -79,10 +79,6 @@ public class BoardController {
 
         ModelAndView mv = new ModelAndView("board/bDetail");
 
-        BoardVo board = boardService.getBoardDetail(boardNum);
-
-        List<FileVo> fv = fileService.selectFile(boardNum);
-
         ldv.setUserId(userId);
         ldv.setBoardNum(boardNum);
 
@@ -91,14 +87,19 @@ public class BoardController {
         ldd.setDislikeCheck(likeDislikeService.dislikeCount(ldv));
         ldd.setDislikeCnt(likeDislikeService.dislikeTotalCount(ldv));
 
+        List<FileVo> fileVo = fileService.selectFile(boardNum);
+        int existingFileCount = fileVo.size();
+
         // 게시판 상세 내용
-        mv.addObject("board", board);
+        mv.addObject("board", boardService.getBoardDetail(boardNum));
         // 게시판 댓글 리스트
         mv.addObject("comment", commentService.commentList(boardNum));
         // 로그인중인 아이디 가져오기
         mv.addObject("userId", userId);
         // 파일 조회 내용
-        mv.addObject("files", fv);
+        mv.addObject("files", fileVo);
+        // 첨부 파일 갯수
+        mv.addObject("existingFileCount", existingFileCount);
         // 좋아요 싫어요
         mv.addObject("likeDislike", ldd);
 

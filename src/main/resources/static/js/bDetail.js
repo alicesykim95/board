@@ -1,9 +1,26 @@
 // 전역 변수
-const boardNum = document.getElementById("boardNum").value;
-const titleSet = document.getElementById("title");
-const contentSet = document.getElementById("content");
-const updateBtn = document.getElementById("update");
-const completeBtn = document.getElementById("complete");
+let boardNum = document.getElementById("boardNum").value;
+let titleSet = document.getElementById("title");
+let contentSet = document.getElementById("content");
+let updateBtn = document.getElementById("update");
+let completeBtn = document.getElementById("complete");
+
+// 파일 다운로드
+function fileDownload() {
+
+    $.ajax({
+        url: '/downloadFile',
+        type: 'GET',
+        data: {fileNum: fileNum},
+        success: function () {
+            alert("다운로드에 성공하였습니다.");
+        },
+        error: function () {
+            alert("다운로드에 실패하였습니다.");
+        }
+    });
+
+}
 
 // 게시글 삭제
 function deleteBoard() {
@@ -23,8 +40,16 @@ function goUpdatePage(){
     contentSet.style.cssText = "border-bottom: 2px solid #01987A; outline: none; background-color: #eeeeee;";
 
     let commentImgHtml = '';
-    commentImgHtml += "<a><img src='../images/delete_icon.png' alt='delete_icon' class='detail_icon file_attach'></a>";
-    $("#downloadFileBtn_container").html(commentImgHtml);
+    commentImgHtml += "<img src='../images/delete_icon.png' alt='delete_icon' class='detail_icon file_attach' onclick='registerDeleteNum(this)'>";
+    $("[id=downloadFileBtn_container]").html(commentImgHtml);
+
+    let fileAttachHtml = '';
+    fileAttachHtml += "<button id='file_upload' onclick='detailFileClick()' type='button'>파일추가</button>";
+    fileAttachHtml += "<input type='file' multiple='multiple' id='detail_hidden_file' onChange='fileAttach(this)' size='68' style='display: none;'>";
+    fileAttachHtml += "<span style='font-size: 10px; color: #575757; margin-left: 10px; padding: 0;'>첨부파일은 최대 <span style='color:#ec5454;'>10</span>개까지 등록이 가능합니다.</span>";
+    $('#detail_file_container').show();
+    $('#detail_file_list').show();
+    $('#detail_file_container').html(fileAttachHtml);
 
 }
 
@@ -219,30 +244,11 @@ function getCommentCount() {
 
 }
 
-
-
-// 파일 다운로드
-function fileDownload() {
-
-    $.ajax({
-        url: '/downloadFile',
-        type: 'GET',
-        data: {fileNum: fileNum},
-        success: function () {
-                alert("다운로드에 성공하였습니다.");
-        },
-        error: function () {
-            alert("다운로드에 실패하였습니다.");
-        }
-    });
-
-}
-
 // 좋아요 싫어요 변수 선언
 let dislikeTotalCount = $("#dislikeTotalCount");
 let likeTotalCount = $("#likeTotalCount");
-let dislikeBtn = $("#dislikeBtn");
-let likeBtn = $("#likeBtn");
+let dislikeBtn = $(".dislikeBtn");
+let likeBtn = $(".likeBtn");
 
 // 좋아요
 function like(){

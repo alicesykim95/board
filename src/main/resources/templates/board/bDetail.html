@@ -37,11 +37,10 @@
             <div class="detail_head">
                 <label class="head_title">작성자</label>
                 <input type="text" class="detail_text" th:value="${board.writer}" readonly>
-<!--                id="board_detail_writer"-->
             </div>
             <div class="detail_head">
                 <label class="head_title">작성일</label>
-                <input type="text" class="detail_text" th:value="${#dates.format(board.modifiedTime, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                <input type="text" class="detail_text" th:value="${#dates.format(board.createdTime, 'yyyy-MM-dd HH:mm:ss')}" readonly>
             </div>
             <div class="detail_head wide_width">
                 <label class="head_title">제목</label>
@@ -54,9 +53,13 @@
             <div class="detail_head ">
                 <label class="head_title">다운로드</label>
                 <div>
+                    <div class="file_container" id="detail_file_container" style="display: none;"></div>
+                    <div class="detail_file_list" id="detail_file_list" style="display: none;"></div>
+                    <input type="hidden" id="existing_file_count" th:value="${existingFileCount}">
                     <th:block th:each="file : ${files}">
                         <div class="download_attach_div">
-                            <div><a class="downloadFile" th:text="${file.fileOriginalName}" th:href="@{'/downloadFile/'+ ${file.fileNum}}"></a></div>
+                            <div><a class="download_file" th:text="${file.fileOriginalName}" th:href="@{'/downloadFile/'+ ${file.fileNum}}"></a></div>
+                            <input type="hidden" id="deleteFileNum" name="deleteFileNum"  th:value="${file.fileNum}">
                             <div id="downloadFileBtn_container"></div>
                         </div>
                     </th:block>
@@ -65,19 +68,19 @@
             <div class="like_dislike_container wide_width">
                 <div class="like_container" id="like_container">
                     <th:block th:if="${likeDislike.likeCheck} == 0 or ${likeDislike.likeCheck} == 2">
-                        <img src="../images/like_btn.png" id="likeBtn" onclick="like()"  style="width: 65px; height: 65px; cursor: pointer;">
+                        <img src="../images/like_btn.png" class="likeBtn" onclick="like()"  style="width: 65px; height: 65px; cursor: pointer;">
                     </th:block>
                     <th:block th:unless="${likeDislike.likeCheck} == 0 or ${likeDislike.likeCheck} == 2">
-                        <img src="../images/like_btn_click.png" id="likeBtn" onclick="like()" style="width: 65px; height: 65px; cursor: pointer;">
+                        <img src="../images/like_btn_click.png" class="likeBtn" onclick="like()" style="width: 65px; height: 65px; cursor: pointer;">
                     </th:block>
                     <div th:text="${likeDislike.likeCnt}" class="like_total_count" id="likeTotalCount"></div>
                 </div>
                 <div class="dislike_container" id="dislike_container">
                     <th:block th:if="${likeDislike.dislikeCheck} == 0 or ${likeDislike.dislikeCheck} == 2">
-                        <img src="../images/dislike_btn.png" id="dislikeBtn" onclick="dislike()"  style="width: 65px; height: 65px; cursor: pointer;">
+                        <img src="../images/dislike_btn.png" class="dislikeBtn" onclick="dislike()"  style="width: 65px; height: 65px; cursor: pointer;">
                     </th:block>
                     <th:block th:unless="${likeDislike.dislikeCheck} == 0 or ${likeDislike.dislikeCheck} == 2">
-                        <img src="../images/dislike_btn_click.png" id="dislikeBtn" onclick="dislike()" style="width: 65px; height: 65px; cursor: pointer;">
+                        <img src="../images/dislike_btn_click.png" class="dislikeBtn" onclick="dislike()" style="width: 65px; height: 65px; cursor: pointer;">
                     </th:block>
                     <div th:text="${likeDislike.dislikeCnt}" class="dislike_total_count" id="dislikeTotalCount"></div>
                 </div>
@@ -114,3 +117,4 @@
 </body>
 </html>
 <script th:src="@{/js/bDetail.js}" th:inline="javascript"></script>
+<script th:src="@{/js/CommonFileUtil.js}" th:inline="javascript"></script>

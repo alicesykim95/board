@@ -26,28 +26,24 @@
     <div class="container">
         <h2 class="title">게시글 작성</h2>
         <div class="board_write">
-            <div class="write_head">
-                <label class="write_title">작성자</label>
+            <div class="write_head write_writer">
+                <label>작성자</label>
                 <input type="text" id="writer" size="68" readonly th:value="${session.userId}">
             </div>
-            <div class="write_head">
-                <label class="write_title">이메일<span>*</span></label>
-                <input type="text" id="email" size="68" placeholder="ex) abcd1234@gmail.com">
-            </div>
-            <div class="write_head write_title">
+            <div class="write_head write_title focus">
                 <label>제목<span>*</span></label>
                 <input type="text" id="title" size="68">
             </div>
-            <div class="write_head write_content">
+            <div class="write_head write_content focus">
                 <label>글내용<span>*</span></label>
                 <textarea rows="10" cols="70" id="content"></textarea>
             </div>
             <div class="file_container">
-                <button id="write_file_upload" onclick="fileClick()" type="button">파일추가</button>
+                <button id="file_upload" onclick="writeFileClick()" type="button">파일추가</button>
                 <input type="file" multiple="multiple" id="write_hidden_file" onchange="fileAttach(this)" size="68" style="display: none;">
                 <span style="font-size: 10px; color: #575757; margin-left: 10px; padding: 0;">첨부파일은 최대 <span style="color:#ec5454; ">10</span>개까지 등록이 가능합니다.</span>
             </div>
-            <div class="file_list" id="file_list"></div>
+            <div class="write_file_list" id="write_file_list"></div>
             <div class="write_btn_container">
                 <input class="write_btn" type="button" value="저장" onclick="registerAction()">
                 <input class="write_btn" type="button" value="목록" onclick="location.href ='/'">
@@ -57,4 +53,4 @@
 </th:block>
 </body>
 </html>
-<script th:src="@{/js/bWrite.js}" th:inline="javascript"></script>
+<script th:src="@{/js/CommonFileUtil.js}" th:inline="javascript"></script>
