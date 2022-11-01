@@ -55,7 +55,6 @@
                 <div>
                     <div class="file_container" id="detail_file_container" style="display: none;"></div>
                     <div class="detail_file_list" id="detail_file_list" style="display: none;"></div>
-                    <input type="hidden" id="existing_file_count" th:value="${existingFileCount}">
                     <th:block th:each="file : ${files}">
                         <div class="download_attach_div">
                             <div><a class="download_file" th:text="${file.fileOriginalName}" th:href="@{'/downloadFile/'+ ${file.fileNum}}"></a></div>

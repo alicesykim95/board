@@ -87,9 +87,6 @@ public class BoardController {
         ldd.setDislikeCheck(likeDislikeService.dislikeCount(ldv));
         ldd.setDislikeCnt(likeDislikeService.dislikeTotalCount(ldv));
 
-        List<FileVo> fileVo = fileService.selectFile(boardNum);
-        int existingFileCount = fileVo.size();
-
         // 게시판 상세 내용
         mv.addObject("board", boardService.getBoardDetail(boardNum));
         // 게시판 댓글 리스트
@@ -97,9 +94,7 @@ public class BoardController {
         // 로그인중인 아이디 가져오기
         mv.addObject("userId", userId);
         // 파일 조회 내용
-        mv.addObject("files", fileVo);
-        // 첨부 파일 갯수
-        mv.addObject("existingFileCount", existingFileCount);
+        mv.addObject("files", fileService.selectFile(boardNum));
         // 좋아요 싫어요
         mv.addObject("likeDislike", ldd);
 

@@ -5,7 +5,7 @@ let fileNum = 0;
 let fileCount = 0;
 
 // 전체 업로드 갯수
-let fileTotalCount = 10;
+let fileTotalCount = 5;
 
 // 첨부파일 배열
 let fileList = [];
@@ -18,13 +18,11 @@ let deleteFileList = [];
 
 // 기존 파일 갯수
 let existingFileCount = 0;
-let FileCountfromBoard =  $('#existing_file_count').val();
-console.log(FileCountfromBoard);
+let FileCountfromBoard =  parseInt($('.download_attach_div').length);
 
 if( FileCountfromBoard != null){
     existingFileCount = FileCountfromBoard;
 }
-
 
 
 // 게시물 저장: 파일 추가 버튼 클릭시 숨어있던 input[type="file"] 동작
@@ -35,6 +33,14 @@ function writeFileClick(){
 // 게시물 수정: 파일 추가 버튼 클릭시 숨어있던 input[type="file"] 동작
 function detailFileClick(){
     $("#detail_hidden_file").click();
+}
+
+// 게시물 수정: 삭제 파일 번호 등록
+function registerDeleteNum(target){
+    let deleteNum = target.parentNode.previousElementSibling.value;
+    deleteFileList.push(deleteNum);
+    target.parentNode.parentNode.remove();
+    existingFileCount--;
 }
 
 // 첨부한 파일 배열에 담기 및 개수 검열
@@ -81,14 +87,6 @@ function deleteFile(fileNum){
     fileList[num].is_delete = true;
     $('#' + fileNum).remove();
     fileCount--;
-}
-
-// 게시물 수정: 삭제 파일 번호 등록
-function registerDeleteNum(target){
-    let deleteNum = target.parentNode.previousElementSibling.value;
-    deleteFileList.push(deleteNum);
-    target.parentNode.parentNode.remove();
-    existingFileCount--;
 }
 
 // 게시글 작성 액션
