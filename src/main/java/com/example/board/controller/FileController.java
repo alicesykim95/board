@@ -63,7 +63,7 @@ public class FileController {
     // 파일 업로드
     @PostMapping("/uploadFile")
     @ResponseBody
-    public Map<String, Object> uploadFile(@RequestParam("fileList")List<MultipartFile> uploadFile, HttpServletRequest request) throws Exception {
+    public Map<String, Object> uploadFile(@RequestParam(value = "fileList", required = false)List<MultipartFile> uploadFile, HttpServletRequest request) throws Exception {
 
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");

@@ -105,11 +105,15 @@ function loadFileRegisterAjax(link, method, nextAction) {
 
     let nextActionValue = nextAction;
 
+    if (fileList == null){
+        window[nextActionValue]();
+    }
+
     let form = $("form")[0];
     const formData = new FormData(form);
 
     for (let i = 0; i < fileList.length; i++) {
-        if (!fileList[i].is_delete){
+        if (!fileList[i].is_delete) {
             formData.append("fileList", fileList[i]);
         }
     }
@@ -124,7 +128,6 @@ function loadFileRegisterAjax(link, method, nextAction) {
         success: function(data) {
 
             fileNums = data.fileNums;
-            console.log(fileNums);
 
             if (data.result === "SUCCESS"){
                 window[nextActionValue]();
@@ -171,7 +174,7 @@ function updateBoard(){
         content: document.getElementById("content").value,
         boardNum: boardNum,
         fileNums: fileNums,
-        deleteFileList: deleteFileList
+        deleteFileList: deleteFileList,
     }
 
     $.ajax({

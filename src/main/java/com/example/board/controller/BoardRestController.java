@@ -6,6 +6,7 @@ import com.example.board.vo.BoardVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +22,9 @@ public class BoardRestController {
     public BoardVo addBoard(BoardVo bdv, @RequestParam(value = "fileNums", required = false) List<String> fileNumList) throws Exception {
 
         boardService.insertBoard(bdv);
+
         if(fileNumList != null) {
             int boardNum = bdv.getBoardNum();
-            System.out.println(boardNum);
             fileService.insertBoardNum(fileNumList, boardNum);
         }
         return bdv;
@@ -31,12 +32,19 @@ public class BoardRestController {
 
     // 게시글 수정 처리
     @RequestMapping(value = "/board", method = RequestMethod.PUT)
-    public BoardVo updateBoard(BoardVo bdv, @RequestParam(required = false) List<String> deleteFileList) throws Exception {
+    public BoardVo updateBoard(BoardVo bdv, @RequestParam(value = "boardNum") int boardNum, @RequestParam(value = "deleteFileList[]", required = false) ArrayList<String> deleteFileList, @RequestParam(value = "fileNums", required = false) List<String> fileNumList) throws Exception {
+
+        System.out.println(deleteFileList);
+        System.out.println(fileNumList);
 
         boardService.updateBoard(bdv);
 
+        if (fileNumList != null){
+            fileService.insertBoardNum(fileNumList, boardNum);
+        }
+
         if (deleteFileList != null) {
-            fileService.deleteExstingFile(deleteFileList);
+            fileService.deleteExstingFile(deleteFileList, boardNum);
         }
         return bdv;
     }

@@ -22,5 +22,5 @@ public interface FileMapper {
     FileVo fileDownload(int fileNum)throws Exception;
 
     // 게시글 기존 첨부 파일 삭제
-    void deleteExistingFile(String fileNum) throws Exception;
+    void deleteExistingFile(int fileNum, int boardNum) throws Exception;
 }

@@ -29,6 +29,7 @@ public class FileService {
         List<String> fileNums = new ArrayList<>();
 
         result.put("result", "ERROR");
+
         try {
             if (multipartFile.size() > 0 && !Objects.equals(multipartFile.get(0).getOriginalFilename(), "")) {
 
@@ -65,22 +66,27 @@ public class FileService {
     }
 
     // 파일 보드넘버 삽입
-    public void insertBoardNum(List<String> filNumList, int boardNum) throws Exception {
-//
-//        if (params.get("fileNums") != null) {
-//            String fileNums = ((String) params.get("fileNums")).replace("[", "").replace("]", "");
-//            String[] fileNumsArray = fileNums.split(",");
+    public void insertBoardNum(List<String> fileNumList, int boardNum) throws Exception {
 
-            for (String file : filNumList) {
-                fileMapper.insertBoardNum(fileNum, boardNum);
-            }
+        String list = fileNumList.toString().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "");
+        String[] fileNumsArray = list.split(",");
+
+        for (String fileString : fileNumsArray) {
+            int fileNum = Integer.parseInt(fileString);
+            fileMapper.insertBoardNum(fileNum, boardNum);
+        }
 
     }
 
     // 게시글 기존 첨부 파일 삭제
-    public void deleteExstingFile(List<String> deleteFileList) throws Exception {
-        for ( String deleteFileNum : deleteFileList){
-            fileMapper.deleteExistingFile(deleteFileNum);
+    public void deleteExstingFile(ArrayList<String> deleteFileList, int boardNum) throws Exception {
+
+        String list = deleteFileList.toString().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "");
+        String[] deleteFileNumsArray = list.split(",");
+
+        for ( String deleteFile : deleteFileNumsArray){
+            int deleteFileNum = Integer.parseInt(deleteFile);
+            fileMapper.deleteExistingFile(deleteFileNum, boardNum);
         }
     }
 

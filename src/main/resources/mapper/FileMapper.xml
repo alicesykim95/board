@@ -47,10 +47,10 @@
     </select>
 
     <!-- 게시글 기존 첨부 파일 삭제  -->
-    <delete id="deleteExstingFile" parameterType="String">
+    <delete id="deleteExistingFile" parameterType="int">
         DELETE
-        FROM board
-        WHERE board_num = #{boardNum}
+        FROM file
+        WHERE board_num = #{boardNum} AND file_num = #{fileNum}
     </delete>
 
 </mapper>
