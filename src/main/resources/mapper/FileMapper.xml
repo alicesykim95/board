@@ -20,7 +20,7 @@
     </insert>
 
     <!-- boarNum 업데이트 -->
-    <update id="insertBoardNum">
+    <update id="insertBoardNum" parameterType="int" >
         UPDATE file
         SET board_num = #{boardNum}
         WHERE file_num = #{fileNum}
@@ -46,5 +46,11 @@
         WHERE file_num = #{fileNum} and file_delete = 0
     </select>
 
+    <!-- 게시글 기존 첨부 파일 삭제  -->
+    <delete id="deleteExstingFile" parameterType="String">
+        DELETE
+        FROM board
+        WHERE board_num = #{boardNum}
+    </delete>
 
 </mapper>

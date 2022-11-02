@@ -31,8 +31,8 @@ public class BoardService {
     }
 
     // 게시글 작성
-    public void insertBoard(Map<String, Object> params) throws Exception {
-        boardMapper.insertBoard(params);
+    public void insertBoard(BoardVo bdv) throws Exception {
+        boardMapper.insertBoard(bdv);
     }
 
     // 게시글 상세

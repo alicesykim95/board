@@ -18,17 +18,27 @@ public class BoardRestController {
 
     // 게시글 작성 처리
     @RequestMapping(value = "/board", method = RequestMethod.POST)
-    public Map<String, Object> addBoard(@RequestBody Map<String, Object> params) throws Exception {
+    public BoardVo addBoard(BoardVo bdv, @RequestParam(value = "fileNums", required = false) List<String> fileNumList) throws Exception {
 
-         boardService.insertBoard(params);
-         fileService.insertBoardNum(params);
-         return params;
+        boardService.insertBoard(bdv);
+        if(fileNumList != null) {
+            int boardNum = bdv.getBoardNum();
+            System.out.println(boardNum);
+            fileService.insertBoardNum(fileNumList, boardNum);
+        }
+        return bdv;
     }
 
     // 게시글 수정 처리
     @RequestMapping(value = "/board", method = RequestMethod.PUT)
-    public int updateBoard(BoardVo bdv) throws Exception {
-        return boardService.updateBoard(bdv);
+    public BoardVo updateBoard(BoardVo bdv, @RequestParam(required = false) List<String> deleteFileList) throws Exception {
+
+        boardService.updateBoard(bdv);
+
+        if (deleteFileList != null) {
+            fileService.deleteExstingFile(deleteFileList);
+        }
+        return bdv;
     }
 
     // 게시글 상세 목록

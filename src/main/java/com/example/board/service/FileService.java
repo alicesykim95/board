@@ -65,21 +65,24 @@ public class FileService {
     }
 
     // 파일 보드넘버 삽입
-    public void insertBoardNum(Map<String, Object> params) throws Exception {
+    public void insertBoardNum(List<String> filNumList, int boardNum) throws Exception {
+//
+//        if (params.get("fileNums") != null) {
+//            String fileNums = ((String) params.get("fileNums")).replace("[", "").replace("]", "");
+//            String[] fileNumsArray = fileNums.split(",");
 
-        if (params.get("fileNums") != null) {
-            String fileNums = ((String) params.get("fileNums")).replace("[", "").replace("]", "");
-            String[] fileNumsArray = fileNums.split(",");
-
-            for (int i = 0; i < fileNumsArray.length; i++) {
-                params.put("fileNum", fileNumsArray[i]);
-                fileMapper.insertBoardNum(params);
+            for (String file : filNumList) {
+                fileMapper.insertBoardNum(fileNum, boardNum);
             }
-        }
+
     }
 
-    // 기존 파일 삭제
-
+    // 게시글 기존 첨부 파일 삭제
+    public void deleteExstingFile(List<String> deleteFileList) throws Exception {
+        for ( String deleteFileNum : deleteFileList){
+            fileMapper.deleteExistingFile(deleteFileNum);
+        }
+    }
 
     // 파일 조회
     public List<FileVo> selectFile(int boardNum) throws Exception {

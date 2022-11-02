@@ -92,7 +92,7 @@
 
         <div class="detail_btn_container" id="btn_container">
             <div class="detail_btn_box1" th:if="${board.writer == session.userId}">
-                <input class="detail_btn" type="hidden" value="완료" id="complete" onclick="updateBoard()">
+                <input class="detail_btn" type="hidden" value="완료" id="complete" onclick="updateAction()">
                 <input class="detail_btn" type="button" value="수정" id="update" onclick="goUpdatePage()">
                 <input class="detail_btn" type="button" value="삭제" id="delete" onclick="deleteBoard()">
             </div>

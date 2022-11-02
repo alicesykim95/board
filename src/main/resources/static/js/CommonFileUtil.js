@@ -124,6 +124,7 @@ function loadFileRegisterAjax(link, method, nextAction) {
         success: function(data) {
 
             fileNums = data.fileNums;
+            console.log(fileNums);
 
             if (data.result === "SUCCESS"){
                 window[nextActionValue]();
@@ -150,8 +151,7 @@ function registerBoard() {
     $.ajax({
         url:'/board',
         type:'POST',
-        data: JSON.stringify(dataList),
-        contentType: 'application/json',
+        data:dataList,
         success: function () {
             alert("성공하였습니다.");
             location.href="/";
@@ -164,3 +164,29 @@ function registerBoard() {
 }
 
 // step2-2: 넘어온 파일 넘버 리스트와 함께 게시물 수정
+function updateBoard(){
+
+    const detailList = {
+        title: document.getElementById("title").value,
+        content: document.getElementById("content").value,
+        boardNum: boardNum,
+        fileNums: fileNums,
+        deleteFileList: deleteFileList
+    }
+
+    $.ajax({
+        url:'/board',
+        type:'PUT',
+        data: detailList,
+        success: function () {
+            alert("성공하였습니다.");
+            location.href="/";
+        },
+        error: function (){
+            alert("실패하였습니다.");
+        }
+    });
+
+
+
+}

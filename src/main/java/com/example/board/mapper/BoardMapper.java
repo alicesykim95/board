@@ -23,7 +23,7 @@ public interface BoardMapper {
     void updateCommentCount(int boardNum) throws Exception;
 
     // 게시글 작성
-    void insertBoard(Map<String, Object> params) throws Exception;
+    void insertBoard(BoardVo bdv) throws Exception;
 
     // 게시글 상세
     BoardVo getBoardDetail(int boardNum) throws Exception;
